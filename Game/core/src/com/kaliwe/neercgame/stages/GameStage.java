@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.kaliwe.neercgame.actors.Player;
 import com.kaliwe.neercgame.utils.BodyUtils;
+import com.kaliwe.neercgame.utils.Constants;
 import com.kaliwe.neercgame.utils.MapHolder;
 import com.kaliwe.neercgame.utils.WorldUtils;
 
@@ -32,7 +33,7 @@ public class GameStage extends Stage implements ContactListener {
     public GameStage() {
         setupWorld();
         setupCamera();
-        setKeyboardFocus(player);
+        setKeyboardFocus(null);
         world.setContactListener(this);
         renderer = new Box2DDebugRenderer();
     }
@@ -40,7 +41,8 @@ public class GameStage extends Stage implements ContactListener {
     private void setupCamera() {
         camera = new OrthographicCamera(VIEWPORT_WIDTH,
                                         VIEWPORT_HEIGHT);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
+        //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
+        camera.position.set(player.getPosition() ,0f);
         camera.update();
     }
 
@@ -72,6 +74,8 @@ public class GameStage extends Stage implements ContactListener {
             accumulator -= TIME_STEP;
         }
 
+        camera.position.set(player.getPosition() ,0f);
+        camera.update();
         //TODO: Implement interpolation
 
     }
@@ -85,13 +89,17 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public boolean keyDown(int keyCode) {
         System.out.println("Key pressed " + keyCode);
-        switch (keyCode) {
-            case Keys.UP:
-                player.jump();
-                break;
-            case Keys.DOWN:
-                player.dodge();
-                break;
+        if (keyCode == Keys.UP) {
+            player.jump();
+        }
+        if (keyCode == Keys.DOWN) {
+            player.dodge();
+        }
+        if (keyCode == Keys.RIGHT) {
+            player.addSpeed(Constants.PLAYER_SPEED);
+        }
+        if (keyCode == Keys.LEFT) {
+            player.addSpeed(-Constants.PLAYER_SPEED);
         }
 
         return super.keyDown(keyCode);
@@ -99,11 +107,16 @@ public class GameStage extends Stage implements ContactListener {
 
     @Override
     public boolean keyUp(int keyCode) {
-        switch (keyCode) {
-            case Keys.DOWN:
-                player.stopDodge();
-                break;
+        if (keyCode == Keys.DOWN) {
+            player.stopDodge();
         }
+        if (keyCode == Keys.LEFT) {
+            player.addSpeed(Constants.PLAYER_SPEED);
+        }
+        if (keyCode == Keys.RIGHT) {
+            player.addSpeed(-Constants.PLAYER_SPEED);
+        }
+
         return true;
     }
 

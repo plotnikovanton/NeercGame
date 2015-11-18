@@ -29,8 +29,11 @@ public class WorldUtils {
         BodyDef bodyDef = new BodyDef();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
         bodyDef.position.set(new Vector2(Constants.PLAYER_X, Constants.PLAYER_Y));
+        bodyDef.gravityScale = Constants.PLAYER_GRAVITY_SCALE;
 
+        // Main shape
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.PLAYER_WIDTH / 2, Constants.PLAYER_HEIGHT / 2);
 

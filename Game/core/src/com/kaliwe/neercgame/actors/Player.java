@@ -1,5 +1,6 @@
 package com.kaliwe.neercgame.actors;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kaliwe.neercgame.box2d.PlayerUserData;
 
@@ -45,5 +46,16 @@ public class Player extends GameActor {
 
     public boolean isDodging() {
         return dodging;
+    }
+
+    public void addSpeed(float speed) {
+        speedX += speed;
+        Vector2 v = body.getLinearVelocity();
+        v.x = speedX;
+        body.setLinearVelocity(v);
+    }
+
+    public Vector2 getPosition() {
+        return super.body.getPosition();
     }
 }
