@@ -13,6 +13,7 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
         stage = new GameStage();
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

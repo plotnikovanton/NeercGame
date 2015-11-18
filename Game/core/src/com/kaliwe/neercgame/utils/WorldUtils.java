@@ -12,6 +12,8 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.kaliwe.neercgame.box2d.GroundUserData;
+import com.kaliwe.neercgame.box2d.PlayerUserData;
 
 import java.util.ArrayList;
 
@@ -25,13 +27,18 @@ public class WorldUtils {
 
     public static Body createPlayer(World world) {
         BodyDef bodyDef = new BodyDef();
+
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(new Vector2(Constants.RUNNER_X, Constants.RUNNER_Y));
+        bodyDef.position.set(new Vector2(Constants.PLAYER_X, Constants.PLAYER_Y));
+
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(Constants.RUNNER_WIDTH / 2, Constants.RUNNER_HEIGHT / 2);
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2, Constants.PLAYER_HEIGHT / 2);
+
         Body body = world.createBody(bodyDef);
-        body.createFixture(shape, Constants.RUNNER_DENSITY);
+        body.setUserData(new PlayerUserData());
+        body.createFixture(shape, Constants.PLAYER_DENSITY);
         body.resetMassData();
+
         shape.dispose();
         return body;
     }
@@ -59,12 +66,23 @@ public class WorldUtils {
             fixtureDef.shape = shape;
             fixtureDef.isSensor = false;
             Body body = world.createBody(bodyDef);
+            body.setUserData(new GroundUserData());
             body.createFixture(fixtureDef);
             bodies.add(body);
+
+            shape.dispose();
         }
 
         return new MapHolder(bodies, tiledMap);
     }
+
+
+
+
+
+
+
+
 
 
     private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {

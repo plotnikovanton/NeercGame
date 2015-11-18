@@ -1,10 +1,11 @@
 package com.kaliwe.neercgame.stages;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.kaliwe.neercgame.actors.Player;
+import com.kaliwe.neercgame.utils.BodyUtils;
 import com.kaliwe.neercgame.utils.MapHolder;
 import com.kaliwe.neercgame.utils.WorldUtils;
 
@@ -12,7 +13,7 @@ import com.kaliwe.neercgame.utils.WorldUtils;
  * Created by anton on 18.11.15.
  */
 
-public class GameStage extends Stage {
+public class GameStage extends Stage implements ContactListener {
 
     // This will be our viewport measurements while working with the debug renderer
     private static final int VIEWPORT_WIDTH = 20;
@@ -31,6 +32,8 @@ public class GameStage extends Stage {
     public GameStage() {
         setupWorld();
         setupCamera();
+        setKeyboardFocus(player);
+        world.setContactListener(this);
         renderer = new Box2DDebugRenderer();
     }
 
@@ -79,4 +82,55 @@ public class GameStage extends Stage {
         renderer.render(world, camera.combined);
     }
 
+    @Override
+    public boolean keyDown(int keyCode) {
+        System.out.println("Key pressed " + keyCode);
+        switch (keyCode) {
+            case Keys.UP:
+                player.jump();
+                break;
+            case Keys.DOWN:
+                player.dodge();
+                break;
+        }
+
+        return super.keyDown(keyCode);
+    }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        switch (keyCode) {
+            case Keys.DOWN:
+                player.stopDodge();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void beginContact(Contact contact) {
+        System.out.println("Contact");
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+
+        if ((BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsPlayer(b)) ||
+                (BodyUtils.bodyIsPlayer(a) && BodyUtils.bodyIsGround(b))) {
+            player.landed();
+        }
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
+
+    }
 }
