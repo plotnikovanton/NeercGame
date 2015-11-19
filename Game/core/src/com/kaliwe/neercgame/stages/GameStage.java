@@ -123,6 +123,7 @@ public class GameStage extends Stage implements ContactListener {
                 break;
             case Keys.LEFT:
                 player.addSpeed(Constants.PLAYER_SPEED);
+                break;
             case Keys.RIGHT:
                 player.addSpeed(-Constants.PLAYER_SPEED);
                 break;

@@ -74,7 +74,7 @@ public class WorldUtils {
             }
 
             bodyDef.type = BodyDef.BodyType.StaticBody;
-            fixtureDef.friction = 1f;
+            fixtureDef.friction = 0.5f;
             fixtureDef.shape = shape;
             fixtureDef.isSensor = false;
             Body body = world.createBody(bodyDef);
