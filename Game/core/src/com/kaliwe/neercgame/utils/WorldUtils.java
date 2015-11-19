@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.kaliwe.neercgame.box2d.FootUserData;
 import com.kaliwe.neercgame.box2d.GroundUserData;
 import com.kaliwe.neercgame.box2d.PlayerUserData;
 
@@ -40,7 +41,15 @@ public class WorldUtils {
         Body body = world.createBody(bodyDef);
         body.setUserData(new PlayerUserData());
         body.createFixture(shape, Constants.PLAYER_DENSITY);
-        body.resetMassData();
+        //body.resetMassData();
+
+        // Foot sensor
+        FixtureDef fixtureDef = new FixtureDef();
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.2f, 0.01f,
+                       new Vector2(0f, -Constants.PLAYER_HEIGHT / 2), 0f);
+        fixtureDef.isSensor = true;
+        fixtureDef.shape = shape;
+        body.createFixture(fixtureDef).setUserData(new FootUserData());
 
         shape.dispose();
         return body;
@@ -65,7 +74,7 @@ public class WorldUtils {
             }
 
             bodyDef.type = BodyDef.BodyType.StaticBody;
-            fixtureDef.friction = 0;
+            fixtureDef.friction = 1f;
             fixtureDef.shape = shape;
             fixtureDef.isSensor = false;
             Body body = world.createBody(bodyDef);

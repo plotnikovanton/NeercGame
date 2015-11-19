@@ -2,6 +2,8 @@ package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.kaliwe.neercgame.actors.Player;
@@ -27,6 +29,8 @@ public class GameStage extends Stage implements ContactListener {
     private final float TIME_STEP = 1 / 300f;
     private float accumulator = 0f;
 
+    private TiledMapRenderer tiledMapRenderer;
+
     private OrthographicCamera camera;
     private Box2DDebugRenderer renderer;
 
@@ -36,6 +40,7 @@ public class GameStage extends Stage implements ContactListener {
         setKeyboardFocus(null);
         world.setContactListener(this);
         renderer = new Box2DDebugRenderer();
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(mapHolder.map, 0.1f);
     }
 
     private void setupCamera() {
@@ -74,6 +79,8 @@ public class GameStage extends Stage implements ContactListener {
             accumulator -= TIME_STEP;
         }
 
+        player.update();
+
         camera.position.set(player.getPosition() ,0f);
         camera.update();
         //TODO: Implement interpolation
@@ -83,58 +90,74 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void draw() {
         super.draw();
+        tiledMapRenderer.setView(camera);
+        tiledMapRenderer.render();
         renderer.render(world, camera.combined);
     }
 
     @Override
     public boolean keyDown(int keyCode) {
         System.out.println("Key pressed " + keyCode);
-        if (keyCode == Keys.UP) {
-            player.jump();
+        switch (keyCode) {
+            case Keys.UP:
+                player.jump();
+                break;
+            case Keys.DOWN:
+                player.dodge();
+                break;
+            case Keys.LEFT:
+                player.addSpeed(-Constants.PLAYER_SPEED);
+                break;
+            case Keys.RIGHT:
+                player.addSpeed(Constants.PLAYER_SPEED);
+                break;
         }
-        if (keyCode == Keys.DOWN) {
-            player.dodge();
-        }
-        if (keyCode == Keys.RIGHT) {
-            player.addSpeed(Constants.PLAYER_SPEED);
-        }
-        if (keyCode == Keys.LEFT) {
-            player.addSpeed(-Constants.PLAYER_SPEED);
-        }
-
         return super.keyDown(keyCode);
     }
 
     @Override
     public boolean keyUp(int keyCode) {
-        if (keyCode == Keys.DOWN) {
-            player.stopDodge();
+        switch (keyCode) {
+            case Keys.DOWN:
+                player.stopDodge();
+                break;
+            case Keys.LEFT:
+                player.addSpeed(Constants.PLAYER_SPEED);
+            case Keys.RIGHT:
+                player.addSpeed(-Constants.PLAYER_SPEED);
+                break;
         }
-        if (keyCode == Keys.LEFT) {
-            player.addSpeed(Constants.PLAYER_SPEED);
-        }
-        if (keyCode == Keys.RIGHT) {
-            player.addSpeed(-Constants.PLAYER_SPEED);
-        }
-
         return true;
     }
 
     @Override
     public void beginContact(Contact contact) {
         System.out.println("Contact");
-        Body a = contact.getFixtureA().getBody();
-        Body b = contact.getFixtureB().getBody();
+        Fixture af = contact.getFixtureA();
+        Body a = af.getBody();
+        Fixture bf = contact.getFixtureB();
+        Body b = bf.getBody();
 
-        if ((BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsPlayer(b)) ||
-                (BodyUtils.bodyIsPlayer(a) && BodyUtils.bodyIsGround(b))) {
+
+        if ((BodyUtils.bodyIsGround(a) && BodyUtils.fixtureIsFoot(bf)) ||
+                (BodyUtils.fixtureIsFoot(af) && BodyUtils.bodyIsGround(b))) {
             player.landed();
         }
     }
 
     @Override
     public void endContact(Contact contact) {
+        System.out.print("End Contact");
+        Fixture af = contact.getFixtureA();
+        Body a = af.getBody();
+        Fixture bf = contact.getFixtureB();
+        Body b = bf.getBody();
 
+
+        if ((BodyUtils.bodyIsGround(a) && BodyUtils.fixtureIsFoot(bf)) ||
+                (BodyUtils.fixtureIsFoot(af) && BodyUtils.bodyIsGround(b))) {
+            player.jumped();
+        }
     }
 
     @Override

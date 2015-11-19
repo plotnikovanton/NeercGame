@@ -10,7 +10,7 @@ import com.kaliwe.neercgame.box2d.PlayerUserData;
 public class Player extends GameActor {
     private boolean jumping;
     private boolean dodging;
-    private float speedX = 0f;
+    private float speedX = 0;
 
     public Player(Body body) {
         super(body);
@@ -18,14 +18,17 @@ public class Player extends GameActor {
 
     @Override
     public PlayerUserData getUserData() {
-        return (PlayerUserData)userData;
+        return (PlayerUserData) userData;
     }
 
     public void jump() {
         if (!(jumping || dodging)) {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
-            jumping = true;
         }
+    }
+
+    public void jumped() {
+        jumping = true;
     }
 
     public void landed() {
@@ -50,6 +53,9 @@ public class Player extends GameActor {
 
     public void addSpeed(float speed) {
         speedX += speed;
+    }
+
+    public void update() {
         Vector2 v = body.getLinearVelocity();
         v.x = speedX;
         body.setLinearVelocity(v);
