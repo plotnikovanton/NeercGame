@@ -2,10 +2,7 @@ package com.kaliwe.neercgame.utils;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.objects.CircleMapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
+import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Circle;
@@ -15,8 +12,10 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.kaliwe.neercgame.box2d.FootUserData;
 import com.kaliwe.neercgame.box2d.GroundUserData;
 import com.kaliwe.neercgame.box2d.PlayerUserData;
+import com.kaliwe.neercgame.box2d.SimpleEnemyUserData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anton on 18.11.15.
@@ -37,17 +36,21 @@ public class WorldUtils {
         // Main shape
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(Constants.PLAYER_WIDTH / 2, Constants.PLAYER_HEIGHT / 2);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.friction = 0;
+        fixtureDef.density = Constants.PLAYER_DENSITY;
 
         Body body = world.createBody(bodyDef);
         body.setUserData(new PlayerUserData());
-        body.createFixture(shape, Constants.PLAYER_DENSITY);
+        body.createFixture(fixtureDef);
         //body.resetMassData();
 
         // Foot sensor
-        FixtureDef fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.2f, 0.01f,
-                       new Vector2(0f, -Constants.PLAYER_HEIGHT / 2), 0f);
-        fixtureDef.isSensor = true;
+        fixtureDef = new FixtureDef();
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.04f , Constants.FOOT_HEIGHT,
+                       new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT), 0f);
+        //fixtureDef.isSensor = true;
         fixtureDef.shape = shape;
         body.createFixture(fixtureDef).setUserData(new FootUserData());
 
@@ -74,7 +77,7 @@ public class WorldUtils {
             }
 
             bodyDef.type = BodyDef.BodyType.StaticBody;
-            fixtureDef.friction = 0.5f;
+            fixtureDef.friction = Constants.WORLD_FRICTION;
             fixtureDef.shape = shape;
             fixtureDef.isSensor = false;
             Body body = world.createBody(bodyDef);
@@ -88,16 +91,50 @@ public class WorldUtils {
         return new MapHolder(bodies, tiledMap);
     }
 
+    public static List<Body> createSimpleEnemy(World world, TiledMap tiledMap) {
+        List<Body> res = new ArrayList<>();
 
+        for (MapObject o : tiledMap.getLayers().get("Simple").getObjects()) {
+            ChainShape chain = getPolyline((PolylineMapObject) o);
 
+            BodyDef bodyDef = new BodyDef();
+            FixtureDef fixtureDef = new FixtureDef();
 
+            //bodyDef.fixedRotation = true;
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+            Vector2 position = new Vector2();
+            chain.getVertex(0, bodyDef.position);
 
+            PolygonShape shape = new PolygonShape();
+            // TODO: replace with constants
+            shape.setAsBox(1f, 1f, new Vector2(Constants.PPM / 2, 0.5f), 0);
+            fixtureDef.shape = shape;
 
+            Body body = world.createBody(bodyDef);
+            body.createFixture(fixtureDef);
+            body.setUserData(new SimpleEnemyUserData(chain));
 
+            res.add(body);
+        }
 
+        return res;
+    }
 
+    public static ChainShape getPolyline(PolylineMapObject polylineMapObject) {
+        float[] raw = polylineMapObject.getPolyline().getTransformedVertices();
+        float[] wordVertices = new float[raw.length];
 
-    private static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
+        for (int i = 0; i < raw.length; i++) {
+            wordVertices[i] = raw[i] / Constants.PPM;
+        }
+
+        ChainShape shape = new ChainShape();
+        shape.createChain(wordVertices);
+
+        return shape;
+    }
+
+    public static PolygonShape getRectangle(RectangleMapObject rectangleObject) {
         Rectangle rectangle = rectangleObject.getRectangle();
         PolygonShape polygon = new PolygonShape();
         Vector2 size = new Vector2((rectangle.x + rectangle.width * 0.5f) / Constants.PPM,
@@ -109,7 +146,7 @@ public class WorldUtils {
         return polygon;
     }
 
-    private static CircleShape getCircle(CircleMapObject circleObject) {
+    public static CircleShape getCircle(CircleMapObject circleObject) {
         Circle circle = circleObject.getCircle();
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(circle.radius / Constants.PPM);
@@ -118,7 +155,7 @@ public class WorldUtils {
     }
 
 
-    private static ChainShape getChain(PolygonMapObject polygonObject) {
+    public static ChainShape getChain(PolygonMapObject polygonObject) {
         ChainShape chain = new ChainShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
 
@@ -134,7 +171,7 @@ public class WorldUtils {
     }
 
 
-    private static PolygonShape getPolygon(PolygonMapObject polygonObject) {
+    public static PolygonShape getPolygon(PolygonMapObject polygonObject) {
         PolygonShape polygon = new PolygonShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
 

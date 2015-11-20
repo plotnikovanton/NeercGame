@@ -5,5 +5,5 @@ package com.kaliwe.neercgame.enums;
  */
 public enum UserDataType {
     GROUND,
-    FOOT, PLAYER
+    FOOT, SIMPLE_ENEMY, PLAYER
 }
