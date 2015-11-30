@@ -1,0 +1,35 @@
+{ "frames": {
+   "player-v2 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 17, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 17, "h": 34 },
+    "sourceSize": { "w": 17, "h": 34 },
+    "duration": 100
+   },
+   "player-v2 1.ase": {
+    "frame": { "x": 17, "y": 0, "w": 17, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 17, "h": 34 },
+    "sourceSize": { "w": 17, "h": 34 },
+    "duration": 100
+   },
+   "player-v2 2.ase": {
+    "frame": { "x": 34, "y": 0, "w": 17, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 17, "h": 34 },
+    "sourceSize": { "w": 17, "h": 34 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.1-dev",
+  "image": "/home/anton/Code/NeercGame/AssetsSources/player/player-v2.png",
+  "format": "RGBA8888",
+  "size": { "w": 51, "h": 34 },
+  "scale": "1"
+ }
+}

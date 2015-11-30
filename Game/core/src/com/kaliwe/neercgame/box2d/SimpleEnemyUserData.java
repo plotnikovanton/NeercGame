@@ -1,6 +1,5 @@
 package com.kaliwe.neercgame.box2d;
 
-import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.kaliwe.neercgame.enums.UserDataType;
 
 /**
@@ -9,23 +8,26 @@ import com.kaliwe.neercgame.enums.UserDataType;
 public class SimpleEnemyUserData extends UserData {
     private float height;
     private float width;
-    private ChainShape chain;
+    private final float[] track;
 
-    public SimpleEnemyUserData(ChainShape chain){
+    public SimpleEnemyUserData(float[] track){
         userDataType = UserDataType.SIMPLE_ENEMY;
         this.height = 1f;
         this.width = 1f;
-        this.chain = chain;
+        this.track = track;
     }
 
+
+    @Override
     public float getHeight() {
         return height;
     }
 
-    public ChainShape getChain() {
-        return chain;
+    public float[] getTrack() {
+        return track;
     }
 
+    @Override
     public float getWidth() {
         return width;
     }

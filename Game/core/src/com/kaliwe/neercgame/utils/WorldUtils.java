@@ -6,13 +6,11 @@ import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.kaliwe.neercgame.box2d.FootUserData;
-import com.kaliwe.neercgame.box2d.GroundUserData;
-import com.kaliwe.neercgame.box2d.PlayerUserData;
-import com.kaliwe.neercgame.box2d.SimpleEnemyUserData;
+import com.kaliwe.neercgame.box2d.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +23,17 @@ public class WorldUtils {
         return new World(Constants.WORLD_GRAVITY, true);
     }
 
-    public static Body createPlayer(World world) {
+    public static Body createPlayer(World world, TiledMap tiledMap) {
         BodyDef bodyDef = new BodyDef();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(new Vector2(Constants.PLAYER_X, Constants.PLAYER_Y));
         bodyDef.gravityScale = Constants.PLAYER_GRAVITY_SCALE;
+
+        // Spawn point
+        Ellipse circle = ((EllipseMapObject) tiledMap.getLayers().get("spawn").getObjects().get("spawn")).getEllipse();
+        bodyDef.position.set(circle.x / Constants.PPM, circle.y / Constants.PPM);
 
         // Main shape
         PolygonShape shape = new PolygonShape();
@@ -46,13 +48,24 @@ public class WorldUtils {
         body.createFixture(fixtureDef);
         //body.resetMassData();
 
-        // Foot sensor
+        // Foot
         fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.04f , Constants.FOOT_HEIGHT,
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.01f , Constants.FOOT_HEIGHT,
                        new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT), 0f);
         //fixtureDef.isSensor = true;
         fixtureDef.shape = shape;
+        body.createFixture(fixtureDef).setUserData(new PlayerUserData());
+
+        // Foot Sensor
+        fixtureDef = new FixtureDef();
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.1f,
+                new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2), 0f);
+        fixtureDef.shape = shape;
+        fixtureDef.isSensor = true;
         body.createFixture(fixtureDef).setUserData(new FootUserData());
+
+
+
 
         shape.dispose();
         return body;
@@ -94,25 +107,26 @@ public class WorldUtils {
     public static List<Body> createSimpleEnemy(World world, TiledMap tiledMap) {
         List<Body> res = new ArrayList<>();
 
+        if (tiledMap.getLayers().get("Simple") == null) return res;
         for (MapObject o : tiledMap.getLayers().get("Simple").getObjects()) {
-            ChainShape chain = getPolyline((PolylineMapObject) o);
+            float[] track = getXLine((PolylineMapObject) o);
 
             BodyDef bodyDef = new BodyDef();
             FixtureDef fixtureDef = new FixtureDef();
 
             //bodyDef.fixedRotation = true;
+            bodyDef.gravityScale = 5f;
             bodyDef.type = BodyDef.BodyType.DynamicBody;
-            Vector2 position = new Vector2();
-            chain.getVertex(0, bodyDef.position);
-
+            bodyDef.position.set(track[0], track[2]);
             PolygonShape shape = new PolygonShape();
             // TODO: replace with constants
-            shape.setAsBox(1f, 1f, new Vector2(Constants.PPM / 2, 0.5f), 0);
+            shape.setAsBox(0.3f, 0.3f, new Vector2(Constants.PPM / 2, 0.5f), 0);
             fixtureDef.shape = shape;
+            fixtureDef.friction = 1;
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
-            body.setUserData(new SimpleEnemyUserData(chain));
+            body.setUserData(new SimpleEnemyUserData(track));
 
             res.add(body);
         }
@@ -120,18 +134,35 @@ public class WorldUtils {
         return res;
     }
 
-    public static ChainShape getPolyline(PolylineMapObject polylineMapObject) {
-        float[] raw = polylineMapObject.getPolyline().getTransformedVertices();
-        float[] wordVertices = new float[raw.length];
+    public static List<Body> createDisappearObjects(World world, TiledMap tiledMap) {
+        List<Body> res = new ArrayList<>();
+        if (tiledMap.getLayers().get("Disappear") == null) return  res;
+        for (MapObject o : tiledMap.getLayers().get("Disappear").getObjects()) {
+            Shape shape = getRectangle((RectangleMapObject) o);
+            BodyDef bodyDef = new BodyDef();
+            FixtureDef fixtureDef = new FixtureDef();
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+            fixtureDef.shape = shape;
+            fixtureDef.friction = Constants.WORLD_FRICTION;
 
-        for (int i = 0; i < raw.length; i++) {
-            wordVertices[i] = raw[i] / Constants.PPM;
+            Body body = world.createBody(bodyDef);
+            body.createFixture(fixtureDef);
+            body.setUserData(new DisappearUserData(o.getName()));
+
+            res.add(body);
         }
+        return res;
+    }
 
-        ChainShape shape = new ChainShape();
-        shape.createChain(wordVertices);
+    public static float[] getXLine(PolylineMapObject polylineMapObject) {
+        float[] raw = polylineMapObject.getPolyline().getTransformedVertices();
+        float[] wordVertices = new float[3];
 
-        return shape;
+        wordVertices[0] = raw[0] / Constants.PPM;
+        wordVertices[1] = raw[2] / Constants.PPM;
+        wordVertices[2] = raw[1] / Constants.PPM;
+
+        return wordVertices;
     }
 
     public static PolygonShape getRectangle(RectangleMapObject rectangleObject) {

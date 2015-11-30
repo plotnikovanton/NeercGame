@@ -7,10 +7,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.kaliwe.neercgame.actors.DisappearObject;
 import com.kaliwe.neercgame.actors.Enemy;
 import com.kaliwe.neercgame.actors.Player;
-import com.kaliwe.neercgame.enums.WalkingState;
-import com.kaliwe.neercgame.utils.BodyUtils;
+import com.kaliwe.neercgame.enums.PlayerState;
+import com.kaliwe.neercgame.utils.Constants;
+import com.kaliwe.neercgame.utils.ContactUtils;
 import com.kaliwe.neercgame.utils.MapHolder;
 import com.kaliwe.neercgame.utils.WorldUtils;
 
@@ -43,15 +45,10 @@ public class GameStage extends Stage implements ContactListener {
         setKeyboardFocus(null);
         world.setContactListener(this);
         renderer = new Box2DDebugRenderer();
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(mapHolder.map, 0.1f);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(mapHolder.map, 1f / Constants.PPM);
     }
 
     private void setupCamera() {
-
-        //camera = new OrthographicCamera(VIEWPORT_WIDTH,
-        //                                VIEWPORT_HEIGHT);
-        //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
-        //camera.position.set(player.getPosition() ,0f);
         getCamera().viewportHeight = VIEWPORT_HEIGHT;
         getCamera().viewportWidth = VIEWPORT_WIDTH;
         getCamera().position.set(player.getPosition(), 0f);
@@ -62,30 +59,33 @@ public class GameStage extends Stage implements ContactListener {
         world = WorldUtils.createWorld();
         setupMap();
         setupPlayer();
-        setupEnemyes();
+        setupEnemies();
     }
 
     private void setupPlayer() {
-        player = new Player(WorldUtils.createPlayer(world));
+        player = new Player(WorldUtils.createPlayer(world, mapHolder.map));
         addActor(player);
     }
 
-    private void setupEnemyes() {
+    private void setupEnemies() {
         for (Body b : WorldUtils.createSimpleEnemy(world, mapHolder.map)) {
             addActor(new Enemy(b));
+        }
+
+        for (Body b : WorldUtils.createDisappearObjects(world, mapHolder.map)) {
+            System.out.println("Got one");
+            addActor(new DisappearObject(b));
         }
     }
 
     private void setupMap() {
-        mapHolder = WorldUtils.createMap(world, "level1.tmx");
+        mapHolder = WorldUtils.createMap(world, "level0.tmx");
         mapHolder.ground.forEach(this::addActor);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        // Fixed timestep
         accumulator += delta;
 
         while (accumulator >= delta) {
@@ -94,13 +94,9 @@ public class GameStage extends Stage implements ContactListener {
         }
 
         Vector3 camPos = new Vector3(player.getPosition().x, player.getPosition().y ,0f);
-        //camera.position.lerp(camPos, 0.1f);
         getCamera().position.lerp(camPos, 0.1f);
 
-        //camera.update();
         getCamera().update();
-        //TODO: Implement interpolation
-
     }
 
     @Override
@@ -117,14 +113,13 @@ public class GameStage extends Stage implements ContactListener {
             case Keys.UP:
                 player.jump();
                 break;
-            case Keys.DOWN:
-                player.dodge();
-                break;
             case Keys.LEFT:
-                player.setWalkingState(WalkingState.LEFT);
+                player.setTurnRight(false);
+                player.setState(PlayerState.WALK);
                 break;
             case Keys.RIGHT:
-                player.setWalkingState(WalkingState.RIGHT);
+                player.setTurnRight(true);
+                player.setState(PlayerState.WALK);
                 break;
         }
         return super.keyDown(keyCode);
@@ -133,12 +128,9 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public boolean keyUp(int keyCode) {
         switch (keyCode) {
-            case Keys.DOWN:
-                player.stopDodge();
-                break;
             case Keys.LEFT:
             case Keys.RIGHT:
-                player.setWalkingState(WalkingState.STAND);
+                player.setState(PlayerState.STAND);
                 break;
         }
         return true;
@@ -146,31 +138,20 @@ public class GameStage extends Stage implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        System.out.println("Contact");
-        Fixture af = contact.getFixtureA();
-        Body a = af.getBody();
-        Fixture bf = contact.getFixtureB();
-        Body b = bf.getBody();
-
-
-        if ((BodyUtils.bodyIsGround(a) && BodyUtils.fixtureIsFoot(bf)) ||
-                (BodyUtils.fixtureIsFoot(af) && BodyUtils.bodyIsGround(b))) {
-            player.landed();
+        if (ContactUtils.checkFixtureAndBody(
+                ContactUtils.isFixtureFoot, ContactUtils.isBodyGround, contact)) {
+            player.incNumOfFootContacts();
+        } else if (ContactUtils.checkFixtureAndBody(
+                ContactUtils.isFixtureFoot, ContactUtils.isBodySimpleEnemy, contact)) {
+            player.jumpOutOfEnemy();
         }
     }
 
     @Override
     public void endContact(Contact contact) {
-        System.out.println("End Contact");
-        Fixture af = contact.getFixtureA();
-        Body a = af.getBody();
-        Fixture bf = contact.getFixtureB();
-        Body b = bf.getBody();
-
-
-        if ((BodyUtils.bodyIsGround(a) && BodyUtils.fixtureIsFoot(bf)) ||
-                (BodyUtils.fixtureIsFoot(af) && BodyUtils.bodyIsGround(b))) {
-            player.jumped();
+        if (ContactUtils.checkFixtureAndBody(
+                ContactUtils.isFixtureFoot, ContactUtils.isBodyGround, contact)) {
+            player.decNumOfFootContacts();
         }
     }
 
