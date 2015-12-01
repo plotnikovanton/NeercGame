@@ -1,7 +1,9 @@
 package com.kaliwe.neercgame.stages;
 
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Filter;
+import com.kaliwe.neercgame.actors.Bug;
 import com.kaliwe.neercgame.utils.ContactUtils;
 import com.kaliwe.neercgame.utils.Mask;
 import com.kaliwe.neercgame.utils.WorldUtils;
@@ -18,6 +20,9 @@ public class Level1 extends GameStage {
     public void setupWorld(String mapName) {
         super.setupWorld(mapName);
         WorldUtils.createPlatforms(world, mapHolder.map);
+        for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
+            addActor(new Bug(b));
+        }
     }
 
     @Override

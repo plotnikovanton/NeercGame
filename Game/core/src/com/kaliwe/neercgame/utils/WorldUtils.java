@@ -123,6 +123,30 @@ public class WorldUtils {
         return body;
     }
 
+    public static List<Body> createBugs(World world, TiledMap tiledMap) {
+        List<Body> res = new ArrayList<>();
+
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        Shape shape = new CircleShape();
+        shape.setRadius(0.1f);
+        fixtureDef.shape = shape;
+        fixtureDef.isSensor = true;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+
+        for (MapObject o : tiledMap.getLayers().get("bugs").getObjects()) {
+            Ellipse e = ((EllipseMapObject)o).getEllipse();
+            bodyDef.position.set(e.x / Constants.PPM, e.y / Constants.PPM);
+
+            Body body = world.createBody(bodyDef);
+            body.createFixture(fixtureDef).setUserData(new BugUserData());
+
+            res.add(body);
+        }
+
+        return res;
+    }
+
     public static void createPlatforms(World world, TiledMap tiledMap) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
