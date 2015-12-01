@@ -35,8 +35,8 @@ public class Player extends GameActor {
         super(body);
         // TODO: move to TextureUtil
         Texture texture = new Texture("player.png");
-        TextureRegion split[][] = TextureRegion.split(texture, 18, 30);
-        TextureRegion mirror[][] = TextureRegion.split(texture, 18, 30);
+        TextureRegion split[][] = TextureRegion.split(texture, 19, 30);
+        TextureRegion mirror[][] = TextureRegion.split(texture, 19, 30);
         for (TextureRegion[] i : mirror) {
             for (TextureRegion j : i) {
                 j.flip(true, false);
@@ -51,6 +51,9 @@ public class Player extends GameActor {
 
         rigthAnimations.put(PlayerState.JUMP, new Animation(10f, mirror[1][0]));
         leftAnimations.put(PlayerState.JUMP, new Animation(10f, split[1][0]));
+
+        rigthAnimations.put(PlayerState.BURNING, new Animation(0.10f, Arrays.copyOfRange(mirror[2], 0, 2)));
+        leftAnimations.put(PlayerState.BURNING, new Animation(0.10f, Arrays.copyOfRange(split[2], 0, 2)));
 
         turnRight = true;
         animationState = PlayerState.JUMP;
@@ -90,7 +93,9 @@ public class Player extends GameActor {
 
     public void setState(PlayerState state) {
         if (this.state != state) {
-            this.state = state;
+            if (!(this.state == PlayerState.DEAD || this.state == PlayerState.BURNING)) {
+                this.state = state;
+            }
             animationState = isOnGround() ? PlayerState.JUMP : state;
             choiseAnimation();
         }
@@ -101,8 +106,12 @@ public class Player extends GameActor {
         choiseAnimation();
     }
 
+    public void setLinearVelocity(float x, float y) {
+        body.setLinearVelocity(x, y);
+    }
+
     private void choiseAnimation() {
-        if(!isOnGround()) {
+        if(!isOnGround() && state != PlayerState.BURNING) {
             animationState = PlayerState.JUMP;
         } else {
             animationState = state;

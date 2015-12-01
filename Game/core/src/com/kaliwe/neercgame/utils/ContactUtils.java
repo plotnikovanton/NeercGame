@@ -25,6 +25,25 @@ public class ContactUtils {
                 (fixtureCheck.apply(af) && bodyCheck.apply(bb));
     }
 
+    public static boolean checkBodyAndBody(Function<Body, Boolean> bodyACheck,
+                                           Function<Body, Boolean> bodyBCheck,
+                                           Contact contact) {
+        Body a = contact.getFixtureA().getBody();
+        Body b = contact.getFixtureB().getBody();
+
+        return (bodyACheck.apply(a) && bodyBCheck.apply(b)) ||
+                bodyACheck.apply(b) && bodyBCheck.apply(a);
+    }
+
+    public static boolean checkFixtureAndFixture(Function<Fixture, Boolean> fixtureACheck,
+                                                 Function<Fixture, Boolean> fixtureBCheck,
+                                                 Contact contact) {
+        Fixture a = contact.getFixtureA();
+        Fixture b = contact.getFixtureB();
+
+        return (fixtureACheck.apply(a) && fixtureBCheck.apply(b)) ||
+                fixtureACheck.apply(b) && fixtureBCheck.apply(a);
+    }
     public static boolean bodyIs(UserDataType type, Body body) {
         UserData userData = (UserData) body.getUserData();
         return userData != null && userData.getUserDataType() == type;
@@ -37,9 +56,12 @@ public class ContactUtils {
 
     // Fixtures
     public static Function<Fixture, Boolean> isFixtureFoot = x -> fixtureIs(UserDataType.FOOT, x);
+    public static Function<Fixture, Boolean> isFixtureFinish = x -> fixtureIs(UserDataType.FNISH, x);
+    public static Function<Fixture, Boolean> isFixturePlatform = x -> fixtureIs(UserDataType.PLATFORM, x);
 
     // Bodies
     public static Function<Body, Boolean> isBodyPlayer = x -> bodyIs(UserDataType.PLAYER, x);
     public static Function<Body, Boolean> isBodyGround = x -> bodyIs(UserDataType.GROUND, x);
     public static Function<Body, Boolean> isBodySimpleEnemy = x -> bodyIs(UserDataType.SIMPLE_ENEMY, x);
+    public static Function<Body, Boolean> isBodyDissapearObject = x -> bodyIs(UserDataType.DISSAPEAR, x);
 }

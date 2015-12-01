@@ -6,5 +6,7 @@ package com.kaliwe.neercgame.enums;
 public enum PlayerState {
     WALK,
     JUMP,
-    STAND
+    STAND,
+    BURNING,
+    DEAD
 }

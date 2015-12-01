@@ -42,6 +42,8 @@ public class WorldUtils {
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
         fixtureDef.density = Constants.PLAYER_DENSITY;
+        fixtureDef.filter.categoryBits = Mask.PLAYER;
+
 
         Body body = world.createBody(bodyDef);
         body.setUserData(new PlayerUserData());
@@ -50,7 +52,7 @@ public class WorldUtils {
 
         // Foot
         fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.01f , Constants.FOOT_HEIGHT,
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.03f , Constants.FOOT_HEIGHT,
                        new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT), 0f);
         //fixtureDef.isSensor = true;
         fixtureDef.shape = shape;
@@ -58,10 +60,11 @@ public class WorldUtils {
 
         // Foot Sensor
         fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.1f,
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.05f,
                 new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2), 0f);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
+        fixtureDef.filter.categoryBits = -1;
         body.createFixture(fixtureDef).setUserData(new FootUserData());
 
 
@@ -104,6 +107,38 @@ public class WorldUtils {
         return new MapHolder(bodies, tiledMap);
     }
 
+    public static Body createFinish(World world, TiledMap tiledMap) {
+        Shape shape = getRectangle((RectangleMapObject) tiledMap.getLayers().get("finish").getObjects().get(0));
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.isSensor = true;
+
+        Body body = world.createBody(bodyDef);
+        body.createFixture(fixtureDef).setUserData(new FinishUserData());
+
+        return body;
+    }
+
+    public static void createPlatforms(World world, TiledMap tiledMap) {
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        fixtureDef.friction = Constants.WORLD_FRICTION;
+        fixtureDef.filter.maskBits = ~Mask.PLAYER;
+
+        for (MapObject o : tiledMap.getLayers().get("platforms").getObjects()) {
+            Body body = world.createBody(bodyDef);
+            fixtureDef.shape = getRectangle((RectangleMapObject) o);
+
+            body.createFixture(fixtureDef).setUserData(new PlatformUserData());
+        }
+    }
+
     public static List<Body> createSimpleEnemy(World world, TiledMap tiledMap) {
         List<Body> res = new ArrayList<>();
 
@@ -138,16 +173,19 @@ public class WorldUtils {
         List<Body> res = new ArrayList<>();
         if (tiledMap.getLayers().get("Disappear") == null) return  res;
         for (MapObject o : tiledMap.getLayers().get("Disappear").getObjects()) {
-            Shape shape = getRectangle((RectangleMapObject) o);
+            Ellipse ellipse = ((EllipseMapObject) o).getEllipse();
             BodyDef bodyDef = new BodyDef();
+            bodyDef.position.set(ellipse.x / Constants.PPM, ellipse.y = Constants.PPM);
             FixtureDef fixtureDef = new FixtureDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
+            PolygonShape shape = new PolygonShape();
+            shape.setAsBox(Constants.DISAPPEAR_OBJECT_WIDTH / 2, Constants.DISAPPEAR_OBJECT_HEIGHT / 2);
             fixtureDef.shape = shape;
             fixtureDef.friction = Constants.WORLD_FRICTION;
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
-            body.setUserData(new DisappearUserData(o.getName()));
+            body.setUserData(new DisappearUserData(o.getName(), 0, 0));
 
             res.add(body);
         }
@@ -185,7 +223,6 @@ public class WorldUtils {
         return circleShape;
     }
 
-
     public static ChainShape getChain(PolygonMapObject polygonObject) {
         ChainShape chain = new ChainShape();
         float[] vertices = polygonObject.getPolygon().getTransformedVertices();
@@ -193,14 +230,12 @@ public class WorldUtils {
         float[] worldVertices = new float[vertices.length];
 
         for (int i = 0; i < vertices.length; ++i) {
-            System.out.println(vertices[i]);
             worldVertices[i] = vertices[i] / Constants.PPM;
         }
 
         chain.createChain(worldVertices);
         return chain;
     }
-
 
     public static PolygonShape getPolygon(PolygonMapObject polygonObject) {
         PolygonShape polygon = new PolygonShape();
@@ -209,7 +244,6 @@ public class WorldUtils {
         float[] worldVertices = new float[vertices.length];
 
         for (int i = 0; i < vertices.length; ++i) {
-            System.out.println(vertices[i]);
             worldVertices[i] = vertices[i] / Constants.PPM;
         }
 

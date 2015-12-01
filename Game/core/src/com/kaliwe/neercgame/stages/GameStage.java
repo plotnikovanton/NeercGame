@@ -7,14 +7,16 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.kaliwe.neercgame.actors.DisappearObject;
-import com.kaliwe.neercgame.actors.Enemy;
+import com.badlogic.gdx.utils.Array;
 import com.kaliwe.neercgame.actors.Player;
+import com.kaliwe.neercgame.box2d.UserData;
 import com.kaliwe.neercgame.enums.PlayerState;
 import com.kaliwe.neercgame.utils.Constants;
 import com.kaliwe.neercgame.utils.ContactUtils;
 import com.kaliwe.neercgame.utils.MapHolder;
 import com.kaliwe.neercgame.utils.WorldUtils;
+
+import java.util.Iterator;
 
 /**
  * Created by anton on 18.11.15.
@@ -23,23 +25,26 @@ import com.kaliwe.neercgame.utils.WorldUtils;
 public class GameStage extends Stage implements ContactListener {
 
     // This will be our viewport measurements while working with the debug renderer
-    private static final int VIEWPORT_WIDTH = 20;
-    private static final int VIEWPORT_HEIGHT = 13;
+    protected static final int VIEWPORT_WIDTH = 20;
+    protected static final int VIEWPORT_HEIGHT = 13;
 
-    private World world;
-    private MapHolder mapHolder;
-    private Player player;
+    protected boolean next = false;
 
-    private final float TIME_STEP = 1 / 300f;
-    private float accumulator = 0f;
+    protected World world;
+    protected MapHolder mapHolder;
+    protected Player player;
 
-    private TiledMapRenderer tiledMapRenderer;
+    protected final float TIME_STEP = 1 / 300f;
+    protected float accumulator = 0f;
 
-    private OrthographicCamera camera;
-    private Box2DDebugRenderer renderer;
+    protected TiledMapRenderer tiledMapRenderer;
 
-    public GameStage() {
-        setupWorld();
+    protected Box2DDebugRenderer renderer;
+    protected boolean failed = false;
+
+    public GameStage(String mapName) {
+        setupWorld(mapName);
+        setupPlayer();
         setupCamera();
 
         setKeyboardFocus(null);
@@ -55,11 +60,10 @@ public class GameStage extends Stage implements ContactListener {
         getCamera().update();
     }
 
-    public void setupWorld() {
+    public void setupWorld(String mapName) {
         world = WorldUtils.createWorld();
-        setupMap();
-        setupPlayer();
-        setupEnemies();
+        setupMap(mapName);
+        WorldUtils.createFinish(world, mapHolder.map);
     }
 
     private void setupPlayer() {
@@ -67,19 +71,8 @@ public class GameStage extends Stage implements ContactListener {
         addActor(player);
     }
 
-    private void setupEnemies() {
-        for (Body b : WorldUtils.createSimpleEnemy(world, mapHolder.map)) {
-            addActor(new Enemy(b));
-        }
-
-        for (Body b : WorldUtils.createDisappearObjects(world, mapHolder.map)) {
-            System.out.println("Got one");
-            addActor(new DisappearObject(b));
-        }
-    }
-
-    private void setupMap() {
-        mapHolder = WorldUtils.createMap(world, "level0.tmx");
+    private void setupMap(String mapName) {
+        mapHolder = WorldUtils.createMap(world, mapName);
         mapHolder.ground.forEach(this::addActor);
     }
 
@@ -93,18 +86,36 @@ public class GameStage extends Stage implements ContactListener {
             accumulator -= TIME_STEP;
         }
 
-        Vector3 camPos = new Vector3(player.getPosition().x, player.getPosition().y ,0f);
+        if (player.getPosition().y < -50) {
+            failed = true;
+        }
+
+        Vector3 camPos = new Vector3(player.getPosition().x, player.getPosition().y - 3 , 0f);
         getCamera().position.lerp(camPos, 0.1f);
 
         getCamera().update();
+        Array<Body> bodies = new Array();
+        world.getBodies(bodies);
+        for (Iterator<Body> i = bodies.iterator(); i.hasNext(); ) {
+            Body body = i.next();
+            Object rawData = body.getUserData();
+            if (rawData != null) {
+                if (rawData instanceof UserData) {
+                    if (((UserData) rawData).isFlaggedForDelete) {
+                        world.destroyBody(body);
+                        body.setUserData(null);
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void draw() {
-        super.draw();
         tiledMapRenderer.setView((OrthographicCamera) getCamera());
         tiledMapRenderer.render();
         renderer.render(world, getCamera().combined);
+        super.draw();
     }
 
     @Override
@@ -144,6 +155,9 @@ public class GameStage extends Stage implements ContactListener {
         } else if (ContactUtils.checkFixtureAndBody(
                 ContactUtils.isFixtureFoot, ContactUtils.isBodySimpleEnemy, contact)) {
             player.jumpOutOfEnemy();
+        } else if (ContactUtils.checkFixtureAndBody(
+                ContactUtils.isFixtureFinish, ContactUtils.isBodyPlayer, contact)) {
+            next = true;
         }
     }
 
@@ -163,5 +177,13 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public boolean isFailed() {
+        return failed;
+    }
+
+    public boolean isNext() {
+        return next;
     }
 }

@@ -7,6 +7,7 @@ import com.kaliwe.neercgame.enums.UserDataType;
  */
 public abstract class UserData {
     protected UserDataType userDataType;
+    public boolean isFlaggedForDelete = false;
 
     public UserData() {
     }

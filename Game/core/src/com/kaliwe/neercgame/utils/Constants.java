@@ -28,4 +28,6 @@ public class Constants {
 
     public static final float FOOT_HEIGHT = 0.02f;
     public static final float SIMPLE_ENEMY_SPEED = 5f;
+    public static final float DISAPPEAR_OBJECT_WIDTH = 6f;
+    public static final float DISAPPEAR_OBJECT_HEIGHT = 5f;
 }

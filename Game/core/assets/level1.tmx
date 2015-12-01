@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="8" tileheight="8" nextobjectid="22">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="20" tilewidth="8" tileheight="8" nextobjectid="29">
  <tileset firstgid="1" name="StyleSheet" tilewidth="8" tileheight="8" tilecount="16384">
   <image source="StyleSheet.png" width="1024" height="1024"/>
  </tileset>
  <layer name="Ground" width="50" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt00EKACAIRFE9ejdv1S4Ey5wW/4HLYMbQDAAAAL/xpjfVPJiRGJWTrKoeux0vVfnV/0GP9z2im7254e4e1dlUPSbwu0ao
+   eJzt0sEKACAIA1D9dP+8U5fQDjnUYA88BpspQkRERNTHugOAoHto0ZtTtodexoonk78660sPb8dbd2bUf0zIgDC5h3dH0Uzu8dttRxZKWGHe
   </data>
  </layer>
  <objectgroup name="GrndObj" opacity="0.53">
-  <object id="3" x="32" y="120.333" width="40" height="7.66667"/>
   <object id="5" x="2.9882" y="14.941" width="1.19528" height="129.389"/>
   <object id="19" x="0" y="144">
    <polygon points="0,0 88,0 88,-32 104,-32 104,-40 136,-40 136,-48 144,-48 144,-42 144,-40 240,-40 240,-48 248,-48 248,16 0,16"/>
@@ -18,9 +17,16 @@
    <polygon points="0,0 150,0 152,56 0,56"/>
   </object>
  </objectgroup>
- <objectgroup name="Simple">
-  <object id="14" x="158" y="100">
-   <polyline points="0,0 64,0"/>
+ <objectgroup name="spawn">
+  <object id="22" name="spawn" x="16" y="128">
+   <ellipse/>
   </object>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object id="24" x="32" y="120" width="40"/>
+  <object id="28" x="32" y="136" width="40"/>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object id="26" x="376" y="80" width="8" height="24"/>
  </objectgroup>
 </map>
