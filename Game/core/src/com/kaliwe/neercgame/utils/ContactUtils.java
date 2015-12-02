@@ -54,10 +54,19 @@ public class ContactUtils {
         return userData != null && userData.getUserDataType() == type;
     }
 
+    public static Fixture getFixture(Contact contact, Function<Fixture, Boolean> checker) {
+        if (checker.apply(contact.getFixtureA())) {
+            return contact.getFixtureA();
+        } else {
+            return contact.getFixtureB();
+        }
+    }
+
     // Fixtures
     public static Function<Fixture, Boolean> isFixtureFoot = x -> fixtureIs(UserDataType.FOOT, x);
     public static Function<Fixture, Boolean> isFixtureFinish = x -> fixtureIs(UserDataType.FNISH, x);
     public static Function<Fixture, Boolean> isFixturePlatform = x -> fixtureIs(UserDataType.PLATFORM, x);
+    public static Function<Fixture, Boolean> isFixtureBug = x -> fixtureIs(UserDataType.BUG, x);
 
     // Bodies
     public static Function<Body, Boolean> isBodyPlayer = x -> bodyIs(UserDataType.PLAYER, x);

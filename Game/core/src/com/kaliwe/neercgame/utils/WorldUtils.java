@@ -61,7 +61,7 @@ public class WorldUtils {
         // Foot Sensor
         fixtureDef = new FixtureDef();
         shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.05f,
-                new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2), 0f);
+                new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2 -0.05f), 0f);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
         fixtureDef.filter.categoryBits = -1;
@@ -135,11 +135,14 @@ public class WorldUtils {
         bodyDef.type = BodyDef.BodyType.StaticBody;
 
         for (MapObject o : tiledMap.getLayers().get("bugs").getObjects()) {
+            BugUserData  userData = new BugUserData();
+
             Ellipse e = ((EllipseMapObject)o).getEllipse();
             bodyDef.position.set(e.x / Constants.PPM, e.y / Constants.PPM);
 
             Body body = world.createBody(bodyDef);
-            body.createFixture(fixtureDef).setUserData(new BugUserData());
+            body.createFixture(fixtureDef).setUserData(userData);
+            body.setUserData(userData);
 
             res.add(body);
         }

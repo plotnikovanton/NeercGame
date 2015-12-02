@@ -15,6 +15,7 @@ public class Level0 extends GameStage {
         super("level0.tmx");
         getCamera().viewportHeight *= 2;
         getCamera().viewportWidth *= 2;
+        cameraLowerY = 8f;
     }
 
 
@@ -36,6 +37,7 @@ public class Level0 extends GameStage {
         if (ContactUtils.checkFixtureAndBody(
                 ContactUtils.isFixtureFoot, ContactUtils.isBodyDissapearObject, contact)) {
             DisappearObject dis;
+            // TODO: Replace using ContactUtils
             if (contact.getFixtureA().getBody().getUserData() instanceof DisappearUserData) {
                 dis = ((DisappearUserData) contact.getFixtureA().getBody().getUserData()).getActor();
             } else {

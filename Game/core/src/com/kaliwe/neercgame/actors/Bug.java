@@ -28,6 +28,7 @@ public class Bug extends GameActor {
 
     public Bug(Body body) {
         super(body);
+        ((BugUserData)body.getUserData()).actor = this;
         Texture texture = new Texture("bug.png");
         TextureRegion[][] split = TextureRegion.split(texture, 20, 20);
         size = 0.5f + rnd.nextFloat() * 0.5f;

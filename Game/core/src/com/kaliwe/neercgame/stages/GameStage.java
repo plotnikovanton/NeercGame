@@ -41,6 +41,8 @@ public class GameStage extends Stage implements ContactListener {
 
     protected Box2DDebugRenderer renderer;
     protected boolean failed = false;
+    protected float cameraLowerY = 5f;
+    protected OrthographicCamera hudCam;
 
     public GameStage(String mapName) {
         setupWorld(mapName);
@@ -58,6 +60,8 @@ public class GameStage extends Stage implements ContactListener {
         getCamera().viewportWidth = VIEWPORT_WIDTH;
         getCamera().position.set(player.getPosition(), 0f);
         getCamera().update();
+
+        hudCam = new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     }
 
     public void setupWorld(String mapName) {
@@ -88,10 +92,14 @@ public class GameStage extends Stage implements ContactListener {
 
         if (player.getPosition().y < -50) {
             failed = true;
-        }
+        };
 
-        Vector3 camPos = new Vector3(player.getPosition().x, player.getPosition().y - 3 , 0f);
-        getCamera().position.lerp(camPos, 0.1f);
+
+        Vector3 camPos = new Vector3(
+                player.getPosition().x,
+                Math.max(cameraLowerY, player.getPosition().y),
+                0f);
+        getCamera().position.lerp(camPos, 0.11f);
 
         getCamera().update();
         Array<Body> bodies = new Array();
