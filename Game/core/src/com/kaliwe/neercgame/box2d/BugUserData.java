@@ -13,14 +13,4 @@ public class BugUserData extends UserData {
     public BugUserData() {
         userDataType = UserDataType.BUG;
     }
-
-    @Override
-    public float getWidth() {
-        return 0;
-    }
-
-    @Override
-    public float getHeight() {
-        return 0;
-    }
 }

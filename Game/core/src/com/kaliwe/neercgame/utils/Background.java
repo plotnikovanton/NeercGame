@@ -10,7 +10,8 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Background {
     private final TextureRegion tr;
-    private final float speedMultiplier;
+    private final float xMultiplier;
+    private final float yMultiplier;
     private final float width;
     private final float height;
     private final Camera camera;
@@ -18,9 +19,10 @@ public class Background {
     private final float offsetX;
     private final float offsetY;
 
-    public Background(TextureRegion tr, float sizeMultiplier, float speedMultiplier, Camera camera, float offsetX, float offsetY) {
+    public Background(TextureRegion tr, float sizeMultiplier, float xMultiplier, float yMultiplier, Camera camera, float offsetX, float offsetY) {
         this.tr = tr;
-        this.speedMultiplier = speedMultiplier;
+        this.xMultiplier = xMultiplier;
+        this.yMultiplier = 1 - yMultiplier;
         this.camera = camera;
         this.width = tr.getRegionWidth() * sizeMultiplier;
         this.height = tr.getRegionHeight() * sizeMultiplier;
@@ -32,9 +34,9 @@ public class Background {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
 
-        float realPositionX = (float) (position.x - Math.floor((position.x * speedMultiplier + camera.viewportWidth / 2) / width) * width / speedMultiplier);
-        float posX = -(realPositionX * speedMultiplier - offsetX);
-        float posY = -position.y + offsetY;
+        float realPositionX = (float) (position.x - Math.floor((position.x * xMultiplier + camera.viewportWidth / 2) / width) * width / xMultiplier);
+        float posX = -(realPositionX * xMultiplier - offsetX);
+        float posY = -position.y + position.y * yMultiplier + offsetY;
 
         sb.draw(tr, posX, posY, width, height);
 

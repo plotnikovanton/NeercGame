@@ -17,18 +17,7 @@ public class SimpleEnemyUserData extends UserData {
         this.track = track;
     }
 
-
-    @Override
-    public float getHeight() {
-        return height;
-    }
-
     public float[] getTrack() {
         return track;
-    }
-
-    @Override
-    public float getWidth() {
-        return width;
     }
 }

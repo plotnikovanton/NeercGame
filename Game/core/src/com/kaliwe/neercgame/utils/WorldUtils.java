@@ -4,12 +4,12 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.*;
 
 import java.util.ArrayList;
@@ -76,10 +76,10 @@ public class WorldUtils {
 
     public static MapHolder createMap(World world, String mapName) {
         java.util.List<Body> bodies = new ArrayList<>();
-        TiledMap tiledMap = new TmxMapLoader().load(mapName);
+        TiledMap tiledMap = ResourceUtils.getMap(mapName);
 
         // Create ground
-        MapObjects ground = tiledMap.getLayers().get("GrndObj").getObjects();
+        MapObjects ground = tiledMap.getLayers().get("ground").getObjects();
 
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -129,7 +129,7 @@ public class WorldUtils {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         Shape shape = new CircleShape();
-        shape.setRadius(0.1f);
+        shape.setRadius(0.2f);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
         bodyDef.type = BodyDef.BodyType.StaticBody;
@@ -147,6 +147,7 @@ public class WorldUtils {
             res.add(body);
         }
 
+        shape.dispose();
         return res;
     }
 
@@ -164,6 +165,15 @@ public class WorldUtils {
 
             body.createFixture(fixtureDef).setUserData(new PlatformUserData());
         }
+    }
+
+    public static List<RainCloud> createRain(World world, TiledMap tiledMap) {
+        List<RainCloud> res = new ArrayList<>();
+        for (MapObject o : tiledMap.getLayers().get("rain").getObjects()) {
+            Ellipse e = ((EllipseMapObject) o).getEllipse();
+            res.add(new RainCloud(world, new Vector2(e.x / Constants.PPM, e.y / Constants.PPM)));
+        }
+        return res;
     }
 
     public static List<Body> createSimpleEnemy(World world, TiledMap tiledMap) {
@@ -212,7 +222,7 @@ public class WorldUtils {
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
-            body.setUserData(new DisappearUserData(o.getName(), 0, 0));
+            body.setUserData(new DisappearUserData(o.getName()));
 
             res.add(body);
         }

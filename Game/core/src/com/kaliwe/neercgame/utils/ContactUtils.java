@@ -52,6 +52,17 @@ public class ContactUtils {
     public static boolean fixtureIs(UserDataType type, Fixture fixture) {
         UserData userData = (UserData) fixture.getUserData();
         return userData != null && userData.getUserDataType() == type;
+
+    }
+
+    public static <E> boolean compareFixtureByUserData (Fixture some, E option) {
+        E op = (E) some.getUserData();
+        return op == option;
+    }
+
+    public static <E> boolean compareBodyByUserData (Body some, E option) {
+        E op = (E) some.getUserData();
+        return op == option;
     }
 
     public static Fixture getFixture(Contact contact, Function<Fixture, Boolean> checker) {
@@ -75,6 +86,7 @@ public class ContactUtils {
     public static Function<Fixture, Boolean> isFixtureFinish = x -> fixtureIs(UserDataType.FNISH, x);
     public static Function<Fixture, Boolean> isFixturePlatform = x -> fixtureIs(UserDataType.PLATFORM, x);
     public static Function<Fixture, Boolean> isFixtureBug = x -> fixtureIs(UserDataType.BUG, x);
+    public static Function<Fixture, Boolean> isFixtureRain = x -> fixtureIs(UserDataType.RAIN, x);
 
     // Bodies
     public static Function<Body, Boolean> isBodyPlayer = x -> bodyIs(UserDataType.PLAYER, x);

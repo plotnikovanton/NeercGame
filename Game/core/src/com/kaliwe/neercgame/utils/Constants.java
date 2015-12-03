@@ -10,7 +10,7 @@ public class Constants {
     public static final int APP_HEIGHT = 480;
 
     public static final Vector2 WORLD_GRAVITY = new Vector2(0, -10);
-    public static final float WORLD_FRICTION = 3f;
+    public static final float WORLD_FRICTION = 5f;
     public static final int PPM = 12;
 
     public static final float PLAYER_X = 2;

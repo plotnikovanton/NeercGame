@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.box2d.UserData;
+import com.kaliwe.neercgame.utils.ResourceUtils;
 
 import java.util.Random;
 
@@ -32,8 +33,9 @@ public class Bug extends GameActor {
         Texture texture = new Texture("bug.png");
         TextureRegion[][] split = TextureRegion.split(texture, 20, 20);
         size = 0.5f + rnd.nextFloat() * 0.5f;
-        animations[0] = new Animation(frameTime, split[0]);
-        animations[1] = new Animation(frameTime, split[1]);
+        animations[0] = ResourceUtils.getAnimation("bug0");
+        animations[1] = ResourceUtils.getAnimation("bug1");
+        frameTime = animations[0].getFrameDuration();
     }
 
     @Override

@@ -10,14 +10,4 @@ public class FinishUserData extends UserData{
         super();
         userDataType = UserDataType.FNISH;
     }
-
-    @Override
-    public float getWidth() {
-        return 0;
-    }
-
-    @Override
-    public float getHeight() {
-        return 0;
-    }
 }

@@ -21,24 +21,4 @@ public abstract class GameActor extends Actor {
     protected float transformToScreen(float n) {
         return Constants.PPM * n;
     }
-
-    public float getOffsetX() {
-        UserData userData = (UserData)body.getUserData();
-        return body.getPosition().x - userData.getWidth() / 2;
-    }
-
-    public float getOffsetY() {
-        UserData userData = (UserData) body.getUserData();
-        return body.getPosition().y - userData.getHeight() / 2 - 0.1f;
-    }
-
-    public float getWidth() {
-        UserData userData = (UserData) body.getUserData();
-        return userData.getWidth();
-    }
-
-    public float getHeight() {
-        UserData userData = (UserData) body.getUserData();
-        return userData.getHeight();
-    }
 }

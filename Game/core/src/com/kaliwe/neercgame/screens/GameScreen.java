@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
-import com.kaliwe.neercgame.stages.Level0;
 import com.kaliwe.neercgame.stages.Level1;
 
 import java.util.ArrayList;
@@ -16,15 +15,32 @@ import java.util.Iterator;
 public class GameScreen implements Screen {
     private Iterator<Class<? extends GameStage>> iter;
     private GameStage stage;
+    private static double totalScore = 0;
+    private static float totalTime = 0;
 
     public GameScreen() {
         iter = new ArrayList<Class<? extends GameStage>>() {{
-            add(Level0.class);
+            //add(Level0.class);
             add(Level1.class);
         }}.iterator();
-        iter.next();
-        stage = new Level0();
-        Gdx.input.setInputProcessor(stage);
+        try {
+            setStage(iter.next());
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setStage(Class<? extends GameStage> stage) throws IllegalAccessException, InstantiationException {
+        this.stage = stage.newInstance();
+        Gdx.input.setInputProcessor(this.stage);
+    }
+
+    public static double getTotalScore() {
+        return totalScore;
+    }
+
+    public static float getTotalTime() {
+        return totalTime;
     }
 
     @Override
@@ -37,21 +53,21 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (stage.isNext()) {
+            totalScore += stage.getScore() / stage.getMaxScore();
             try {
-                stage = iter.next().newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
+                setStage(iter.next());
+            } catch (IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
-            Gdx.input.setInputProcessor(stage);
         } else if (stage.isFailed()) {
             stage.dispose();
             try {
-                stage = stage.getClass().newInstance();
+                setStage(stage.getClass());
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
-            Gdx.input.setInputProcessor(stage);
         }
+        totalTime += delta;
         stage.draw();
         stage.act(delta);
     }

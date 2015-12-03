@@ -20,17 +20,6 @@ public class PlayerUserData extends UserData {
         userDataType = UserDataType.PLAYER;
     }
 
-    @Override
-    public float getWidth() {
-        return Constants.PLAYER_WIDTH;
-    }
-
-    @Override
-    public float getHeight() {
-        return Constants.PLAYER_HEIGHT + Constants.FOOT_HEIGHT;
-    }
-
-
     public Vector2 getJumpingLinearImpulse() {
         return jumpingLinearImpulse;
     }

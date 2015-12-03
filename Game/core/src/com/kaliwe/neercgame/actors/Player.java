@@ -141,13 +141,17 @@ public class Player extends GameActor {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
+        float heigth = Constants.PLAYER_HEIGHT + Constants.FOOT_HEIGHT;
+        float widht = Constants.PLAYER_WIDTH;
+        float offsetY = body.getPosition().y - heigth / 2 - 0.1f;
+
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion frame = animation.getKeyFrame(stateTime, true);
-        float textureHeight = getHeight() * 1.15f;
+        float textureHeight = heigth * 1.15f;
         float textureWidth = frame.getRegionWidth() * textureHeight / frame.getRegionHeight();
         batch.draw(frame,
                    body.getPosition().x - textureWidth / 2,
-                   getOffsetY(),
+                   offsetY,
                    textureWidth,
                    textureHeight);
     }
@@ -158,5 +162,16 @@ public class Player extends GameActor {
 
     public boolean isDead() {
         return state == PlayerState.DEAD || state == PlayerState.BURNING;
+    }
+
+    public void turnToSensor() {
+        body.getFixtureList().forEach(fixture -> fixture.setSensor(true));
+    }
+
+    public void kill() {
+        body.setLinearVelocity(0, 0);
+        jumpOutOfEnemy();
+        turnToSensor();
+        setState(PlayerState.DEAD);
     }
 }

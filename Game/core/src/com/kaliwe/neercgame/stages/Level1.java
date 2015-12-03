@@ -1,37 +1,57 @@
 package com.kaliwe.neercgame.stages;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.actors.Bug;
+import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.utils.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anton on 01.12.15.
  */
 public class Level1 extends GameStage {
-    private short score;
-    private Background bg;
+    protected List<Background> bgs = new ArrayList<>();
+    protected short totalScore;
+    protected int[] renderOnMid = {3};
+    protected int[] renderOnFg = {0,1,2};
+    protected List<RainCloud> clouds;
 
     public Level1() {
-        super("level1.tmx");
-        bg = new Background(
-                new TextureRegion(new Texture("buildings.png")),
-                2f, 10f, hudCam, 0, 0);
-        score = 0;
+        this("level1");
+        float skyOffset = 100;
+        bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
+        bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
+        bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, 0));
+    }
+
+    public Level1(String mapName) {
+        super(mapName);
+        super.renderOnFg = new int[]{0};
     }
 
     @Override
     public void setupWorld(String mapName) {
         super.setupWorld(mapName);
         WorldUtils.createPlatforms(world, mapHolder.map);
+        totalScore = 0;
+        // setup Bugs
         for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
             addActor(new Bug(b));
+            totalScore++;
+        }
+
+        // setup Rain
+        clouds = new ArrayList<>();
+        for (RainCloud actor : WorldUtils.createRain(world, mapHolder.map)){
+            addActor(actor);
+            clouds.add(actor);
         }
     }
 
@@ -52,16 +72,27 @@ public class Level1 extends GameStage {
                 score++;
             }
             userData.isFlaggedForDelete = true;
+        } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureRain, ContactUtils.isBodyPlayer, contact)) {
+            player.kill();
         }
     }
 
     @Override
     public void draw() {
+        tiledMapRenderer.render(renderOnFg);
         Vector3 position = new Vector3(getCamera().position);
         position.y = position.y * hudCam.viewportHeight / VIEWPORT_HEIGHT;
-        bg.draw(getBatch(), position);
+        for (Background bg : bgs) {
+            bg.draw(getBatch(), position);
+        }
+        clouds.stream().forEach(x -> {
+            x.drawRain(getBatch());
+            x.draw(getBatch());
+        });
+        tiledMapRenderer.render(renderOnMid);
         super.draw();
-        HUDUtils.drawCollectedBugs(getBatch(), hudCam, (short) 10, (short) 10);
+        HUDUtils.drawCollectedBugs(getBatch(), hudCam, score, totalScore);
+        HUDUtils.drawTotalScore(getBatch(), hudCam, score, totalScore);
     }
 
     @Override

@@ -15,7 +15,4 @@ public abstract class UserData {
     public UserDataType getUserDataType() {
         return userDataType;
     }
-
-    public abstract float getWidth();
-    public abstract float getHeight();
 }

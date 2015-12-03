@@ -12,10 +12,13 @@ import com.kaliwe.neercgame.utils.WorldUtils;
  */
 public class Level0 extends GameStage {
     public Level0() {
-        super("level0.tmx");
+        //TODO: replace with ResourceUtils
+        super("level0");
         getCamera().viewportHeight *= 2;
         getCamera().viewportWidth *= 2;
         cameraLowerY = 8f;
+        score = 1;
+        maxScore = 1;
     }
 
 
@@ -39,5 +42,10 @@ public class Level0 extends GameStage {
             DisappearUserData data = ((DisappearUserData)ContactUtils.getBody(contact, ContactUtils.isBodyDissapearObject).getUserData());
             data.getActor().actWith(player);
         }
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
     }
 }

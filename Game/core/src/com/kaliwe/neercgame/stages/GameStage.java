@@ -28,6 +28,9 @@ public class GameStage extends Stage implements ContactListener {
     protected static final int VIEWPORT_WIDTH = 20;
     protected static final int VIEWPORT_HEIGHT = 13;
 
+    protected short score;
+    protected short maxScore;
+
     protected boolean next = false;
 
     protected World world;
@@ -37,6 +40,9 @@ public class GameStage extends Stage implements ContactListener {
     protected final float TIME_STEP = 1 / 300f;
     protected float accumulator = 0f;
 
+    protected int[] renderOnBg = { 0, 1, 2, 3 };
+    protected int[] renderOnFg = { 4 };
+
     protected TiledMapRenderer tiledMapRenderer;
 
     protected Box2DDebugRenderer renderer;
@@ -45,6 +51,9 @@ public class GameStage extends Stage implements ContactListener {
     protected OrthographicCamera hudCam;
 
     public GameStage(String mapName) {
+        score = 0;
+        maxScore = 1;
+
         setupWorld(mapName);
         setupPlayer();
         setupCamera();
@@ -92,7 +101,7 @@ public class GameStage extends Stage implements ContactListener {
 
         if (player.getPosition().y < -50) {
             failed = true;
-        };
+        }
 
 
         Vector3 camPos = new Vector3(
@@ -121,9 +130,10 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void draw() {
         tiledMapRenderer.setView((OrthographicCamera) getCamera());
-        tiledMapRenderer.render();
+        tiledMapRenderer.render(renderOnBg);
         renderer.render(world, getCamera().combined);
         super.draw();
+        tiledMapRenderer.render(renderOnFg);
     }
 
     @Override
@@ -185,6 +195,14 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public short getScore() {
+        return score;
+    }
+
+    public short getMaxScore() {
+        return maxScore;
     }
 
     public boolean isFailed() {

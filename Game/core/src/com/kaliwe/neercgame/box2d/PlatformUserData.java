@@ -9,14 +9,4 @@ public class PlatformUserData extends UserData{
     public PlatformUserData() {
         userDataType = UserDataType.PLATFORM;
     }
-
-    @Override
-    public float getWidth() {
-        return 0;
-    }
-
-    @Override
-    public float getHeight() {
-        return 0;
-    }
 }
