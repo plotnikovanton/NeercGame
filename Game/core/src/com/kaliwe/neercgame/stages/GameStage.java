@@ -25,8 +25,8 @@ import java.util.Iterator;
 public class GameStage extends Stage implements ContactListener {
 
     // This will be our viewport measurements while working with the debug renderer
-    protected static final int VIEWPORT_WIDTH = 20;
-    protected static final int VIEWPORT_HEIGHT = 13;
+    protected final int VIEWPORT_WIDTH = 20;
+    protected final int VIEWPORT_HEIGHT = 13;
 
     protected short score;
     protected short maxScore;
@@ -50,7 +50,9 @@ public class GameStage extends Stage implements ContactListener {
     protected float cameraLowerY = 5f;
     protected OrthographicCamera hudCam;
 
-    public GameStage(String mapName) {
+    public GameStage(String mapName, int PPM) {
+        Constants.PPM = PPM;
+
         score = 0;
         maxScore = 1;
 
@@ -64,7 +66,7 @@ public class GameStage extends Stage implements ContactListener {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(mapHolder.map, 1f / Constants.PPM);
     }
 
-    private void setupCamera() {
+    protected void setupCamera() {
         getCamera().viewportHeight = VIEWPORT_HEIGHT;
         getCamera().viewportWidth = VIEWPORT_WIDTH;
         getCamera().position.set(player.getPosition(), 0f);
@@ -89,6 +91,17 @@ public class GameStage extends Stage implements ContactListener {
         mapHolder.ground.forEach(this::addActor);
     }
 
+    protected void updateCamera() {
+        Vector3 camPos = new Vector3(
+                player.getPosition().x,
+                Math.max(cameraLowerY, player.getPosition().y),
+                0f);
+        getCamera().position.lerp(camPos, 0.11f);
+
+        getCamera().update();
+        tiledMapRenderer.setView((OrthographicCamera) getCamera());
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -103,14 +116,8 @@ public class GameStage extends Stage implements ContactListener {
             failed = true;
         }
 
+        updateCamera();
 
-        Vector3 camPos = new Vector3(
-                player.getPosition().x,
-                Math.max(cameraLowerY, player.getPosition().y),
-                0f);
-        getCamera().position.lerp(camPos, 0.11f);
-
-        getCamera().update();
         Array<Body> bodies = new Array();
         world.getBodies(bodies);
         for (Iterator<Body> i = bodies.iterator(); i.hasNext(); ) {
@@ -129,7 +136,6 @@ public class GameStage extends Stage implements ContactListener {
 
     @Override
     public void draw() {
-        tiledMapRenderer.setView((OrthographicCamera) getCamera());
         tiledMapRenderer.render(renderOnBg);
         renderer.render(world, getCamera().combined);
         super.draw();

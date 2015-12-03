@@ -208,11 +208,11 @@ public class WorldUtils {
 
     public static List<Body> createDisappearObjects(World world, TiledMap tiledMap) {
         List<Body> res = new ArrayList<>();
-        if (tiledMap.getLayers().get("Disappear") == null) return  res;
-        for (MapObject o : tiledMap.getLayers().get("Disappear").getObjects()) {
+        if (tiledMap.getLayers().get("logo") == null) return  res;
+        for (MapObject o : tiledMap.getLayers().get("logo").getObjects()) {
             Ellipse ellipse = ((EllipseMapObject) o).getEllipse();
             BodyDef bodyDef = new BodyDef();
-            bodyDef.position.set(ellipse.x / Constants.PPM, ellipse.y = Constants.PPM);
+            bodyDef.position.set(ellipse.x / Constants.PPM, ellipse.y / Constants.PPM);
             FixtureDef fixtureDef = new FixtureDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
             PolygonShape shape = new PolygonShape();

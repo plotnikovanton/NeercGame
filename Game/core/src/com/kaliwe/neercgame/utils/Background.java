@@ -31,7 +31,7 @@ public class Background {
     }
 
     public void draw(Batch sb, Vector3 position) {
-        sb.setProjectionMatrix(camera.combined);
+        //sb.setProjectionMatrix(camera.combined);
         sb.begin();
 
         float realPositionX = (float) (position.x - Math.floor((position.x * xMultiplier + camera.viewportWidth / 2) / width) * width / xMultiplier);

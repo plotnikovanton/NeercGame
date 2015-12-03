@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="8" tileheight="8" nextobjectid="16">
- <tileset firstgid="1" name="StyleSheet" tilewidth="8" tileheight="8" tilecount="16384">
-  <image source="StyleSheet.png" width="1024" height="1024"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="11">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16" tilecount="256">
+  <image source="Style.png" width="512" height="128"/>
  </tileset>
- <tileset firstgid="16385" name="cup" tilewidth="30" tileheight="49" tilecount="1">
-  <image source="cup.png" width="30" height="49"/>
- </tileset>
- <layer name="Слой тайлов 1" width="100" height="50">
+ <layer name="bg" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztz8EJADAIBEHtLP1XlQr8CCEoM3D/2wgAAAAAAAAAAAAA2C3P7we1bG6CbtuUPgAAAAAAAACAFy7/nABf
+   eJztzrENACAIAEFW001w/yGksrciIXfJ9x8BAAAAAAAAAAAAAAAAAAAAAEyyqt09wZPV6Z4AAAAAAAAAAAAAAAAAAAAAAAAAAADgywVmCQFH
   </data>
  </layer>
- <objectgroup name="GrndObj">
-  <object id="2" x="32" y="16">
-   <polygon points="0,0 0,208 110,208 112,336 -26,336 -24,0"/>
+ <layer name="m1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJAAAIxDBx/6FdwPeBkkAXaBUAAAAAAAAAAAAAAAAAAAAAAB90sAuSP64+AgAAAAAAAAAAAAAAAAAAAAAAAAAAdgPcsQB3
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object id="4" x="0" y="720">
+   <polygon points="0,0 432,0 432,4 0,4"/>
   </object>
-  <object id="12" x="470" y="224" width="124" height="134"/>
+  <object id="6" x="1088" y="720">
+   <polygon points="0,0 256,0 256,4 0,4"/>
+  </object>
+  <object id="10" x="264" y="720">
+   <polygon points="0,0 0,-224 -8,-224 -8,0"/>
+  </object>
  </objectgroup>
- <objectgroup name="Disappear">
-  <object id="9" name="cloud" x="218" y="276">
+ <objectgroup name="logo">
+  <object id="7" name="cloud" x="560" y="769">
    <ellipse/>
   </object>
-  <object id="10" name="lamp" x="316" y="275">
+  <object id="8" name="lamp" x="752" y="769">
    <ellipse/>
   </object>
-  <object id="11" name="balloon" x="419" y="277">
+  <object id="9" name="balloon" x="944" y="769">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup name="spawn">
-  <object id="8" name="spawn" x="72" y="200">
+  <object id="1" name="spawn" x="352" y="624">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup name="finish">
-  <object id="15" x="520" y="174" width="30" height="50"/>
+  <object id="2" x="1180" y="408" width="8" height="312"/>
  </objectgroup>
 </map>

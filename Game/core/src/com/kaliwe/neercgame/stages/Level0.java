@@ -1,9 +1,11 @@
 package com.kaliwe.neercgame.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.kaliwe.neercgame.actors.DisappearObject;
 import com.kaliwe.neercgame.box2d.DisappearUserData;
+import com.kaliwe.neercgame.utils.Constants;
 import com.kaliwe.neercgame.utils.ContactUtils;
 import com.kaliwe.neercgame.utils.WorldUtils;
 
@@ -12,8 +14,8 @@ import com.kaliwe.neercgame.utils.WorldUtils;
  */
 public class Level0 extends GameStage {
     public Level0() {
-        //TODO: replace with ResourceUtils
-        super("level0");
+        super("level0", 24);
+        Gdx.gl.glClearColor(1,1,1,1);
         getCamera().viewportHeight *= 2;
         getCamera().viewportWidth *= 2;
         cameraLowerY = 8f;
@@ -26,6 +28,17 @@ public class Level0 extends GameStage {
         for (Body b : WorldUtils.createDisappearObjects(world, mapHolder.map)) {
             addActor(new DisappearObject(b));
         }
+    }
+
+    @Override
+    protected void updateCamera() {
+    }
+
+    @Override
+    protected void setupCamera() {
+        getCamera().viewportWidth = VIEWPORT_WIDTH;
+        getCamera().viewportHeight = VIEWPORT_HEIGHT;
+        getCamera().position.set(752 / Constants.PPM, 769 / Constants.PPM + 5,0);
     }
 
     @Override

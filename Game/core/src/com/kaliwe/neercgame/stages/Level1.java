@@ -20,20 +20,21 @@ public class Level1 extends GameStage {
     protected List<Background> bgs = new ArrayList<>();
     protected short totalScore;
     protected int[] renderOnMid = {3};
-    protected int[] renderOnFg = {0,1,2};
+    protected int[] renderOnBg = {0, 1, 2};
     protected List<RainCloud> clouds;
 
     public Level1() {
         this("level1");
         float skyOffset = 100;
+        cameraLowerY = 17f;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, 0));
     }
 
     public Level1(String mapName) {
-        super(mapName);
-        super.renderOnFg = new int[]{0};
+        super(mapName, 12);
+        super.renderOnBg = new int[]{};
     }
 
     @Override
@@ -79,12 +80,13 @@ public class Level1 extends GameStage {
 
     @Override
     public void draw() {
-        tiledMapRenderer.render(renderOnFg);
         Vector3 position = new Vector3(getCamera().position);
         position.y = position.y * hudCam.viewportHeight / VIEWPORT_HEIGHT;
         for (Background bg : bgs) {
             bg.draw(getBatch(), position);
         }
+
+        tiledMapRenderer.render(renderOnBg);
         clouds.stream().forEach(x -> {
             x.drawRain(getBatch());
             x.draw(getBatch());

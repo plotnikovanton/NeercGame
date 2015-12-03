@@ -11,7 +11,7 @@ public class Constants {
 
     public static final Vector2 WORLD_GRAVITY = new Vector2(0, -10);
     public static final float WORLD_FRICTION = 5f;
-    public static final int PPM = 12;
+    public static int PPM = 12;
 
     public static final float PLAYER_X = 2;
     public static final float PLAYER_Y = 5;
