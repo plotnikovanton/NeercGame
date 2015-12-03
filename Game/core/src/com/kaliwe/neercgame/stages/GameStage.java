@@ -25,8 +25,8 @@ import java.util.Iterator;
 public class GameStage extends Stage implements ContactListener {
 
     // This will be our viewport measurements while working with the debug renderer
-    protected final int VIEWPORT_WIDTH = 20;
-    protected final int VIEWPORT_HEIGHT = 13;
+    public static int VIEWPORT_WIDTH = 20;
+    public static int VIEWPORT_HEIGHT = 13;
 
     protected short score;
     protected short maxScore;
@@ -34,7 +34,7 @@ public class GameStage extends Stage implements ContactListener {
     protected boolean next = false;
 
     protected World world;
-    protected MapHolder mapHolder;
+    public MapHolder mapHolder;
     protected Player player;
 
     protected final float TIME_STEP = 1 / 300f;
@@ -82,7 +82,7 @@ public class GameStage extends Stage implements ContactListener {
     }
 
     private void setupPlayer() {
-        player = new Player(WorldUtils.createPlayer(world, mapHolder.map));
+        player = new Player(WorldUtils.createPlayer(world, this.mapHolder.map, mapHolder));
         addActor(player);
     }
 
@@ -93,7 +93,7 @@ public class GameStage extends Stage implements ContactListener {
 
     protected void updateCamera() {
         Vector3 camPos = new Vector3(
-                player.getPosition().x,
+                Math.max(player.getPosition().x, mapHolder.spawn.x + VIEWPORT_WIDTH / 4),
                 Math.max(cameraLowerY, player.getPosition().y),
                 0f);
         getCamera().position.lerp(camPos, 0.11f);
@@ -137,7 +137,7 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void draw() {
         tiledMapRenderer.render(renderOnBg);
-        renderer.render(world, getCamera().combined);
+        //renderer.render(world, getCamera().combined);
         super.draw();
         tiledMapRenderer.render(renderOnFg);
     }

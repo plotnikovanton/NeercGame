@@ -25,11 +25,11 @@ public class Level1 extends GameStage {
 
     public Level1() {
         this("level1");
-        float skyOffset = 100;
+        float skyOffset = 260;
         cameraLowerY = 17f;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
-        bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, 0));
+        bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, cameraLowerY*14));
     }
 
     public Level1(String mapName) {

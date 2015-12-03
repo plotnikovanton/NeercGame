@@ -1,6 +1,7 @@
 package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.kaliwe.neercgame.actors.DisappearObject;
@@ -32,6 +33,7 @@ public class Level0 extends GameStage {
 
     @Override
     protected void updateCamera() {
+        tiledMapRenderer.setView((OrthographicCamera) getCamera());
     }
 
     @Override

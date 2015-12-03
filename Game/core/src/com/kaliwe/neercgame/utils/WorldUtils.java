@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.*;
+import com.kaliwe.neercgame.stages.GameStage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class WorldUtils {
         return new World(Constants.WORLD_GRAVITY, true);
     }
 
-    public static Body createPlayer(World world, TiledMap tiledMap) {
+    public static Body createPlayer(World world, TiledMap tiledMap, MapHolder mapHolder) {
         BodyDef bodyDef = new BodyDef();
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -34,6 +35,7 @@ public class WorldUtils {
         // Spawn point
         Ellipse circle = ((EllipseMapObject) tiledMap.getLayers().get("spawn").getObjects().get("spawn")).getEllipse();
         bodyDef.position.set(circle.x / Constants.PPM, circle.y / Constants.PPM);
+        mapHolder.spawn = new Vector2(bodyDef.position);
 
         // Main shape
         PolygonShape shape = new PolygonShape();
@@ -69,6 +71,15 @@ public class WorldUtils {
 
 
 
+        // Build invisible wall
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        fixtureDef = new FixtureDef();
+        fixtureDef.shape = new PolygonShape();
+        ((PolygonShape) fixtureDef.shape).setAsBox(0, 10);
+        bodyDef.position.set(mapHolder.spawn.x - GameStage.VIEWPORT_WIDTH / 4, body.getPosition().y);
+        Body wallBody = world.createBody(bodyDef);
+        wallBody.createFixture(fixtureDef);
 
         shape.dispose();
         return body;

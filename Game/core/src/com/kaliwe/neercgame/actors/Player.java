@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.kaliwe.neercgame.box2d.PlayerUserData;
 import com.kaliwe.neercgame.enums.PlayerState;
+import com.kaliwe.neercgame.stages.GameStage;
 import com.kaliwe.neercgame.utils.Constants;
 import com.kaliwe.neercgame.utils.ResourceUtils;
 
@@ -48,6 +49,7 @@ public class Player extends GameActor {
 
         stateTime = 0f;
         numOfFootContacts = 0;
+
     }
 
     @Override
@@ -135,6 +137,7 @@ public class Player extends GameActor {
                 }
             }
         }
+        GameStage stage = (GameStage) getStage();
     }
 
     @Override
