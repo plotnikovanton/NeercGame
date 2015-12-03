@@ -61,7 +61,7 @@ public class GameStage extends Stage implements ContactListener {
         getCamera().position.set(player.getPosition(), 0f);
         getCamera().update();
 
-        hudCam = new OrthographicCamera(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        hudCam = new OrthographicCamera(VIEWPORT_WIDTH * 20, VIEWPORT_HEIGHT * 20);
     }
 
     public void setupWorld(String mapName) {

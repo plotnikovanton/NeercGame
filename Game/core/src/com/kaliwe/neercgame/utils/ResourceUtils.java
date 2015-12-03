@@ -1,7 +1,9 @@
 package com.kaliwe.neercgame.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.Arrays;
@@ -13,6 +15,7 @@ import java.util.Map;
  */
 public class ResourceUtils {
     private static Map<String, Animation> animations = new HashMap<>();
+    private static Map<String, BitmapFont> fonts = new HashMap<>();
 
     static {
         Texture textureBuffer;
@@ -21,7 +24,7 @@ public class ResourceUtils {
         TextureRegion mirror[][];
 
         // Player animations
-        textureBuffer = new Texture("player.png");
+        textureBuffer = new Texture(Gdx.files.internal("player.png"));
         split = TextureRegion.split(textureBuffer, 19, 30);
         mirror = flip(split);
 
@@ -43,6 +46,10 @@ public class ResourceUtils {
         animations.put("deadRight", new Animation(0.10f, Arrays.copyOfRange(mirror[3], 0, 2)));
         animations.put("deadLeft", new Animation(0.10f, Arrays.copyOfRange(split[3], 0, 2)));
 
+
+        // Fonts
+        fonts.put("visitor", new BitmapFont(Gdx.files.internal("visitor.fnt"), Gdx.files.internal("visitor.png"), false));
+
     }
 
     private static TextureRegion[][] flip(TextureRegion[][] split) {
@@ -57,11 +64,19 @@ public class ResourceUtils {
         return mirror;
     }
 
-    public static Animation getAnimation(String key) {
-        if (animations.containsKey(key)) {
-            return animations.get(key);
+    private static <T> T getIfExists(Map<String, T> map, String key) {
+        if (map.containsKey(key)) {
+            return map.get(key);
         } else {
             throw new IllegalArgumentException("Have not got Animation called: " + key);
         }
+    }
+
+    public static Animation getAnimation(String key) {
+        return getIfExists(animations, key);
+    }
+
+    public static BitmapFont getFont(String key) {
+        return getIfExists(fonts, key);
     }
 }

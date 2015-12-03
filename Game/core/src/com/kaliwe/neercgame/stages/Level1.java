@@ -2,16 +2,14 @@ package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.actors.Bug;
 import com.kaliwe.neercgame.box2d.BugUserData;
-import com.kaliwe.neercgame.utils.Background;
-import com.kaliwe.neercgame.utils.ContactUtils;
-import com.kaliwe.neercgame.utils.Mask;
-import com.kaliwe.neercgame.utils.WorldUtils;
+import com.kaliwe.neercgame.utils.*;
 
 /**
  * Created by anton on 01.12.15.
@@ -24,7 +22,7 @@ public class Level1 extends GameStage {
         super("level1.tmx");
         bg = new Background(
                 new TextureRegion(new Texture("buildings.png")),
-                0.1f, 0.5f, hudCam, 0, 0);
+                2f, 10f, hudCam, 0, 0);
         score = 0;
     }
 
@@ -59,8 +57,11 @@ public class Level1 extends GameStage {
 
     @Override
     public void draw() {
-        bg.draw(getBatch(), getCamera().position);
+        Vector3 position = new Vector3(getCamera().position);
+        position.y = position.y * hudCam.viewportHeight / VIEWPORT_HEIGHT;
+        bg.draw(getBatch(), position);
         super.draw();
+        HUDUtils.drawCollectedBugs(getBatch(), hudCam, (short) 10, (short) 10);
     }
 
     @Override
