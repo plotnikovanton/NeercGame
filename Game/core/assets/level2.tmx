@@ -1,38 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="8" tileheight="8" nextobjectid="12">
- <tileset firstgid="1" name="StyleSheet" tilewidth="8" tileheight="8" tilecount="16384">
-  <image source="StyleSheet.png" width="1024" height="1024"/>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="512" height="128"/>
  </tileset>
- <layer name="Слой тайлов 1" width="100" height="50">
+ <layer name="bg" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztw8EJAAAIBKBr9Dbv3QZBCiYAAAAAAAAAAAAAAABbeWqrqqqqqqqqbw68sIua
+   eJztxrENACAMwLBeCVwCnE9nBsay2FKkRAAAAAAAAAAAAAAAAAAAAPzRsp4NX/YvM1vZ9mUPAAAAtwN4k0rX
   </data>
  </layer>
- <objectgroup name="GroundObj">
-  <object id="3" x="0" y="248">
-   <polygon points="0,0 0,8 800,8 800,0"/>
-  </object>
- </objectgroup>
- <objectgroup name="clouds">
-  <object id="4" x="240" y="90">
-   <ellipse/>
-  </object>
-  <object id="5" x="360" y="88">
-   <ellipse/>
-  </object>
-  <object id="6" x="462" y="88">
-   <ellipse/>
-  </object>
-  <object id="7" x="136" y="88">
-   <ellipse/>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzLlNA0AURVG3aLALwUCCqwBMAlWYJcFVmCWBKlicQMILRyNN4GSERudIN/jS059MAAAAAAAAAAAAAAAAAOB/mKaDdJhmaT7wft/fPZylZXEfpUU6TifpdOB9a1v/7Ok63RT3ebpIl2mVrgbet7b1z54e06a41+k23aX79DDwvrWtf/b0lt6Le5ue0nN6Sa8D71vb+mdPP+m3uD/SZ/pK32k38L61rX8CAADAPv4AKbmlnA==
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzrENACAMwDD+/ws+gTtg7MhEi2RL2dMaAAAAAAAAAAAAAAAAAADAf/ppZE8E1X5em6eVPRFU+wEAAIBbG+gXBq0=
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAIADFW0010/yHk5QoQ0ib3vwgAAAAAAAAAAAAAAAAAAOhpZbt6gu9kt3oCAAAAYLgHZ7EBRw==
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 1600,0 1600,8 0,16"/>
   </object>
  </objectgroup>
  <objectgroup name="spawn">
-  <object id="9" name="Spawn" x="50" y="184">
+  <object name="spawn" x="160" y="576">
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup name="finish">
-  <object id="11" x="680" y="176" width="32" height="70"/>
+  <object x="1276" y="476" width="8" height="180"/>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object x="214" y="600" width="20"/>
+  <object x="288" y="572" width="16"/>
+  <object x="304" y="564" width="32"/>
+  <object x="480" y="572" width="16"/>
+  <object x="496" y="564" width="32"/>
+  <object x="404" y="600" width="24"/>
+  <object x="596" y="600" width="24"/>
+  <object x="668" y="572" width="20"/>
+  <object x="688" y="564" width="32"/>
+  <object x="788" y="600" width="24"/>
+  <object x="860" y="572" width="20"/>
+  <object x="880" y="564" width="32"/>
+  <object x="981" y="600" width="24"/>
+  <object x="1052" y="572" width="20"/>
+  <object x="1072" y="564" width="32"/>
+  <object x="1172" y="600" width="24"/>
+  <object x="1228" y="572" width="20"/>
+  <object x="1248" y="564" width="28"/>
+ </objectgroup>
+ <objectgroup name="bugs">
+  <object x="224" y="576">
+   <ellipse/>
+  </object>
+  <object x="320" y="544">
+   <ellipse/>
+  </object>
+  <object x="416" y="580">
+   <ellipse/>
+  </object>
+  <object x="496" y="540">
+   <ellipse/>
+  </object>
+  <object x="568" y="608">
+   <ellipse/>
+  </object>
+  <object x="720" y="608">
+   <ellipse/>
+  </object>
+  <object x="892" y="544">
+   <ellipse/>
+  </object>
+  <object x="992" y="576">
+   <ellipse/>
+  </object>
+  <object x="1064" y="556">
+   <ellipse/>
+  </object>
+  <object x="1088" y="540">
+   <ellipse/>
+  </object>
+  <object x="1152" y="612">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="rain">
+  <object x="368" y="592">
+   <ellipse/>
+  </object>
+  <object x="256" y="532">
+   <ellipse/>
+  </object>
+  <object x="568" y="536">
+   <ellipse/>
+  </object>
+  <object x="764" y="540">
+   <ellipse/>
+  </object>
+  <object x="948" y="588">
+   <ellipse/>
+  </object>
+  <object x="1152" y="528">
+   <ellipse/>
+  </object>
  </objectgroup>
 </map>

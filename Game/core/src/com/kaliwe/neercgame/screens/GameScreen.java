@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
 import com.kaliwe.neercgame.stages.Level1;
+import com.kaliwe.neercgame.stages.Level2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +22,9 @@ public class GameScreen implements Screen {
     public GameScreen() {
         iter = new ArrayList<Class<? extends GameStage>>() {{
             //add(Level0.class);
-            add(Level1.class);
+            //add(Level1.class);
+            add(Level2.class);
+
         }}.iterator();
         try {
             setStage(iter.next());

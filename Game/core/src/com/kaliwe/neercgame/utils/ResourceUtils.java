@@ -75,6 +75,8 @@ public class ResourceUtils {
         // Map
         maps.put("level0", mapLoader.load(Gdx.files.internal("level0.tmx").path()));
         maps.put("level1", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
+        maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));
+
     }
 
     private static TextureRegion[][] flip(TextureRegion[][] split) {
