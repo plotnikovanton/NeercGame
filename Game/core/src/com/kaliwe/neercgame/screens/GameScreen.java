@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
+import com.kaliwe.neercgame.stages.Level0;
 import com.kaliwe.neercgame.stages.Level1;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
         iter = new ArrayList<Class<? extends GameStage>>() {{
-            //add(Level0.class);
+            add(Level0.class);
             add(Level1.class);
         }}.iterator();
         iter.next();
-        stage = new Level1();
+        stage = new Level0();
         Gdx.input.setInputProcessor(stage);
     }
 

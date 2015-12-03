@@ -62,6 +62,14 @@ public class ContactUtils {
         }
     }
 
+    public static Body getBody(Contact contact, Function<Body, Boolean> checker) {
+        if (checker.apply(contact.getFixtureA().getBody())) {
+            return contact.getFixtureA().getBody();
+        } else {
+            return contact.getFixtureB().getBody();
+        }
+    }
+
     // Fixtures
     public static Function<Fixture, Boolean> isFixtureFoot = x -> fixtureIs(UserDataType.FOOT, x);
     public static Function<Fixture, Boolean> isFixtureFinish = x -> fixtureIs(UserDataType.FNISH, x);

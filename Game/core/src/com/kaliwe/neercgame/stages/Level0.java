@@ -36,14 +36,8 @@ public class Level0 extends GameStage {
         super.beginContact(contact);
         if (ContactUtils.checkFixtureAndBody(
                 ContactUtils.isFixtureFoot, ContactUtils.isBodyDissapearObject, contact)) {
-            DisappearObject dis;
-            // TODO: Replace using ContactUtils
-            if (contact.getFixtureA().getBody().getUserData() instanceof DisappearUserData) {
-                dis = ((DisappearUserData) contact.getFixtureA().getBody().getUserData()).getActor();
-            } else {
-                dis = ((DisappearUserData) contact.getFixtureB().getBody().getUserData()).getActor();
-            }
-            dis.actWith(player);
+            DisappearUserData data = ((DisappearUserData)ContactUtils.getBody(contact, ContactUtils.isBodyDissapearObject).getUserData());
+            data.getActor().actWith(player);
         }
     }
 }
