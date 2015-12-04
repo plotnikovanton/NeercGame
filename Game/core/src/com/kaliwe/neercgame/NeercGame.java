@@ -1,16 +1,13 @@
 package com.kaliwe.neercgame;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.kaliwe.neercgame.screens.GameScreen;
+import com.kaliwe.neercgame.screens.IntroScreen;
 
 public class NeercGame extends Game {
 
     @Override
     public void create () {
-        Gdx.gl.glClearColor(135/255f, 206/255f, 235/255f, 1);
-        //Gdx.gl.glClearColor(1f, 1f, 1f, 1);
-        setScreen(new GameScreen());
+        setScreen(new IntroScreen(this));
     }
 
     @Override

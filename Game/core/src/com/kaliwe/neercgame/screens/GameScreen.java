@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
 import com.kaliwe.neercgame.stages.Level0;
-import com.kaliwe.neercgame.stages.Level1;
 import com.kaliwe.neercgame.stages.Level2;
 
 import java.util.ArrayList;
@@ -21,9 +20,10 @@ public class GameScreen implements Screen {
     private static float totalTime = 0;
 
     public GameScreen() {
+        Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
         iter = new ArrayList<Class<? extends GameStage>>() {{
             add(Level0.class);
-            add(Level1.class);
+            //add(Level1.class);
             add(Level2.class);
 
         }}.iterator();
@@ -57,7 +57,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (stage.isNext()) {
-            totalScore += stage.getScore() / stage.getMaxScore();
+            totalScore += (double) stage.getScore() / (double) stage.getMaxScore();
             try {
                 setStage(iter.next());
             } catch (IllegalAccessException | InstantiationException e) {

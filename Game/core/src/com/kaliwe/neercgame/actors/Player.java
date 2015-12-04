@@ -64,11 +64,13 @@ public class Player extends GameActor {
     }
 
     public void jumpOutOfEnemy () {
-        Vector2 linearVelocity = body.getLinearVelocity();
-        linearVelocity.y=0;
-        body.setLinearVelocity(linearVelocity);
-        body.applyLinearImpulse(getUserData().getJumpingOutEnemyLinearImpulse(), body.getWorldCenter(), true);
-        choiceAnimation();
+        if (state != PlayerState.DEAD) {
+            Vector2 linearVelocity = body.getLinearVelocity();
+            linearVelocity.y=0;
+            body.setLinearVelocity(linearVelocity);
+            body.applyLinearImpulse(getUserData().getJumpingOutEnemyLinearImpulse(), body.getWorldCenter(), true);
+            choiceAnimation();
+        }
     }
 
     public void decNumOfFootContacts() {

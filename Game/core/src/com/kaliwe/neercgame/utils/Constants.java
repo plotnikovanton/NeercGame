@@ -23,8 +23,8 @@ public class Constants {
     public static final float PLAYER_DENSITY = 0.5f;
     public static final float PLAYER_DODGE_X = 2f;
     public static final float PLAYER_DODGE_Y = 1.5f;
-    public static final float PLAYER_SPEED = 2f;
-    public static final float PLAYER_MAX_SPEED = 10f;
+    public static final float PLAYER_SPEED = 1.6f;
+    public static final float PLAYER_MAX_SPEED = 8f;
 
     public static final float FOOT_HEIGHT = 0.02f;
     public static final float SIMPLE_ENEMY_SPEED = 5f;

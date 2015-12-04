@@ -1,5 +1,6 @@
 package com.kaliwe.neercgame.stages;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -18,15 +19,14 @@ import java.util.List;
  */
 public class Level1 extends GameStage {
     protected List<Background> bgs = new ArrayList<>();
-    protected short totalScore;
     protected int[] renderOnMid = {3};
     protected int[] renderOnBg = {0, 1, 2};
     protected List<RainCloud> clouds;
+    protected Color tint = null;
 
     public Level1() {
         this("level1");
         float skyOffset = 260;
-        cameraLowerY = 17f;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, cameraLowerY*14));
@@ -34,6 +34,7 @@ public class Level1 extends GameStage {
 
     public Level1(String mapName) {
         super(mapName, 12);
+        cameraLowerY = 17f;
         super.renderOnBg = new int[]{};
     }
 
@@ -41,11 +42,11 @@ public class Level1 extends GameStage {
     public void setupWorld(String mapName) {
         super.setupWorld(mapName);
         WorldUtils.createPlatforms(world, mapHolder.map);
-        totalScore = 0;
+        maxScore = 0;
         // setup Bugs
         for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
             addActor(new Bug(b));
-            totalScore++;
+            maxScore++;
         }
 
         // setup Rain
@@ -80,21 +81,26 @@ public class Level1 extends GameStage {
 
     @Override
     public void draw() {
+        if (tint != null) {
+            getBatch().setColor(tint);
+        }
         Vector3 position = new Vector3(getCamera().position);
         position.y = position.y * hudCam.viewportHeight / VIEWPORT_HEIGHT;
         for (Background bg : bgs) {
             bg.draw(getBatch(), position);
         }
 
+
         tiledMapRenderer.render(renderOnBg);
         clouds.stream().forEach(x -> {
             x.drawRain(getBatch());
             x.draw(getBatch());
         });
+
         tiledMapRenderer.render(renderOnMid);
         super.draw();
-        HUDUtils.drawCollectedBugs(getBatch(), hudCam, score, totalScore);
-        HUDUtils.drawTotalScore(getBatch(), hudCam, score, totalScore);
+        HUDUtils.drawCollectedBugs(getBatch(), hudCam, score, maxScore);
+        HUDUtils.drawTotalScore(getBatch(), hudCam, score, maxScore);
     }
 
     @Override
