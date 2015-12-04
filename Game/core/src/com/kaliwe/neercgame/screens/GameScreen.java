@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
+
 import com.kaliwe.neercgame.stages.Level0;
 import com.kaliwe.neercgame.stages.Level1;
 import com.kaliwe.neercgame.stages.Level2;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +21,7 @@ public class GameScreen implements Screen {
     private GameStage stage;
     private static double totalScore = 0;
     private static float totalTime = 0;
+    public static boolean lock;
 
     public GameScreen() {
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
@@ -38,6 +41,7 @@ public class GameScreen implements Screen {
     private void setStage(Class<? extends GameStage> stage) throws IllegalAccessException, InstantiationException {
         this.stage = stage.newInstance();
         Gdx.input.setInputProcessor(this.stage);
+
     }
 
     public static double getTotalScore() {
@@ -57,24 +61,16 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (stage.isNext()) {
-            totalScore += (double) stage.getScore() / (double) stage.getMaxScore();
+        //stage = new BetweenStagesStage((short)10,(short) 10,"10");
+        if (GameStateManager.next) {
             try {
-                setStage(iter.next());
+                stage = GameStateManager.getNext();
             } catch (IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
             }
-        } else if (stage.isFailed()) {
-            stage.dispose();
-            try {
-                setStage(stage.getClass());
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
         }
-        totalTime += delta;
-        stage.draw();
         stage.act(delta);
+        stage.draw();
     }
 
     @Override

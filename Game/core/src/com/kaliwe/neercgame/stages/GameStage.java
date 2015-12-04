@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.Array;
 import com.kaliwe.neercgame.actors.Player;
 import com.kaliwe.neercgame.box2d.UserData;
 import com.kaliwe.neercgame.enums.PlayerState;
+import com.kaliwe.neercgame.screens.GameScreen;
+import com.kaliwe.neercgame.screens.GameStateManager;
 import com.kaliwe.neercgame.utils.Constants;
 import com.kaliwe.neercgame.utils.ContactUtils;
 import com.kaliwe.neercgame.utils.MapHolder;
@@ -28,10 +30,10 @@ public class GameStage extends Stage implements ContactListener {
     public static int VIEWPORT_WIDTH = 20;
     public static int VIEWPORT_HEIGHT = 13;
 
+    public String text;
+
     protected short score;
     protected short maxScore;
-
-    protected boolean next = false;
 
     protected World world;
     public MapHolder mapHolder;
@@ -46,12 +48,16 @@ public class GameStage extends Stage implements ContactListener {
     protected TiledMapRenderer tiledMapRenderer;
 
     protected Box2DDebugRenderer renderer;
-    protected boolean failed = false;
+    protected boolean lock = false;
     protected float cameraLowerY = 5f;
     protected OrthographicCamera hudCam;
 
-    public GameStage(String mapName, int PPM) {
+    protected float acc = 0;
+
+    public GameStage(String mapName, int PPM, String text) {
         Constants.PPM = PPM;
+        GameScreen.lock = false;
+        this.text = text;
 
         score = 0;
         maxScore = 1;
@@ -75,18 +81,18 @@ public class GameStage extends Stage implements ContactListener {
         hudCam = new OrthographicCamera(VIEWPORT_WIDTH * 20, VIEWPORT_HEIGHT * 20);
     }
 
-    public void setupWorld(String mapName) {
+    protected void setupWorld(String mapName) {
         world = WorldUtils.createWorld();
         setupMap(mapName);
         WorldUtils.createFinish(world, mapHolder.map);
     }
 
-    private void setupPlayer() {
+    protected void setupPlayer() {
         player = new Player(WorldUtils.createPlayer(world, this.mapHolder.map, mapHolder));
         addActor(player);
     }
 
-    private void setupMap(String mapName) {
+    protected void setupMap(String mapName) {
         mapHolder = WorldUtils.createMap(world, mapName);
         mapHolder.ground.forEach(this::addActor);
     }
@@ -107,13 +113,18 @@ public class GameStage extends Stage implements ContactListener {
         super.act(delta);
         accumulator += delta;
 
+        acc += delta;
+
         while (accumulator >= delta) {
             world.step(TIME_STEP, 6, 2);
             accumulator -= TIME_STEP;
         }
 
         if (player.getPosition().y < -50) {
-            failed = true;
+            if (!lock) {
+                lock = true;
+                GameStateManager.failed(score, maxScore);
+            }
         }
 
         updateCamera();
@@ -181,7 +192,10 @@ public class GameStage extends Stage implements ContactListener {
             player.jumpOutOfEnemy();
         } else if (ContactUtils.checkFixtureAndBody(
                 ContactUtils.isFixtureFinish, ContactUtils.isBodyPlayer, contact)) {
-            next = true;
+            if (!lock) {
+                lock = true;
+                GameStateManager.complete(score, maxScore);
+            }
         }
     }
 
@@ -209,13 +223,5 @@ public class GameStage extends Stage implements ContactListener {
 
     public short getMaxScore() {
         return maxScore;
-    }
-
-    public boolean isFailed() {
-        return failed;
-    }
-
-    public boolean isNext() {
-        return next;
     }
 }

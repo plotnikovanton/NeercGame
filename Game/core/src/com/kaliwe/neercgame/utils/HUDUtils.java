@@ -1,10 +1,13 @@
 package com.kaliwe.neercgame.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kaliwe.neercgame.screens.GameScreen;
 
 import java.text.DecimalFormat;
@@ -16,8 +19,9 @@ import java.util.Date;
  */
 public class HUDUtils {
     private static BitmapFont mainFont = ResourceUtils.getFont("visitor");
-    private static DecimalFormat totalScoreFormatter = new DecimalFormat("#0.00");
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+    public static DecimalFormat totalScoreFormatter = new DecimalFormat("#0.00");
+    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+    private static ShapeRenderer shapeRenderer = new ShapeRenderer();
 
     public static void drawCollectedBugs(Batch sb, Camera hudCam, short current, short total) {
         sb.setProjectionMatrix(hudCam.combined);
@@ -50,6 +54,7 @@ public class HUDUtils {
     public static void drawTotalScore(Batch sb, Camera hudCam, float offsetX, float offsetY, short score, short maxScore) {
         GlyphLayout layout = new GlyphLayout();
 
+        sb.setProjectionMatrix(hudCam.combined);
         sb.begin();
         String totalScore = totalScoreFormatter.format(GameScreen.getTotalScore() + (double) score / (double) maxScore);
         layout.setText(mainFont, totalScore);
@@ -65,6 +70,27 @@ public class HUDUtils {
         layout.setText(mainFont, time);
 
         mainFont.draw(sb, time, offsetX - layout.width, offsetY - mainFont.getCapHeight() - 2);
+        sb.end();
+    }
+
+    public static void drawTextBox(Batch sb, Camera hudCam, String text, float alpha) {
+        // draw black box
+        Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
+        float width = hudCam.viewportWidth - 80;
+        float height = hudCam.viewportHeight - 80;
+        shapeRenderer.setProjectionMatrix(hudCam.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0, 0, 0, alpha);
+        shapeRenderer.rect(-width / 2, -height / 2, width, height);
+        shapeRenderer.end();
+
+        sb.setProjectionMatrix(hudCam.combined);
+        sb.begin();
+        mainFont.setColor(1, 1, 1, alpha);
+        mainFont.draw(sb, text, -width / 2 + 15, height / 2 - 15,
+                width - 30, 1, true
+        );
+
         sb.end();
     }
 }

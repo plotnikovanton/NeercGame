@@ -64,6 +64,13 @@ public class ResourceUtils {
         animations.put("bug1", new Animation(0.06f, split[1]));
         textureRegions.put("bugHud", split[0][0]);
 
+        // Pig
+        textureBuffer = new Texture(Gdx.files.internal("pig.png"));
+        split = TextureRegion.split(textureBuffer, 20, 20);
+        textureRegions.put("pigNormal1", split[0][0]);
+        textureRegions.put("pigNormal2", split[0][1]);
+        animations.put("pigSpecial", new Animation(0.1f, Arrays.copyOfRange(split[0], 2,4)));
+
         // Fonts
         fonts.put("visitor", new BitmapFont(Gdx.files.internal("visitor.fnt"), Gdx.files.internal("visitor.png"), false));
 
@@ -73,6 +80,7 @@ public class ResourceUtils {
         textureRegions.put("cloudsBack", new TextureRegion(new Texture(Gdx.files.internal("clouds_back.png"))));
 
         // Map
+        maps.put("levelBetweenLevels", mapLoader.load(Gdx.files.internal("levelBetweenLevels.tmx").path()));
         maps.put("level0", mapLoader.load(Gdx.files.internal("level0.tmx").path()));
         maps.put("level1", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
         maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));

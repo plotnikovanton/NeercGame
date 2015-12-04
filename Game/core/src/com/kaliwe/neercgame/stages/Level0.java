@@ -15,7 +15,7 @@ import com.kaliwe.neercgame.utils.WorldUtils;
  */
 public class Level0 extends GameStage {
     public Level0() {
-        super("level0", 24);
+        super("level0", 24, "LEVEL 1");
         Gdx.gl.glClearColor(1,1,1,1);
         getCamera().viewportHeight *= 2;
         getCamera().viewportWidth *= 2;
