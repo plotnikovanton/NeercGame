@@ -10,8 +10,12 @@ import com.kaliwe.neercgame.screens.GameStateManager;
 import com.kaliwe.neercgame.utils.HUDUtils;
 import com.kaliwe.neercgame.utils.ResourceUtils;
 
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 /**
  * Created by anton on 04.12.15.
@@ -53,8 +57,27 @@ public class SaveScore extends Stage {
         }
 
 
-        System.out.println("In: " + data);
-        System.out.println("Out: " + stringBuffer.toString());
+        //System.out.println("In: " + data);
+        //System.out.println("Out: " + stringBuffer.toString());
+        StringBuilder params = new StringBuilder();
+        Arrays.stream(new String[] {
+                "score=", score, "&time=", time, "&name=", name, "&md5=", stringBuffer.toString()})
+                .forEach(params::append);
+
+        // Send post request
+
+        try {
+            URL url = new URL("http://localhost:1488" );
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(params.toString());
+            wr.flush();
+            wr.close();
+
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void setupTextField() {
@@ -73,7 +96,6 @@ public class SaveScore extends Stage {
 
         textField.setTextFieldListener((textField1, c) -> {
             if (c == 13) {
-                System.out.println(123);
                 try {
                     sendToServer(textField1.getText());
                 } catch (NoSuchAlgorithmException e) {

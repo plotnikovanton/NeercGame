@@ -45,6 +45,8 @@ public class GameScreen implements Screen {
         }
         GameStateManager.act(delta);
 
+
+
         stage.act(delta);
         stage.draw();
     }
