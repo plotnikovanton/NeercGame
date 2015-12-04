@@ -1,6 +1,7 @@
 package com.kaliwe.neercgame.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.kaliwe.neercgame.stages.*;
 
 import java.util.ArrayList;
@@ -11,14 +12,14 @@ import java.util.Iterator;
  */
 public class GameStateManager {
     private static Iterator<Class<? extends GameStage>> iter = new ArrayList<Class<? extends GameStage>>() {{
-            add(Level0.class);
+        add(Level0.class);
             add(Level1.class);
             add(Level2.class);
             add(Level3.class);
             add(Level6.class);
-        }}.iterator();
+    }}.iterator();
     private static Class<? extends GameStage> last;
-    private static GameStage lastInstance;
+    private static Stage lastInstance;
 
     public static boolean timeLock = false;
 
@@ -32,15 +33,18 @@ public class GameStateManager {
     public static double totalScore = 0;
     public static float totalTime = 0;
 
-    public static GameStage getNext() throws IllegalAccessException, InstantiationException {
-        System.out.println("Next");
-        if (lastInstance != null )lastInstance.dispose();
+    public static Stage getNext() throws IllegalAccessException, InstantiationException {
+        if (lastInstance != null) lastInstance.dispose();
         if (!failed) {
             if (sureComplete) {
-                last = iter.next();
-                lastInstance = last.newInstance();
+                if (iter.hasNext()) {
+                    last = iter.next();
+                    lastInstance = last.newInstance();
+                } else {
+                    lastInstance = new SaveScore();
+                }
             } else {
-                lastInstance = new BetweenStagesStage(score, maxScore, lastInstance.text);
+                lastInstance = new BetweenStagesStage(score, maxScore, ((GameStage)lastInstance).text);
             }
         } else {
             timeLock = false;
@@ -78,7 +82,7 @@ public class GameStateManager {
     }
 
     public static void act(float delta) {
-        if (!timeLock){
+        if (!timeLock) {
             totalTime += delta;
         }
     }

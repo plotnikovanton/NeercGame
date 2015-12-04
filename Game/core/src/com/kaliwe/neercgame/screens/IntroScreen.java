@@ -20,6 +20,8 @@ public class IntroScreen extends InputAdapter implements Screen {
     private Color color;
     private float timer;
 
+    protected static final int VIEWPORT_WIDTH = 20 * 30;
+    protected static final int VIEWPORT_HEIGHT = 13 * 30;
     protected final Game game;
 
     public IntroScreen(Game game) {

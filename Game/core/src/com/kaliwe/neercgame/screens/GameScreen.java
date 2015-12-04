@@ -3,16 +3,13 @@ package com.kaliwe.neercgame.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.kaliwe.neercgame.stages.GameStage;
-
-import java.util.Iterator;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
  * Created by anton on 18.11.15.
  */
 public class GameScreen implements Screen {
-    private Iterator<Class<? extends GameStage>> iter;
-    private GameStage stage;
+    private Stage stage;
     private static double totalScore = 0;
     private static float totalTime = 0;
     public static boolean lock;
@@ -31,14 +28,14 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-
+        //stage = new SaveScore();
+        //Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //stage = new BetweenStagesStage((short)10,(short) 10,"10");
         if (GameStateManager.next) {
             try {
                 stage = GameStateManager.getNext();
@@ -47,6 +44,7 @@ public class GameScreen implements Screen {
             }
         }
         GameStateManager.act(delta);
+
         stage.act(delta);
         stage.draw();
     }

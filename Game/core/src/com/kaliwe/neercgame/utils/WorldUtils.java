@@ -283,10 +283,8 @@ public class WorldUtils {
 
         float[] worldVertices = new float[vertices.length];
 
-        System.out.println("new");
         for (int i = 0; i < vertices.length; ++i) {
             worldVertices[i] = vertices[i] / Constants.PPM;
-            System.out.println(worldVertices[i]);
         }
 
         //worldVertices[worldVertices.length - 2] = worldVertices[0];
