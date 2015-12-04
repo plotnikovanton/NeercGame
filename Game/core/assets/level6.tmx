@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="1024" height="356"/>
+ </tileset>
+ <layer name="bg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztx8EVglAUQ8FPEyjl0IRiY4CNIXRDmoDnYubkLtIaAAAAAAAAAAAAAAAAAABX6rvWHumZhs6v/q/0TlP6+OV/Tkta09cv/1v6pT0dfvnP9EeNkiRJknRTJ88Jh9w=
+  </data>
+ </layer>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztyscNwzAABEGyBKfCnAqTLBWm1I+vA4MwnzPAfg5XCgAAAAAAAAAAAAAAAAD8b0yfNKU5DbbuW4s1bWlPR1ps3bcW51rKJV3TLZ2qrffW4pH/M73SO92rrffWYsz/k6Y0p6Haem8t1vy3tKcjLdXWewMAAIBfvhe3HeI=
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1VdOQmEQQOFLUymWLdGrZUuCjWLZEr2XJXk2YCIQgphzku/xJjPzkxAEZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZj+XDgdBBlnkkEcBRZRQRgVV1MLHnvb/98iN62jgCc94wSve0EQLbXR8j4PX5cY99DHAECOMMcEUM8yx8D0OXigSBGFEEEUMZzjHBeJIIIlU5NjT/v3mWGCJFdbYbPF9mhtnkEUOeRRQRAllVFBFbcf32HfGUyoZ4neLS1zhGjeh33//yI3raOAJz3jBK97QRAttdHZ8j31nPKWq7FXDLe5wj4ctdu1y4x76GGCIEcaYYIoZ5ljs+B77znhKtdmrg3d84BNfW+waivL/gQiiiOEM57hAHAkkkYoeZ8ZTas5eCyyxwhqbLXZNc+MMssghjwKKKKGMCqqo7fge+85oZmZmZmZmdui+AcxzSVE=
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzrENwlAMRVGngs1gLdLAWtAkY+ENvvXBUYpzJHdXT44AAAAAAAAAAAAAAAAAAIjY8vY/dNWdmb6rPaPLEnFdfu+qOzN9R/vIW2uTh7rl7/fC/6OuujPTd7TvvE9t8lDP/P1V+H/UVXdm+q72jLb8fS/8P+qqOzN9VwsAAAAdvhDaH3k=
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 1600,0 1600,8 0,16"/>
+  </object>
+  <object x="0" y="656">
+   <polygon points="0,0 516,0 520,-4 524,-8 528,-12 548,-32 548,-40 544,-44 540,-48 536,-56 540,-64 544,-68 548,-68 552,-72 588,-72 592,-72 596,-72 600,-76 596,-80 596,-84 596,-88 584,-92 580,-96 576,-88 568,-92 564,-92 564,-88 560,-84 556,-92 552,-96 552,-100 560,-108 568,-108 572,-116 576,-120 572,-124 568,-124 568,-128 572,-132 580,-136 584,-132 588,-128 592,-124 596,-128 596,-136 604,-136 604,-128 608,-116 612,-104 612,-100 616,-96 624,-92 628,-72 632,-64 632,-60 632,-56 704,-8 704,0 1600,0 1600,144 0,144"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawn">
+  <object name="spawn" x="64" y="592">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object x="1214" y="476" width="8" height="180"/>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object x="0" y="572" width="16"/>
+  <object x="20" y="564" width="28"/>
+  <object x="80" y="572" width="16"/>
+  <object x="100" y="564" width="24"/>
+  <object x="156" y="572" width="20"/>
+  <object x="176" y="564" width="28"/>
+  <object x="236" y="572" width="20"/>
+  <object x="260" y="564" width="24"/>
+  <object x="212" y="600" width="24"/>
+  <object x="272" y="640" width="64"/>
+  <object x="292" y="620" width="24"/>
+  <object x="296" y="604" width="16"/>
+  <object x="300" y="596" width="8"/>
+  <object x="320" y="572" width="16"/>
+  <object x="336" y="564" width="32"/>
+  <object x="372" y="600" width="24"/>
+  <object x="400" y="572" width="16"/>
+  <object x="416" y="564" width="28"/>
+  <object x="480" y="572" width="16"/>
+  <object x="500" y="600" width="24"/>
+  <object x="500" y="564" width="28"/>
+  <object x="644" y="572" width="16"/>
+  <object x="664" y="564" width="20"/>
+  <object x="696" y="600" width="20"/>
+  <object x="720" y="572" width="16"/>
+  <object x="744" y="564" width="20"/>
+  <object x="868" y="600" width="24"/>
+  <object x="800" y="572" width="16"/>
+  <object x="816" y="564" width="32"/>
+  <object x="880" y="572" width="16"/>
+  <object x="896" y="564" width="32"/>
+  <object x="956" y="596" width="8"/>
+  <object x="952" y="604" width="16"/>
+  <object x="948" y="620" width="24"/>
+  <object x="928" y="640" width="64"/>
+  <object x="960" y="572" width="16"/>
+  <object x="984" y="564" width="20"/>
+  <object x="1048" y="600" width="20"/>
+  <object x="1036" y="572" width="20"/>
+  <object x="1056" y="564" width="28"/>
+  <object x="1120" y="572" width="16"/>
+  <object x="1140" y="564" width="28"/>
+  <object x="1196" y="572" width="16"/>
+ </objectgroup>
+ <objectgroup name="bugs">
+  <object x="112" y="544">
+   <ellipse/>
+  </object>
+  <object x="164" y="560">
+   <ellipse/>
+  </object>
+  <object x="192" y="548">
+   <ellipse/>
+  </object>
+  <object x="304" y="568">
+   <ellipse/>
+  </object>
+  <object x="408" y="560">
+   <ellipse/>
+  </object>
+  <object x="428" y="548">
+   <ellipse/>
+  </object>
+  <object x="488" y="560">
+   <ellipse/>
+  </object>
+  <object x="672" y="604">
+   <ellipse/>
+  </object>
+  <object x="592" y="520">
+   <ellipse/>
+  </object>
+  <object x="808" y="544">
+   <ellipse/>
+  </object>
+  <object x="960" y="560">
+   <ellipse/>
+  </object>
+  <object x="1068" y="536">
+   <ellipse/>
+  </object>
+  <object x="1128" y="560">
+   <ellipse/>
+  </object>
+  <object x="780" y="632">
+   <ellipse/>
+  </object>
+  <object x="1184" y="632">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="rain"/>
+</map>
