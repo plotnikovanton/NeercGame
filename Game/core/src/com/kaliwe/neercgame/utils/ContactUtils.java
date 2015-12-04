@@ -45,11 +45,13 @@ public class ContactUtils {
                 fixtureACheck.apply(b) && fixtureBCheck.apply(a);
     }
     public static boolean bodyIs(UserDataType type, Body body) {
+        if (! (body.getUserData() instanceof  UserData)) return false;
         UserData userData = (UserData) body.getUserData();
         return userData != null && userData.getUserDataType() == type;
     }
 
     public static boolean fixtureIs(UserDataType type, Fixture fixture) {
+        if (! (fixture.getUserData() instanceof  UserData)) return false;
         UserData userData = (UserData) fixture.getUserData();
         return userData != null && userData.getUserDataType() == type;
 

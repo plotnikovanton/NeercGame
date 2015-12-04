@@ -21,4 +21,7 @@ public abstract class GameActor extends Actor {
     protected float transformToScreen(float n) {
         return Constants.PPM * n;
     }
+    public Body getBody() {
+        return body;
+    }
 }

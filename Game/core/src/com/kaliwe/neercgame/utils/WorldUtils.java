@@ -1,5 +1,6 @@
 package com.kaliwe.neercgame.utils;
 
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.*;
@@ -119,7 +120,9 @@ public class WorldUtils {
     }
 
     public static Body createFinish(World world, TiledMap tiledMap) {
-        Shape shape = getRectangle((RectangleMapObject) tiledMap.getLayers().get("finish").getObjects().get(0));
+        MapLayer layer = tiledMap.getLayers().get("finish");
+        if (layer == null) return null;
+        Shape shape = getRectangle((RectangleMapObject) layer.getObjects().get(0));
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
@@ -163,6 +166,9 @@ public class WorldUtils {
     }
 
     public static void createPlatforms(World world, TiledMap tiledMap) {
+        MapLayer layer = tiledMap.getLayers().get("platforms");
+        if (layer == null) return;
+
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
 

@@ -25,15 +25,15 @@ public class Level1 extends GameStage {
     protected Color tint = null;
 
     public Level1() {
-        this("level1");
+        this("level1", "LEVEL 2");
         float skyOffset = 260;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, cameraLowerY*14));
     }
 
-    public Level1(String mapName) {
-        super(mapName, 12);
+    public Level1(String mapName, String text) {
+        super(mapName, 12, text);
         cameraLowerY = 17f;
         super.renderOnBg = new int[]{};
     }

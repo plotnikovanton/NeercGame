@@ -15,21 +15,22 @@ import java.util.Random;
  * Created by anton on 01.12.15.
  */
 public class Bug extends GameActor {
-    private static Random rnd = new Random();
-    private Animation[] animations = new Animation[2];
-    private float animationTime = 5000;
-    private boolean roll = false;
-    private float rollTime = 0;
-    private static float frameTime = 0.06f;
-    private float acc = 0;
-    private int pos = 0;
-    private float drag = 0;
-    private float size;
-    private boolean right = true;
+    protected static Random rnd = new Random();
+    protected Animation[] animations = new Animation[2];
+    protected float animationTime = 5000;
+    protected boolean roll = false;
+    protected float rollTime = 0;
+    protected static float frameTime = 0.06f;
+    protected float acc = 0;
+    protected int pos = 0;
+    protected float drag = 0;
+    protected float size;
+    protected boolean right = true;
 
     public Bug(Body body) {
         super(body);
-        ((BugUserData)body.getUserData()).actor = this;
+        BugUserData userData = ((BugUserData)body.getUserData());
+        if (userData!=null)userData.actor = this;
         Texture texture = new Texture("bug.png");
         TextureRegion[][] split = TextureRegion.split(texture, 20, 20);
         size = 0.5f + rnd.nextFloat() * 0.5f;
