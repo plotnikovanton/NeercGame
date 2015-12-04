@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.kaliwe.neercgame.stages.GameStage;
 import com.kaliwe.neercgame.stages.Level0;
+import com.kaliwe.neercgame.stages.Level1;
 import com.kaliwe.neercgame.stages.Level2;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
         iter = new ArrayList<Class<? extends GameStage>>() {{
             add(Level0.class);
-            //add(Level1.class);
+            add(Level1.class);
             add(Level2.class);
 
         }}.iterator();

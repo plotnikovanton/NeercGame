@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
-  <image source="Style.png" width="512" height="128"/>
+  <image source="Style.png" width="1024" height="512"/>
  </tileset>
  <layer name="bg" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztxsENgCAUBUEshabESsDyeRVw/HqYSTbZ1gAAAAAAAAAAAAAAAAAAAL5xp5EeX/YnM630+rI/ufSruiRJkiQVtQEl4LJb
+   eJztxsENgCAUBUEsjSbFysByeBVw/HqYSTbZ1gAAAAAAAAAAAAAAAAAAAL5xp5EeX/YnM630+rI/ufSruiRJkiQVtQEId1CK
   </data>
  </layer>
  <layer name="m1" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztz7kNwkAQRmG3yFUIVwJVcCVQBVcCVWAggSoAO4GEP1ythOWxNEDwPukFI41310kCAAAAAAAAAAAAAAAAAAAAAAAAAMB/qKm6aqiman1513Km53t/ZaCGwdxWHdVVPdV33rWc6fneojvi2dNcLYJ5pMZqoqZq5rxrOdPzvUV3xLOnndoH81Kt1Fpt1NZ513Km53uL7ohnTxd1DeaDStVRndTZuHs27FrvL7ufVjz70x3x7OmpXsF8U3f1UJnKjbu5YTcz3l92/17h30Lxd/EMAAAAAECRNwfAsls=
+   eJzt0EsOgkAQhGHmCL42eipfGz2VCBs9lQgbuIzlgkgmkUybtLr4v6TCdNKZmpBlAAAAAAAAAAAAAAAAAAAAAAAAAAD8h5OSK2elUMov71ru9Hzvr7RKN5hvSqXclVppnHctd3q+d6wjnj0tQ5atwmue6DxVZspcWQTfXcudnu8d64hnTwf1HAdda503ylbZKfvgu2u50/O9Yx3x7Ominuug66RzrpyVQimDbbffT73X0p+6n39497uOePbUqqcbdN10rpS7UitNsO32+ym7z6+lP3W/Mrwh5Z/EMwAAAAAAYx7o0pFZ
   </data>
  </layer>
  <layer name="m2" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztzkENADAIADH8+2JOho7hgQ9L2uT+FwEAAAAAAAAAAAAAAAAAAPCf7I6HNW5XHgAAAGDsARAuBq0=
+   eJzt0NENABAUBMF7xdMZddGDDyQzFWw2AQAAAAAAAAAAAAAAAAAA+E+rpJeGV4z9YV5+8UIDAAAAnFpN/gU1
   </data>
  </layer>
  <layer name="m3" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztzsENACAIADFW0010/yHk5QoQ0ib3vwgAAAAAAAAAAAAAAAAAAOhpZbt6gu9kt3oCAAAAYLgHZ7EBRw==
+   eJztzsENACAIADFW1810Mnm5AoS0yf0vAgAAAAAAAAAAAAAAAAAAelrZrp7gO9mtngAAAAAY7gETigKH
   </data>
  </layer>
  <layer name="fg" width="100" height="50">
@@ -43,22 +43,22 @@
  </objectgroup>
  <objectgroup name="platforms">
   <object x="248" y="635" width="16"/>
-  <object x="288" y="572" width="16"/>
+  <object x="284" y="572" width="20"/>
   <object x="304" y="564" width="32"/>
-  <object x="462" y="572" width="16"/>
+  <object x="458" y="572" width="20"/>
   <object x="478" y="564" width="32"/>
   <object x="389" y="600" width="24"/>
   <object x="565" y="600" width="24"/>
-  <object x="639" y="576" width="20"/>
+  <object x="634" y="576" width="24"/>
   <object x="659" y="568" width="32"/>
   <object x="725" y="600" width="24"/>
-  <object x="800" y="572" width="20"/>
+  <object x="795" y="572" width="24"/>
   <object x="820" y="564" width="32"/>
   <object x="917" y="600" width="24"/>
-  <object x="988" y="572" width="20"/>
+  <object x="985" y="572" width="24"/>
   <object x="1008" y="564" width="32"/>
   <object x="1093" y="600" width="24"/>
-  <object x="1165" y="572" width="20"/>
+  <object x="1164" y="572" width="20"/>
   <object x="1185" y="564" width="28"/>
   <object x="776" y="635" width="16"/>
   <object x="214" y="600" width="20"/>

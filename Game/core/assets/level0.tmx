@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
-  <image source="Style.png" width="512" height="128"/>
+  <image source="Style.png" width="1024" height="512"/>
  </tileset>
  <layer name="bg" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzkEKABAAAEH5GT/h/4/gJAcnJdJM7X1DAAAAAAAAAAAAAAAAAAAAAAB+knr59gRD6dXbEwfEqRfERQAAAAAAAAAAAAAAAAAAAAAAAAAAALsauIwBVw==
+   eJztzkEKABAAAEH5OT/jZZzk4KREmqm9bwgAAAAAAAAAAAAAAAAAAAAAwE9SL9+eYCi9envigDj1grgIAAAAAAAAAAAAAAAAAAAAAAAAAABgVwN3bwKX
   </data>
  </layer>
  <layer name="m1" width="100" height="100">
@@ -29,7 +29,7 @@
   </data>
  </layer>
  <objectgroup name="ground">
-  <object x="1008" y="720">
+  <object x="1004" y="720">
    <polygon points="0,0 256,0 256,4 0,4"/>
   </object>
   <object x="264" y="720">
@@ -40,13 +40,13 @@
   </object>
  </objectgroup>
  <objectgroup name="logo">
-  <object name="cloud" x="576" y="768">
+  <object name="cloud" x="575" y="768">
    <ellipse/>
   </object>
-  <object name="lamp" x="744" y="769">
+  <object name="lamp" x="742" y="769">
    <ellipse/>
   </object>
-  <object name="balloon" x="913" y="768">
+  <object name="balloon" x="910" y="768">
    <ellipse/>
   </object>
  </objectgroup>
