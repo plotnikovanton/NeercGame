@@ -26,8 +26,8 @@ public class Player extends GameActor {
     private PlayerState animationState;
     private boolean turnRight;
 
-    private java.util.Map<PlayerState, Animation> rightAnimations = new HashMap<>();
-    private java.util.Map<PlayerState, Animation> leftAnimations = new HashMap<>();
+    protected java.util.Map<PlayerState, Animation> rightAnimations = new HashMap<>();
+    protected java.util.Map<PlayerState, Animation> leftAnimations = new HashMap<>();
     private Animation animation;
 
     private float stateTime;

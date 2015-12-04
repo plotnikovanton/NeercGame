@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.kaliwe.neercgame.box2d.UserData;
+import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.utils.ResourceUtils;
 
 import java.util.Random;
@@ -27,6 +27,7 @@ public class Pig extends GameActor {
 
     public Pig(Body body) {
         super(body);
+        if (body.getUserData() != null) ((BugUserData)body.getUserData()).actor = this;
         size = 1f;
         animation = ResourceUtils.getAnimation("pigSpecial");
         tr1 = ResourceUtils.getTextureRegion("pigNormal1");
@@ -34,8 +35,8 @@ public class Pig extends GameActor {
     }
 
     @Override
-    public UserData getUserData() {
-        return null;
+    public BugUserData getUserData() {
+        return (BugUserData) body.getUserData();
     }
 
     @Override
@@ -48,8 +49,8 @@ public class Pig extends GameActor {
                 pos = rnd.nextFloat() > 0.15;
             }
             if ((int)acc % 8 == 0) {
-                if (rnd.nextFloat() < 0.1) {
-                    animationTime = 1 + rnd.nextFloat()*2;
+                if (rnd.nextFloat() < 0.05) {
+                    animationTime = 0.3f + rnd.nextFloat()*1.5f;
                     playAnimation = true;
                 }
             }

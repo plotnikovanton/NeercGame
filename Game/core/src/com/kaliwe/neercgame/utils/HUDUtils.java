@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kaliwe.neercgame.screens.GameScreen;
+import com.kaliwe.neercgame.stages.GameStage;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -64,7 +65,7 @@ public class HUDUtils {
                 totalScore
                 , offsetX - layout.width, offsetY);
 
-        long totalTime = (long) (GameScreen.getTotalTime() * 1000);
+        long totalTime = (long) (GameStage.getTime() * 1000);
 
         String time = simpleDateFormat.format(new Date(totalTime));
         layout.setText(mainFont, time);

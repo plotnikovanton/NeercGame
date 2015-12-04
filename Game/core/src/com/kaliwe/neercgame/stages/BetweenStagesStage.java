@@ -8,11 +8,11 @@ import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.kaliwe.neercgame.actors.Bug;
 import com.kaliwe.neercgame.actors.Pig;
 import com.kaliwe.neercgame.enums.Special;
-import com.kaliwe.neercgame.screens.GameScreen;
 import com.kaliwe.neercgame.screens.GameStateManager;
 import com.kaliwe.neercgame.utils.*;
 
@@ -109,10 +109,15 @@ public class BetweenStagesStage extends GameStage {
         getBatch().begin();
         font.setColor(Color.GREEN);
         font.draw(getBatch(), "level complete!!", 25, 80);
-        font.draw(getBatch(), "total score: " + GameStateManager.totalScore + (double) score / (double) maxScore, 10, 60);
-        font.draw(getBatch(), "total time: " + GameScreen.getTotalTime(), 10, 50);
+        font.draw(getBatch(), "total score: " +
+                HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore + (double) score / (double) maxScore), 10, 60);
+        font.draw(getBatch(), "total time: " +
+                HUDUtils.simpleDateFormat.format(GameStateManager.totalTime * 1000), 10, 50);
         font.draw(getBatch(), "bugs on level: " + score+"/"+maxScore, 10, 30);
 
+        font.setColor(Color.BLACK);
+        font.draw(getBatch(), "debug", bug.getBody().getPosition().x * 30, bug.getBody().getPosition().y * 30 - cameraLowerY * 30 + 40, 0, 1, true);
+        font.draw(getBatch(), "next problem", pig.getBody().getPosition().x * 30, pig.getBody().getPosition().y * 30 - cameraLowerY * 30 + 40, 0, 1, true);
 
         getBatch().end();
 
@@ -133,5 +138,21 @@ public class BetweenStagesStage extends GameStage {
                 ContactUtils.isBodyPlayer, contact)) {
             GameStateManager.sureComplete(score, maxScore);
         }
+    }
+
+    @Override
+    protected void updateCamera() {
+        float camPosX;
+        if (player.getPosition().x > bug.getBody().getPosition().x) {
+            camPosX = cup.x;
+        } else {
+            camPosX = Math.max(player.getPosition().x, mapHolder.spawn.x + VIEWPORT_WIDTH / 4) ;
+        }
+        float camPosY = Math.max(cameraLowerY, player.getPosition().y);
+
+        getCamera().position.lerp(new Vector3(camPosX, camPosY, 0f), 0.11f);
+
+        getCamera().update();
+        tiledMapRenderer.setView((OrthographicCamera) getCamera());
     }
 }

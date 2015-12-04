@@ -46,6 +46,7 @@ public class GameScreen implements Screen {
                 e.printStackTrace();
             }
         }
+        GameStateManager.act(delta);
         stage.act(delta);
         stage.draw();
     }

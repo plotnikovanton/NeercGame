@@ -283,11 +283,17 @@ public class WorldUtils {
 
         float[] worldVertices = new float[vertices.length];
 
+        System.out.println("new");
         for (int i = 0; i < vertices.length; ++i) {
             worldVertices[i] = vertices[i] / Constants.PPM;
+            System.out.println(worldVertices[i]);
         }
 
-        chain.createChain(worldVertices);
+        //worldVertices[worldVertices.length - 2] = worldVertices[0];
+        //worldVertices[worldVertices.length - 1] = worldVertices[1];
+
+        chain.createLoop(worldVertices);
+        //chain.setPrevVertex(worldVertices[0], worldVertices[1]);
         return chain;
     }
 

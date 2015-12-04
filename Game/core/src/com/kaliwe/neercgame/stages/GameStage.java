@@ -52,9 +52,10 @@ public class GameStage extends Stage implements ContactListener {
     protected float cameraLowerY = 5f;
     protected OrthographicCamera hudCam;
 
-    protected float acc = 0;
+    protected static float acc;
 
     public GameStage(String mapName, int PPM, String text) {
+        acc = 0;
         Constants.PPM = PPM;
         GameScreen.lock = false;
         this.text = text;
@@ -217,8 +218,8 @@ public class GameStage extends Stage implements ContactListener {
 
     }
 
-    public short getScore() {
-        return score;
+    public static float getTime() {
+        return acc;
     }
 
     public short getMaxScore() {

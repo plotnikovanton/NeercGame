@@ -14,16 +14,20 @@ public class GameStateManager {
             add(Level0.class);
             add(Level1.class);
             add(Level2.class);
+            add(Level3.class);
+            add(Level6.class);
         }}.iterator();
     private static Class<? extends GameStage> last;
     private static GameStage lastInstance;
+
+    public static boolean timeLock = false;
 
     public static boolean next = true;
     public static boolean failed = false;
     public static boolean sureComplete = true;
 
-    public static short score;
-    public static short maxScore;
+    public static short score = 0;
+    public static short maxScore = 1;
 
     public static double totalScore = 0;
     public static float totalTime = 0;
@@ -34,12 +38,12 @@ public class GameStateManager {
         if (!failed) {
             if (sureComplete) {
                 last = iter.next();
-                totalScore += (double) score / (double) totalScore;
                 lastInstance = last.newInstance();
             } else {
                 lastInstance = new BetweenStagesStage(score, maxScore, lastInstance.text);
             }
         } else {
+            timeLock = false;
             lastInstance = last.newInstance();
         }
         failed = false;
@@ -61,6 +65,7 @@ public class GameStateManager {
         sureComplete = false;
         score = score1;
         maxScore = maxScore1;
+        timeLock = true;
     }
 
     public static void sureComplete(short score1, short maxScore1) {
@@ -68,5 +73,13 @@ public class GameStateManager {
         sureComplete = true;
         score = score1;
         maxScore = maxScore1;
+        timeLock = false;
+        totalScore += (double) score / (double) maxScore;
+    }
+
+    public static void act(float delta) {
+        if (!timeLock){
+            totalTime += delta;
+        }
     }
 }

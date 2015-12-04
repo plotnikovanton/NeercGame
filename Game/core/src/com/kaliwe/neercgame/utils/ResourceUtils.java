@@ -36,8 +36,8 @@ public class ResourceUtils {
         animations.put("standRight", new Animation(10f, mirror[0][0]));
         animations.put("standLeft", new Animation(10f, split[0][0]));
 
-        animations.put("walkRight", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 1, 4)));
-        animations.put("walkLeft", new Animation(0.10f, Arrays.copyOfRange(split[0], 1, 4)));
+        animations.put("walkRight", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 1, 5)));
+        animations.put("walkLeft", new Animation(0.10f, Arrays.copyOfRange(split[0], 1, 5)));
 
         animations.put("jumpUpLeft", new Animation(10f, split[1][0]));
         animations.put("jumpUpRight", new Animation(10f, mirror[1][0]));
@@ -51,6 +51,25 @@ public class ResourceUtils {
         animations.put("deadRight", new Animation(0.10f, Arrays.copyOfRange(mirror[3], 0, 2)));
         animations.put("deadLeft", new Animation(0.10f, Arrays.copyOfRange(split[3], 0, 2)));
 
+        // Stanok
+        textureBuffer = new Texture(Gdx.files.internal("stankevich.png"));
+        split = TextureRegion.split(textureBuffer, 18, 30);
+        mirror = flip(split);
+
+        animations.put("standRightSt", new Animation(10f, mirror[0][0]));
+        animations.put("standLeftSt", new Animation(10f, split[0][0]));
+
+        animations.put("walkRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 1, 5)));
+        animations.put("walkLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[0], 1, 5)));
+
+        animations.put("jumpUpLeftSt", new Animation(10f, split[1][0]));
+        animations.put("jumpUpRightSt", new Animation(10f, mirror[1][0]));
+
+        animations.put("jumpDownRightSt", new Animation(10f, mirror[0][3]));
+        animations.put("jumpDownLeftSt", new Animation(10f, split[0][3]));
+
+        animations.put("deadRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 0, 2)));
+        animations.put("deadLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[0], 0, 2)));
         // Rain
         textureBuffer = new Texture(Gdx.files.internal("cloud-rain.png"));
         split = TextureRegion.split(textureBuffer, 58, 19);
@@ -84,6 +103,8 @@ public class ResourceUtils {
         maps.put("level0", mapLoader.load(Gdx.files.internal("level0.tmx").path()));
         maps.put("level1", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
         maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));
+        maps.put("level3", mapLoader.load(Gdx.files.internal("level3.tmx").path()));
+        maps.put("level6", mapLoader.load(Gdx.files.internal("level6.tmx").path()));
 
     }
 

@@ -1,13 +1,13 @@
 package com.kaliwe.neercgame.box2d;
 
-import com.kaliwe.neercgame.actors.Bug;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.kaliwe.neercgame.enums.UserDataType;
 
 /**
  * Created by anton on 01.12.15.
  */
 public class BugUserData extends UserData {
-    public Bug actor;
+    public Actor actor;
     public short numberOfContacts;
 
     public BugUserData() {

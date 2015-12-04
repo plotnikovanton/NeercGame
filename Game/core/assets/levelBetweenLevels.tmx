@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="9">
  <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16" tilecount="1408">
   <image source="Style.png" width="1024" height="356"/>
  </tileset>
@@ -36,6 +36,9 @@
  <objectgroup name="ground">
   <object id="2" x="0" y="1536">
    <polygon points="0,0 1600,0 1600,4 0,4"/>
+  </object>
+  <object id="8" x="832" y="1536">
+   <polygon points="0,0 0,-544 16,-544 16,0"/>
   </object>
  </objectgroup>
  <objectgroup name="special">

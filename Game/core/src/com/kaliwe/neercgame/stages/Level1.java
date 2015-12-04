@@ -42,18 +42,22 @@ public class Level1 extends GameStage {
     public void setupWorld(String mapName) {
         super.setupWorld(mapName);
         WorldUtils.createPlatforms(world, mapHolder.map);
-        maxScore = 0;
         // setup Bugs
-        for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
-            addActor(new Bug(b));
-            maxScore++;
-        }
+        setupBugs();
 
         // setup Rain
         clouds = new ArrayList<>();
         for (RainCloud actor : WorldUtils.createRain(world, mapHolder.map)){
             addActor(actor);
             clouds.add(actor);
+        }
+    }
+
+    public void setupBugs() {
+        maxScore = 0;
+        for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
+            addActor(new Bug(b));
+            maxScore++;
         }
     }
 
