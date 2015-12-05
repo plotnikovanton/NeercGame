@@ -168,6 +168,7 @@ public class GameStage extends Stage implements ContactListener {
     public boolean keyDown(int keyCode) {
         switch (keyCode) {
             case Keys.UP:
+            case Keys.SPACE:
                 player.jump();
                 break;
             case Keys.LEFT:

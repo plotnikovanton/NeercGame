@@ -55,7 +55,7 @@ public class ResourceUtils {
 
         // Stanok
         textureBuffer = new Texture(Gdx.files.internal("stankevich.png"));
-        split = TextureRegion.split(textureBuffer, 18, 30);
+        split = TextureRegion.split(textureBuffer, 19, 30);
         mirror = flip(split);
 
         animations.put("standRightSt", new Animation(10f, mirror[0][0]));
@@ -67,11 +67,11 @@ public class ResourceUtils {
         animations.put("jumpUpLeftSt", new Animation(10f, split[1][0]));
         animations.put("jumpUpRightSt", new Animation(10f, mirror[1][0]));
 
-        animations.put("jumpDownRightSt", new Animation(10f, mirror[0][3]));
-        animations.put("jumpDownLeftSt", new Animation(10f, split[0][3]));
+        animations.put("jumpDownRightSt", new Animation(10f, mirror[1][1]));
+        animations.put("jumpDownLeftSt", new Animation(10f, split[1][1]));
 
-        animations.put("deadRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 0, 2)));
-        animations.put("deadLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[0], 0, 2)));
+        animations.put("deadRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[2], 0, 2)));
+        animations.put("deadLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[2], 0, 2)));
 
         // Cat
         textureBuffer = new Texture(Gdx.files.internal("cat.png"));
@@ -120,7 +120,7 @@ public class ResourceUtils {
         sounds.put("jump", Gdx.audio.newSound(Gdx.files.internal("music/jump.ogg")));
         sounds.put("steps", Gdx.audio.newSound(Gdx.files.internal("music/footsteps.ogg")));
         sounds.put("fail", Gdx.audio.newSound(Gdx.files.internal("music/fail.ogg")));
-        sounds.put("hallOfFame", Gdx.audio.newSound(Gdx.files.internal("music/hall_of_fame.ogg")));
+        //sounds.put("hallOfFame", Gdx.audio.newSound(Gdx.files.internal("music/hall_of_fame.ogg")));
         sounds.put("getCoin", Gdx.audio.newSound(Gdx.files.internal("music/coin-get.ogg")));
         sounds.put("main", Gdx.audio.newSound(Gdx.files.internal("music/main1.ogg")));
         sounds.put("meow", Gdx.audio.newSound(Gdx.files.internal("music/meow.ogg")));
@@ -138,6 +138,7 @@ public class ResourceUtils {
         maps.put("level7", mapLoader.load(Gdx.files.internal("level7.tmx").path()));
 
         maps.put("level8", mapLoader.load(Gdx.files.internal("level8.tmx").path()));
+        maps.put("level9", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
 
         maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 
