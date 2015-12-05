@@ -106,54 +106,6 @@
   <object name="spawn" x="84" y="576">
    <ellipse/>
   </object>
-  <object x="564" y="596">
-   <ellipse/>
-  </object>
-  <object x="760" y="600">
-   <ellipse/>
-  </object>
-  <object x="648" y="496">
-   <ellipse/>
-  </object>
-  <object x="624" y="400">
-   <ellipse/>
-  </object>
-  <object x="640" y="312">
-   <ellipse/>
-  </object>
-  <object x="512" y="120">
-   <ellipse/>
-  </object>
-  <object x="600" y="112">
-   <ellipse/>
-  </object>
-  <object x="1364" y="120">
-   <ellipse/>
-  </object>
-  <object x="1368" y="212">
-   <ellipse/>
-  </object>
-  <object x="1460" y="308">
-   <ellipse/>
-  </object>
-  <object x="1488" y="500">
-   <ellipse/>
-  </object>
-  <object x="1200" y="500">
-   <ellipse/>
-  </object>
-  <object x="872" y="404">
-   <ellipse/>
-  </object>
-  <object x="1192" y="308">
-   <ellipse/>
-  </object>
-  <object x="576" y="528">
-   <ellipse/>
-  </object>
-  <object x="960" y="216">
-   <ellipse/>
-  </object>
  </objectgroup>
  <objectgroup name="finish">
   <object x="1276" y="476" width="8" height="180"/>
@@ -260,6 +212,60 @@
    <ellipse/>
   </object>
   <object x="399" y="580">
+   <ellipse/>
+  </object>
+  <object x="564" y="596">
+   <ellipse/>
+  </object>
+  <object x="576" y="528">
+   <ellipse/>
+  </object>
+  <object x="760" y="600">
+   <ellipse/>
+  </object>
+  <object x="1488" y="500">
+   <ellipse/>
+  </object>
+  <object x="1200" y="500">
+   <ellipse/>
+  </object>
+  <object x="648" y="496">
+   <ellipse/>
+  </object>
+  <object x="576" y="528">
+   <ellipse/>
+  </object>
+  <object x="624" y="400">
+   <ellipse/>
+  </object>
+  <object x="872" y="404">
+   <ellipse/>
+  </object>
+  <object x="1460" y="308">
+   <ellipse/>
+  </object>
+  <object x="1192" y="308">
+   <ellipse/>
+  </object>
+  <object x="640" y="312">
+   <ellipse/>
+  </object>
+  <object x="800" y="220">
+   <ellipse/>
+  </object>
+  <object x="960" y="216">
+   <ellipse/>
+  </object>
+  <object x="1368" y="212">
+   <ellipse/>
+  </object>
+  <object x="1364" y="124">
+   <ellipse/>
+  </object>
+  <object x="600" y="112">
+   <ellipse/>
+  </object>
+  <object x="512" y="120">
    <ellipse/>
   </object>
  </objectgroup>
