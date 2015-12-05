@@ -49,7 +49,7 @@ public class RainCloud extends Actor {
 
         bodyDef.position.set(position.x, position.y - 0.1f);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.gravityScale = 8f;
+        bodyDef.gravityScale = 7f;
     }
 
     @Override

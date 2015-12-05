@@ -1,5 +1,6 @@
 package com.kaliwe.neercgame.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -27,6 +28,8 @@ public class Level1 extends GameStage {
 
     public Level1() {
         this("level1", "LEVEL 2");
+        Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
+
         float skyOffset = 260;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
