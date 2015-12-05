@@ -112,6 +112,7 @@ public class ResourceUtils {
 
         // Backgrounds
         textureRegions.put("buildings", new TextureRegion(new Texture(Gdx.files.internal("buildings.png"))));
+        textureRegions.put("buildings-zinger", new TextureRegion(new Texture(Gdx.files.internal("buildings-zinger.png"))));
         textureRegions.put("clouds", new TextureRegion(new Texture(Gdx.files.internal("clouds.png"))));
         textureRegions.put("cloudsBack", new TextureRegion(new Texture(Gdx.files.internal("clouds_back.png"))));
 
@@ -130,8 +131,13 @@ public class ResourceUtils {
         maps.put("level1", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
         maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));
         maps.put("level3", mapLoader.load(Gdx.files.internal("level3.tmx").path()));
+
+        maps.put("level4", mapLoader.load(Gdx.files.internal("level4.tmx").path()));
+        maps.put("level5", mapLoader.load(Gdx.files.internal("level5.tmx").path()));
         maps.put("level6", mapLoader.load(Gdx.files.internal("level6.tmx").path()));
         maps.put("level7", mapLoader.load(Gdx.files.internal("level7.tmx").path()));
+
+        maps.put("level8", mapLoader.load(Gdx.files.internal("level8.tmx").path()));
 
         maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 

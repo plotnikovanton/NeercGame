@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="bg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7AhDf+mcEF2tEkTAAAAAAAAAAAAAAAAAAAAoM1YdVVVVZ8e6AzLhQ==
+  </data>
+ </layer>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAIADFW1810Mnm5AoS0yf0vAgAAAAAAAAAAAAAAAAAAelrZrp7gO9mtngAAAAAY7gETigKH
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 1600,0 1600,8 0,16"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawn">
+  <object name="spawn" x="84" y="576">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object x="1276" y="476" width="8" height="180"/>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object x="196" y="624" width="188"/>
+  <object x="260" y="592" width="24"/>
+  <object x="228" y="560" width="124"/>
+  <object x="448" y="560" width="96"/>
+  <object x="228" y="528" width="24"/>
+  <object x="276" y="496" width="28"/>
+  <object x="340" y="496" width="24"/>
+  <object x="404" y="500" width="28"/>
+  <object x="448" y="520" width="32"/>
+  <object x="484" y="628" width="24"/>
+  <object x="576" y="544" width="92"/>
+  <object x="688" y="576" width="76"/>
+  <object x="736" y="604" width="72"/>
+  <object x="688" y="628" width="64"/>
+  <object x="836" y="588" width="40"/>
+  <object x="928" y="560" width="48"/>
+  <object x="844" y="564" width="20"/>
+  <object x="1008" y="560" width="48"/>
+  <object x="1088" y="560" width="48"/>
+  <object x="1168" y="560" width="44"/>
+  <object x="1056" y="624" width="32"/>
+  <object x="672" y="528" width="28"/>
+  <object x="368" y="536" width="48"/>
+  <object x="1056" y="592" width="28"/>
+  <object x="548" y="512" width="44"/>
+ </objectgroup>
+ <objectgroup name="bugs">
+  <object x="148" y="624">
+   <ellipse/>
+  </object>
+  <object x="220" y="596">
+   <ellipse/>
+  </object>
+  <object x="288" y="536">
+   <ellipse/>
+  </object>
+  <object x="288" y="468">
+   <ellipse/>
+  </object>
+  <object x="416" y="472">
+   <ellipse/>
+  </object>
+  <object x="352" y="596">
+   <ellipse/>
+  </object>
+  <object x="436" y="628">
+   <ellipse/>
+  </object>
+  <object x="496" y="596">
+   <ellipse/>
+  </object>
+  <object x="524" y="532">
+   <ellipse/>
+  </object>
+  <object x="624" y="520">
+   <ellipse/>
+  </object>
+  <object x="696" y="560">
+   <ellipse/>
+  </object>
+  <object x="708" y="608">
+   <ellipse/>
+  </object>
+  <object x="856" y="536">
+   <ellipse/>
+  </object>
+  <object x="956" y="536">
+   <ellipse/>
+  </object>
+  <object x="952" y="624">
+   <ellipse/>
+  </object>
+  <object x="1072" y="596">
+   <ellipse/>
+  </object>
+  <object x="1196" y="540">
+   <ellipse/>
+  </object>
+  <object x="1196" y="624">
+   <ellipse/>
+  </object>
+  <object x="356" y="476">
+   <ellipse/>
+  </object>
+  <object x="468" y="504">
+   <ellipse/>
+  </object>
+  <object x="464" y="548">
+   <ellipse/>
+  </object>
+  <object x="240" y="508">
+   <ellipse/>
+  </object>
+  <object x="1032" y="536">
+   <ellipse/>
+  </object>
+  <object x="1112" y="536">
+   <ellipse/>
+  </object>
+  <object x="788" y="588">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="rain"/>
+</map>
