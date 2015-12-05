@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="bg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7AhDf+mcEF2tEkTAAAAAAAAAAAAAAAAAAAAoM1YdVVVVZ8e6AzLhQ==
+  </data>
+ </layer>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0jmOwkAUhGGbBNJh4EyQDsuZhpTFZzIp232ogNa0RlS3ZdrZ/0klteyu5ydEVQEAAAAAAAAAAAAAAAAAAAAAAAAAMLy9clCOyklpBu67+332+HT3oWZ94qJclZtyVx7Ru1Y59+y7rrv/7vnolf/zwvPU7l2FuSVmlfBVV9VU+VZmyrz+ezfWeVL7bqofd+Pf1d1P7eF2yXW6CHNLzCrhR99dKWtlo2yjPRY6LzN7ub7ruvupPdy8XMeJ/x9hbt9Zpe313YNyVE5KE+3xq/Mus5fru667n9rDzct1ughzS8wq4aLvXpWbclce0R6tzufMXq7vuu5+ag83L9fpIswtMQsAAAAAAOcJ4OxzsQ==
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0ElOQkEYhdHHGAH3JQJbAsGJCm5JusmjWxJ3ARKSSmheck7yjWpy/6oqAAAAAAAAAAAAAAAAAIDL6rRL+3RIx3R66KLLmrS1VLtVVS+pk7qpl15bj171vyZtLfWWe/rpPQ3SMI2e9MYmbS31lXu+00+ap0X6vXLjOO+T9JGmaZY+7/AvJVubps49u7RPh3RMpys3/uV9mVZpnTZpe4d/KdkKAAAAt3IGzKQmEQ==
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAIADFW1810Mnm5AoS0yf0vAgAAAAAAAAAAAAAAAAAAelrZrp7gO9mtngAAAAAY7gETigKH
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 1600,0 1600,8 0,16"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawn">
+  <object name="spawn" x="84" y="576">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object x="1276" y="476" width="8" height="180"/>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object x="140" y="576" width="20"/>
+  <object x="160" y="564" width="32"/>
+  <object x="244" y="600" width="24"/>
+  <object x="320" y="640" width="68"/>
+  <object x="340" y="616" width="24"/>
+  <object x="344" y="604" width="16"/>
+  <object x="348" y="596" width="12"/>
+  <object x="396" y="572" width="20"/>
+  <object x="416" y="564" width="32"/>
+  <object x="484" y="600" width="24"/>
+  <object x="520" y="636" width="48"/>
+  <object x="584" y="636" width="16"/>
+  <object x="588" y="572" width="20"/>
+  <object x="608" y="564" width="32"/>
+  <object x="684" y="572" width="20"/>
+  <object x="704" y="564" width="32"/>
+  <object x="808" y="600" width="20"/>
+  <object x="892" y="572" width="20"/>
+  <object x="912" y="564" width="32"/>
+  <object x="1008" y="640" width="68"/>
+  <object x="1032" y="608" width="16"/>
+  <object x="1036" y="596" width="12"/>
+  <object x="1028" y="620" width="24"/>
+  <object x="1156" y="600" width="24"/>
+  <object x="1196" y="572" width="20"/>
+  <object x="1224" y="564" width="20"/>
+  <object x="1104" y="608" width="32"/>
+  <object x="752" y="577" width="32"/>
+  <object x="848" y="576" width="32"/>
+  <object x="528" y="592" width="32"/>
+ </objectgroup>
+ <objectgroup name="bugs"/>
+ <objectgroup name="rain"/>
+ <objectgroup name="cats">
+  <object x="112" y="624">
+   <polyline points="0,0 128,0"/>
+  </object>
+  <object x="320" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="608" y="544">
+   <polyline points="0,0 32,0"/>
+  </object>
+  <object x="1008" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="512" y="640">
+   <polyline points="0,0 468,0"/>
+  </object>
+ </objectgroup>
+</map>
