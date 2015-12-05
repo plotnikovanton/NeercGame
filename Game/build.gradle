@@ -63,6 +63,7 @@ project(":core") {
 
 
     dependencies {
+        compile 'org.apache.httpcomponents:httpclient:4.5.1'
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"

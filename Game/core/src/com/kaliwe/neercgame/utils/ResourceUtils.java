@@ -70,6 +70,21 @@ public class ResourceUtils {
 
         animations.put("deadRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 0, 2)));
         animations.put("deadLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[0], 0, 2)));
+
+        // Cat
+        textureBuffer = new Texture(Gdx.files.internal("cat.png"));
+        split = TextureRegion.split(textureBuffer, 26, 22);
+        mirror = flip(split);
+
+        animations.put("catWalkRight", new Animation(0.1f, split[2]));
+        animations.put("catWalkLeft", new Animation(0.1f, mirror[2]));
+
+        animations.put("catSitsRight", new Animation(0.05f, split[0]));
+        animations.put("catSitsLeft", new Animation(0.05f, mirror[0]));
+
+        animations.put("catTailRight", new Animation(0.1f, split[1]));
+        animations.put("catTailLeft", new Animation(0.1f, mirror[1]));
+
         // Rain
         textureBuffer = new Texture(Gdx.files.internal("cloud-rain.png"));
         split = TextureRegion.split(textureBuffer, 58, 19);
@@ -105,6 +120,8 @@ public class ResourceUtils {
         maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));
         maps.put("level3", mapLoader.load(Gdx.files.internal("level3.tmx").path()));
         maps.put("level6", mapLoader.load(Gdx.files.internal("level6.tmx").path()));
+
+        maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 
     }
 

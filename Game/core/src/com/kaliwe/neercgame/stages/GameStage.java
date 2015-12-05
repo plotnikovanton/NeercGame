@@ -149,9 +149,9 @@ public class GameStage extends Stage implements ContactListener {
     @Override
     public void draw() {
         tiledMapRenderer.render(renderOnBg);
-        //renderer.render(world, getCamera().combined);
         super.draw();
         tiledMapRenderer.render(renderOnFg);
+        //renderer.render(world, getCamera().combined);
     }
 
     @Override

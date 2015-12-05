@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.kaliwe.neercgame.box2d.PlayerUserData;
 import com.kaliwe.neercgame.enums.PlayerState;
 import com.kaliwe.neercgame.stages.GameStage;
@@ -157,8 +158,9 @@ public class Player extends GameActor {
         batch.draw(frame,
                    body.getPosition().x - textureWidth / 2,
                    offsetY,
+                   1,1,
                    textureWidth,
-                   textureHeight);
+                   textureHeight, 1, 1, body.getAngle());
     }
 
     public Vector2 getPosition() {
@@ -170,13 +172,18 @@ public class Player extends GameActor {
     }
 
     public void turnToSensor() {
-        body.getFixtureList().forEach(fixture -> fixture.setSensor(true));
+
+        Filter filter = new Filter();
+        filter.categoryBits = 0;
+        filter.maskBits = 0;
+        body.getFixtureList().forEach(fixture -> fixture.setFilterData(filter));
     }
 
     public void kill() {
         body.setLinearVelocity(0, 0);
-        jumpOutOfEnemy();
         turnToSensor();
+        body.setLinearVelocity(0,0);
+        body.applyLinearImpulse(0, 15f, 0, 0, true);
         setState(PlayerState.DEAD);
     }
 }

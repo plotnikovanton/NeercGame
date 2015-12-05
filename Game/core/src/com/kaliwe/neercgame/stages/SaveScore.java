@@ -9,13 +9,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.kaliwe.neercgame.screens.GameStateManager;
 import com.kaliwe.neercgame.utils.HUDUtils;
 import com.kaliwe.neercgame.utils.ResourceUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anton on 04.12.15.
@@ -38,6 +44,7 @@ public class SaveScore extends Stage {
     }
 
     private void sendToServer(String name) throws NoSuchAlgorithmException {
+        System.out.println("gotit");
         // generate data
         String score = HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore);
         String time = HUDUtils.simpleDateFormat.format((long)GameStateManager.totalTime * 1000);
@@ -59,23 +66,19 @@ public class SaveScore extends Stage {
 
         //System.out.println("In: " + data);
         //System.out.println("Out: " + stringBuffer.toString());
-        StringBuilder params = new StringBuilder();
-        Arrays.stream(new String[] {
-                "score=", score, "&time=", time, "&name=", name, "&md5=", stringBuffer.toString()})
-                .forEach(params::append);
 
         // Send post request
-
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost("http://localhost:1488");
+        List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("score", score));
+        nvps.add(new BasicNameValuePair("time", time));
+        nvps.add(new BasicNameValuePair("name", name));
+        nvps.add(new BasicNameValuePair("md5", stringBuffer.toString()));
         try {
-            URL url = new URL("http://localhost:1488" );
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(params.toString());
-            wr.flush();
-            wr.close();
-
-        } catch (java.io.IOException e) {
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+            CloseableHttpResponse response2 = httpClient.execute(httpPost);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
