@@ -5,6 +5,9 @@ import com.kaliwe.neercgame.screens.IntroScreen;
 
 public class NeercGame extends Game {
 
+    public NeercGame() {
+    }
+
     @Override
     public void create () {
         setScreen(new IntroScreen(this));

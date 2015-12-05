@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.actors.Bug;
+import com.kaliwe.neercgame.actors.Cat;
 import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.utils.*;
@@ -54,6 +55,8 @@ public class Level1 extends GameStage {
             addActor(actor);
             clouds.add(actor);
         }
+
+        setupCats();
     }
 
     public void setupBugs() {
@@ -61,6 +64,12 @@ public class Level1 extends GameStage {
         for (Body b : WorldUtils.createBugs(world, mapHolder.map)) {
             addActor(new Bug(b));
             maxScore++;
+        }
+    }
+
+    protected void setupCats() {
+        for (Body body : WorldUtils.createCats(world, mapHolder.map)) {
+            addActor(new Cat(body));
         }
     }
 
@@ -118,6 +127,10 @@ public class Level1 extends GameStage {
             Filter filter = new Filter();
             filter.maskBits = ~Mask.PLAYER;
             ContactUtils.getFixture(contact, ContactUtils.isFixturePlatform).setFilterData(filter);
+        } else if (
+            ContactUtils.checkBodyAndBody(ContactUtils.isBodyCat, ContactUtils.isBodyPlayer, contact)
+                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureCat, ContactUtils.isBodyPlayer, contact)) {
+            player.kill();
         }
     }
 }

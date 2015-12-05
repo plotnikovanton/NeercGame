@@ -5,5 +5,5 @@ package com.kaliwe.neercgame.enums;
  */
 public enum UserDataType {
     GROUND,
-    FOOT, SIMPLE_ENEMY, DISSAPEAR, FNISH, PLATFORM, BUG, PLAYER, RAIN
+    FOOT, SIMPLE_ENEMY, DISSAPEAR, FNISH, PLATFORM, BUG, PLAYER, CAT, RAIN
 }
