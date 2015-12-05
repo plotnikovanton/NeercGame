@@ -1,6 +1,7 @@
 package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -26,6 +27,8 @@ public class Level1 extends GameStage {
     protected List<RainCloud> clouds;
     protected Color tint = null;
 
+
+
     public Level1() {
         this("level1", "LEVEL 2");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
@@ -34,6 +37,7 @@ public class Level1 extends GameStage {
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("clouds"), 0.5f, 8f, 0.8f, hudCam, 0, skyOffset));
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, 0, cameraLowerY*14));
+
     }
 
     public Level1(String mapName, String text) {
@@ -90,8 +94,21 @@ public class Level1 extends GameStage {
                 score++;
             }
             userData.isFlaggedForDelete = true;
+
+            Sound snd = ResourceUtils.getSound("getCoin");
+            long sId = snd.play();
+            snd.setVolume(sId, 0.5f);
+
         } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureRain, ContactUtils.isBodyPlayer, contact)) {
             player.kill();
+        } else if (
+            ContactUtils.checkBodyAndBody(ContactUtils.isBodyCat, ContactUtils.isBodyPlayer, contact)
+                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureCat, ContactUtils.isBodyPlayer, contact)) {
+            player.kill();
+            Sound snd = ResourceUtils.getSound("meow");
+            long sId = snd.play();
+            //snd.setVolume(sId, 0.5f);
+
         }
     }
 
@@ -127,10 +144,6 @@ public class Level1 extends GameStage {
             Filter filter = new Filter();
             filter.maskBits = ~Mask.PLAYER;
             ContactUtils.getFixture(contact, ContactUtils.isFixturePlatform).setFilterData(filter);
-        } else if (
-            ContactUtils.checkBodyAndBody(ContactUtils.isBodyCat, ContactUtils.isBodyPlayer, contact)
-                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureCat, ContactUtils.isBodyPlayer, contact)) {
-            player.kill();
         }
     }
 }

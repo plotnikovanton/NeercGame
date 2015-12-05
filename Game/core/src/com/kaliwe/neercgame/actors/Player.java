@@ -46,11 +46,10 @@ public class Player extends GameActor {
 
         turnRight = true;
         animationState = PlayerState.JUMP;
-        setState(PlayerState.STAND);
 
         stateTime = 0f;
         numOfFootContacts = 0;
-
+        setState(PlayerState.STAND);
     }
 
     @Override
@@ -60,12 +59,14 @@ public class Player extends GameActor {
 
     public void jump() {
         if (isOnGround()) {
+            ResourceUtils.getSound("jump").play();
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
         }
     }
 
     public void jumpOutOfEnemy () {
         if (state != PlayerState.DEAD) {
+            ResourceUtils.getSound("jump").play();
             Vector2 linearVelocity = body.getLinearVelocity();
             linearVelocity.y=0;
             body.setLinearVelocity(linearVelocity);
@@ -88,6 +89,9 @@ public class Player extends GameActor {
         if (this.state != state) {
             if (!(this.state == PlayerState.DEAD || this.state == PlayerState.BURNING)) {
                 this.state = state;
+                if (state == PlayerState.DEAD || state == PlayerState.BURNING) {
+                    ResourceUtils.getSound("fail").play();
+                }
             }
             animationState = state;
             choiceAnimation();

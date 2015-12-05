@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="9">
- <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16" tilecount="1408">
-  <image source="Style.png" width="1024" height="356"/>
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16" tilecount="2048">
+  <image source="Style.png" width="1024" height="512"/>
  </tileset>
  <layer name="bg" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -10,7 +10,7 @@
  </layer>
  <layer name="m1" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0UENwCAQAMHDCHVGnYEzaoX7VEMvzYyCTTYCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGroLeJqX1fwGvni9qOMmS+WH2XsfPH4AQAAv3UApiMD/Q==
+   eJzt1bERgzAQRFGJPgA3BnJjgCuzW2ETCnAkBe/NbH4zP7hSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAMSy1lrb2v4LGnRdNjGGdaXHoM45sWPz2GME/5H9mavabe17ClwZ617K1Hd0canNmVffQAgL/cbeYIgw==
   </data>
  </layer>
  <layer name="m2" width="100" height="100">

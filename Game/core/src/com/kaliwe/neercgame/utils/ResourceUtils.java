@@ -1,6 +1,7 @@
 package com.kaliwe.neercgame.utils;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -20,6 +21,7 @@ public class ResourceUtils {
     private static Map<String, BitmapFont> fonts = new HashMap<>();
     private static Map<String, TextureRegion> textureRegions = new HashMap<>();
     private static Map<String, TiledMap> maps = new HashMap<>();
+    private static Map<String, Sound> sounds = new HashMap<>();
 
     static {
         Texture textureBuffer;
@@ -113,6 +115,15 @@ public class ResourceUtils {
         textureRegions.put("clouds", new TextureRegion(new Texture(Gdx.files.internal("clouds.png"))));
         textureRegions.put("cloudsBack", new TextureRegion(new Texture(Gdx.files.internal("clouds_back.png"))));
 
+        // Sound
+        sounds.put("jump", Gdx.audio.newSound(Gdx.files.internal("music/jump.ogg")));
+        sounds.put("steps", Gdx.audio.newSound(Gdx.files.internal("music/footsteps.ogg")));
+        sounds.put("fail", Gdx.audio.newSound(Gdx.files.internal("music/fail.ogg")));
+        sounds.put("hallOfFame", Gdx.audio.newSound(Gdx.files.internal("music/hall_of_fame.ogg")));
+        sounds.put("getCoin", Gdx.audio.newSound(Gdx.files.internal("music/coin-get.ogg")));
+        sounds.put("main", Gdx.audio.newSound(Gdx.files.internal("music/main1.ogg")));
+        sounds.put("meow", Gdx.audio.newSound(Gdx.files.internal("music/meow.ogg")));
+
         // Map
         maps.put("levelBetweenLevels", mapLoader.load(Gdx.files.internal("levelBetweenLevels.tmx").path()));
         maps.put("level0", mapLoader.load(Gdx.files.internal("level0.tmx").path()));
@@ -120,6 +131,7 @@ public class ResourceUtils {
         maps.put("level2", mapLoader.load(Gdx.files.internal("level2.tmx").path()));
         maps.put("level3", mapLoader.load(Gdx.files.internal("level3.tmx").path()));
         maps.put("level6", mapLoader.load(Gdx.files.internal("level6.tmx").path()));
+        maps.put("level7", mapLoader.load(Gdx.files.internal("level7.tmx").path()));
 
         maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 
@@ -159,5 +171,9 @@ public class ResourceUtils {
 
     public static TiledMap getMap(String key) {
         return getIfExists(maps, key);
+    }
+
+    public static Sound getSound (String key) {
+        return getIfExists(sounds, key);
     }
 }

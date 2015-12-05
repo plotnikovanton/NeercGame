@@ -23,6 +23,15 @@ public class BetweenStagesStage extends GameStage {
     BitmapFont font;
     OrthographicCamera textCamera;
 
+//    protected static Sound sound;
+//    protected static long soundId;
+//    static {
+//        sound = ResourceUtils.getSound("hallOfFame");
+//        soundId = sound.loop();
+//        sound.setVolume(soundId, 0.1f);
+//        sound.pause(soundId);
+//    }
+
     Pig pig;
     Bug bug;
     Vector2 cup;
@@ -46,6 +55,9 @@ public class BetweenStagesStage extends GameStage {
         cameraLowerY = 8.5f;
         getCamera().position.set(10, 8.5f, 0);
         font = ResourceUtils.getFont("visitor");
+
+        sound.resume(soundId);
+//        super.sound.pause(super.soundId);
     }
 
     @Override
@@ -108,7 +120,7 @@ public class BetweenStagesStage extends GameStage {
         getBatch().setProjectionMatrix(textCamera.combined);
         getBatch().begin();
         font.setColor(Color.GREEN);
-        font.draw(getBatch(), "level complete!!", 25, 80);
+        font.draw(getBatch(), "problem solved!!", 25, 80);
         font.draw(getBatch(), "total score: " +
                 HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore + (double) score / (double) maxScore), 10, 60);
         font.draw(getBatch(), "total time: " +
@@ -133,9 +145,11 @@ public class BetweenStagesStage extends GameStage {
         super.beginContact(contact);
         if (ContactUtils.checkFixtureAndBody(x->ContactUtils.compareFixtureByUserData(x, Special.BUG),
         ContactUtils.isBodyPlayer, contact)) {
+            sound.pause(soundId);
             GameStateManager.failed(score, maxScore);
         } else if (ContactUtils.checkFixtureAndBody(x->ContactUtils.compareFixtureByUserData(x, Special.PIG),
                 ContactUtils.isBodyPlayer, contact)) {
+            sound.pause(soundId);
             GameStateManager.sureComplete(score, maxScore);
         }
     }

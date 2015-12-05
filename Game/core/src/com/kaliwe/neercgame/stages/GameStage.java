@@ -1,6 +1,7 @@
 package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -13,10 +14,7 @@ import com.kaliwe.neercgame.box2d.UserData;
 import com.kaliwe.neercgame.enums.PlayerState;
 import com.kaliwe.neercgame.screens.GameScreen;
 import com.kaliwe.neercgame.screens.GameStateManager;
-import com.kaliwe.neercgame.utils.Constants;
-import com.kaliwe.neercgame.utils.ContactUtils;
-import com.kaliwe.neercgame.utils.MapHolder;
-import com.kaliwe.neercgame.utils.WorldUtils;
+import com.kaliwe.neercgame.utils.*;
 
 import java.util.Iterator;
 
@@ -53,6 +51,16 @@ public class GameStage extends Stage implements ContactListener {
     protected OrthographicCamera hudCam;
 
     protected static float acc;
+    protected static Sound sound;
+    protected static long soundId;
+
+    static {
+        sound = ResourceUtils.getSound("main");
+        soundId = sound.loop();
+        sound.setVolume(soundId, 0.3f);
+        sound.pause(soundId);
+
+    }
 
     public GameStage(String mapName, int PPM, String text) {
         acc = 0;
@@ -71,6 +79,8 @@ public class GameStage extends Stage implements ContactListener {
         world.setContactListener(this);
         renderer = new Box2DDebugRenderer();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(mapHolder.map, 1f / Constants.PPM);
+
+        sound.resume(soundId);
     }
 
     protected void setupCamera() {
@@ -195,6 +205,7 @@ public class GameStage extends Stage implements ContactListener {
                 ContactUtils.isFixtureFinish, ContactUtils.isBodyPlayer, contact)) {
             if (!lock) {
                 lock = true;
+                sound.pause(soundId);
                 GameStateManager.complete(score, maxScore);
             }
         }
