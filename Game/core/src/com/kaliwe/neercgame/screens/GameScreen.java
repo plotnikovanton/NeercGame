@@ -15,7 +15,6 @@ public class GameScreen implements Screen {
     public static boolean lock;
 
     public GameScreen() {
-        Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
     }
 
     public static double getTotalScore() {
