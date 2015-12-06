@@ -73,6 +73,15 @@ public class ResourceUtils {
         animations.put("deadRightSt", new Animation(0.10f, Arrays.copyOfRange(mirror[2], 0, 2)));
         animations.put("deadLeftSt", new Animation(0.10f, Arrays.copyOfRange(split[2], 0, 2)));
 
+        // Egor
+        textureBuffer = new Texture(Gdx.files.internal("egor.png"));
+        split = TextureRegion.split(textureBuffer, 23, 46);
+        mirror = flip(split);
+
+        animations.put("EgorLeft", new Animation(10f, mirror[0][0]));
+        animations.put("EgorRight", new Animation(10f, split[0][0]));
+
+
         // Cat
         textureBuffer = new Texture(Gdx.files.internal("cat.png"));
         split = TextureRegion.split(textureBuffer, 26, 22);
