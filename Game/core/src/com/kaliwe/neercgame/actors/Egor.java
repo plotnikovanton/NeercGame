@@ -3,7 +3,8 @@ package com.kaliwe.neercgame.actors;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.*;
+import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.box2d.EgorUserData;
 import com.kaliwe.neercgame.utils.ResourceUtils;
 
@@ -20,16 +21,36 @@ public class Egor extends GameActor {
     private float standingTime = 0;
     private float goal;
     private boolean right;
+    public final Bug bug;
     protected static Animation animationRight;
     protected static Animation animationLeft;
 
+    private static FixtureDef bugFDef;
+    private static BodyDef bugBDef;
+    private BugUserData bugUserData = new BugUserData();
     static {
         animationRight = ResourceUtils.getAnimation("egorRight");
         animationLeft = ResourceUtils.getAnimation("egorLeft");
+
+        bugFDef = new FixtureDef();
+        bugBDef = new BodyDef();
+
+        Shape shape = new CircleShape();
+        shape.setRadius(0.2f);
+        bugFDef.shape = shape;
+        bugFDef.isSensor = true;
+        bugBDef.type = BodyDef.BodyType.StaticBody;
     }
 
     public Egor(Body body) {
         super(body);
+
+        Body bugBody = body.getWorld().createBody(bugBDef);
+        bugBody.setUserData(bugUserData);
+        bugBody.createFixture(bugFDef).setUserData(bugUserData);
+
+        bug = new Bug(bugBody);
+
         totalTime = rnd.nextFloat()*10;
         goal = getUserData().b;
         right = getUserData().a < getUserData().b;
@@ -59,6 +80,7 @@ public class Egor extends GameActor {
             body.setLinearVelocity(Math.signum(goal - body.getPosition().x) * SPEED, body.getLinearVelocity().y);
         }
 
+        bug.body.setTransform(body.getPosition().x, body.getPosition().y+1.5f, 0);
     }
 
     @Override

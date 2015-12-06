@@ -107,7 +107,7 @@ public class SaveScore extends Stage {
             }
         });
 
-        addActor(textField.debug());
+        addActor(textField);
         setKeyboardFocus(textField);
     }
 

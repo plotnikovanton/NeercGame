@@ -84,7 +84,10 @@ public class Level1 extends GameStage {
 
     protected void setupEgors() {
         for (Body body : WorldUtils.createEgors(world, mapHolder.map)) {
-            addActor(new Egor(body));
+            Egor e = new Egor(body);
+            addActor(e);
+            addActor(e.bug);
+            maxScore++;
         }
     }
 

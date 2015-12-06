@@ -177,7 +177,7 @@ public class WorldUtils {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(23f/25f/2f - 0.1f, 46f/25f/2f);
+        shape.setAsBox(23f/25f/2f, 46f/25f/2f);
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
         fixtureDef.filter.categoryBits = Mask.EGOR;
