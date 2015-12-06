@@ -26,6 +26,7 @@ public class Level1 extends GameStage {
     protected int[] renderOnBg = {0, 1, 2};
     protected List<RainCloud> clouds;
     protected Color tint = null;
+    protected Sound collectSmt;
 
 
 
@@ -44,6 +45,7 @@ public class Level1 extends GameStage {
         super(mapName, 12, text);
         cameraLowerY = 17f;
         super.renderOnBg = new int[]{};
+        collectSmt = ResourceUtils.getSound("getCoin");
     }
 
     @Override
@@ -95,9 +97,8 @@ public class Level1 extends GameStage {
             }
             userData.isFlaggedForDelete = true;
 
-            Sound snd = ResourceUtils.getSound("getCoin");
-            long sId = snd.play();
-            snd.setVolume(sId, 0.5f);
+            long sId = collectSmt.play();
+            collectSmt.setVolume(sId, 0.5f);
 
         } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureRain, ContactUtils.isBodyPlayer, contact)) {
             player.kill();

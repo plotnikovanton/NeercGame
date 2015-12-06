@@ -124,6 +124,7 @@ public class ResourceUtils {
         sounds.put("getCoin", Gdx.audio.newSound(Gdx.files.internal("music/coin-get.ogg")));
         sounds.put("main", Gdx.audio.newSound(Gdx.files.internal("music/main1.ogg")));
         sounds.put("meow", Gdx.audio.newSound(Gdx.files.internal("music/meow.ogg")));
+        sounds.put("oink", Gdx.audio.newSound(Gdx.files.internal("music/oink.ogg")));
 
         // Map
         maps.put("levelBetweenLevels", mapLoader.load(Gdx.files.internal("levelBetweenLevels.tmx").path()));
