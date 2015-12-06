@@ -3,6 +3,7 @@ package com.kaliwe.neercgame.stages;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -37,6 +38,8 @@ public class BetweenStagesStage extends GameStage {
     Vector2 cup;
     float dst;
 
+    TextureRegion bg ;
+
     short score;
     short maxScore;
     String text;
@@ -55,6 +58,8 @@ public class BetweenStagesStage extends GameStage {
         cameraLowerY = 8.5f;
         getCamera().position.set(10, 8.5f, 0);
         font = ResourceUtils.getFont("visitor");
+
+        bg = ResourceUtils.getTextureRegion("x13");
 
         sound.resume(soundId);
 //        super.sound.pause(super.soundId);
@@ -134,7 +139,7 @@ public class BetweenStagesStage extends GameStage {
         getBatch().end();
 
         if (dst < 6) {
-            HUDUtils.drawTextBox(getBatch(), hudCam, text, 0.8f-dst/6);
+            HUDUtils.drawTextBox(getBatch(), hudCam, text, 0.8f-dst/6, bg);
         }
 
 

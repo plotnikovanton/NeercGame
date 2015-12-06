@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kaliwe.neercgame.screens.GameScreen;
 import com.kaliwe.neercgame.stages.GameStage;
@@ -74,24 +75,31 @@ public class HUDUtils {
         sb.end();
     }
 
-    public static void drawTextBox(Batch sb, Camera hudCam, String text, float alpha) {
+    public static void drawTextBox(Batch sb, Camera hudCam, float alpha, TextureRegion tex) {
         // draw black box
         Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
-        float width = hudCam.viewportWidth - 80;
         float height = hudCam.viewportHeight - 80;
-        shapeRenderer.setProjectionMatrix(hudCam.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(0, 0, 0, alpha);
-        shapeRenderer.rect(-width / 2, -height / 2, width, height);
-        shapeRenderer.end();
-
+        //float width = hudCam.viewportWidth - 80;
+        float width = height / tex.getRegionHeight() * tex.getRegionWidth();
+        //shapeRenderer.setProjectionMatrix(hudCam.combined);
+        //shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        //shapeRenderer.setColor(0, 0, 0, alpha);
+        //shapeRenderer.rect(-width / 2, -height / 2, width, height);
+        //shapeRenderer.end();
         sb.setProjectionMatrix(hudCam.combined);
+        Color c = sb.getColor();
+        sb.setColor(c.r, c.g, c.b, alpha);
+        sb.enableBlending();
         sb.begin();
-        mainFont.setColor(1, 1, 1, alpha);
-        mainFont.draw(sb, text, -width / 2 + 15, height / 2 - 15,
-                width - 30, 1, true
-        );
-
+        sb.draw(tex, -width/2, -height/2, width, height);
         sb.end();
+
+        //sb.begin();
+        //mainFont.setColor(1, 1, 1, alpha);
+        //mainFont.draw(sb, text, -width / 2 + 15, height / 2 - 15,
+        //        width - 30, 1, true
+        //);
+        sb.end();
+        sb.setColor(c.r, c.g, c.b, alpha);
     }
 }
