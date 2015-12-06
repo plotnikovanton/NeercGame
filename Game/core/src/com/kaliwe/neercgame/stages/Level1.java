@@ -66,6 +66,8 @@ public class Level1 extends GameStage {
         setupCats();
 
         setupEgors();
+
+        setupLava();
     }
 
     public void setupBugs() {
@@ -89,6 +91,10 @@ public class Level1 extends GameStage {
             addActor(e.bug);
             maxScore++;
         }
+    }
+
+    protected void setupLava() {
+        WorldUtils.createLava(world, mapHolder.map);
     }
 
     @Override
@@ -123,6 +129,8 @@ public class Level1 extends GameStage {
             //snd.setVolume(sId, 0.5f);
         } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureFoot, ContactUtils.isBodyEgor, contact)) {
             player.jumpOutOfEnemy();
+        } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureLava, ContactUtils.isBodyPlayer, contact)) {
+            player.kill();
         }
     }
 
