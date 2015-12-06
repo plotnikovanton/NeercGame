@@ -59,7 +59,7 @@ public class BetweenStagesStage extends GameStage {
         getCamera().position.set(10, 8.5f, 0);
         font = ResourceUtils.getFont("visitor");
 
-        bg = ResourceUtils.getTextureRegion("x13");
+        bg = ResourceUtils.getTextureRegion(text);
 
         sound.resume(soundId);
 //        super.sound.pause(super.soundId);
@@ -139,7 +139,7 @@ public class BetweenStagesStage extends GameStage {
         getBatch().end();
 
         if (dst < 6) {
-            HUDUtils.drawTextBox(getBatch(), hudCam, text, 0.8f-dst/6, bg);
+            HUDUtils.drawTextBox(getBatch(), hudCam, Math.max(0, 0.8f-dst/6), bg);
         }
 
 

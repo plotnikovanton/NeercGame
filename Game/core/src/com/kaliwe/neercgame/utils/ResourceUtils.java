@@ -127,6 +127,10 @@ public class ResourceUtils {
         textureRegions.put("x13", new TextureRegion(new Texture(Gdx.files.internal("x13.png"))));
         textureRegions.put("cloudsBack", new TextureRegion(new Texture(Gdx.files.internal("clouds_back.png"))));
 
+        // Photos
+
+        textureRegions.put("level0", new TextureRegion(new Texture(Gdx.files.internal("photos/level0.png"))));
+
         // Sound
         sounds.put("jump", Gdx.audio.newSound(Gdx.files.internal("music/jump.ogg")));
         sounds.put("steps", Gdx.audio.newSound(Gdx.files.internal("music/footsteps.ogg")));

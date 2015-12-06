@@ -34,6 +34,8 @@ public class SaveScore extends Stage {
     protected TextField.TextFieldStyle tfStyle;
     protected Label.LabelStyle labelStyle;
     protected Label label;
+    protected Label label1;
+    private boolean flag = true;
 
     public SaveScore() {
         Gdx.gl.glClearColor(0,0,0,1);
@@ -44,6 +46,8 @@ public class SaveScore extends Stage {
     }
 
     private void sendToServer(String name) throws NoSuchAlgorithmException {
+        if (!flag) return;
+        flag = false;
         System.out.println("gotit");
         // generate data
         String score = HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore);
@@ -101,6 +105,7 @@ public class SaveScore extends Stage {
             if (c == 13) {
                 try {
                     sendToServer(textField1.getText().toLowerCase());
+                    textField1.setDisabled(true);
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
@@ -116,6 +121,12 @@ public class SaveScore extends Stage {
         label = new Label("Set your name", labelStyle);
         label.setPosition(VIEWPORT_WIDTH, VIEWPORT_HEIGHT + 100, 1);
         addActor(label);
+
+        label1 = new Label("Total score: "+ HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore)
+                + "\nTotal time: " + HUDUtils.simpleDateFormat.format(GameStateManager.totalTime * 1000)
+                , labelStyle);
+        label1.setPosition(VIEWPORT_WIDTH, VIEWPORT_HEIGHT-50, 1);
+        addActor(label1);
     }
 
     protected void setupCamera() {

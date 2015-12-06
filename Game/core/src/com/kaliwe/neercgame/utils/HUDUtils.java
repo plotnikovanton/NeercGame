@@ -99,7 +99,7 @@ public class HUDUtils {
         //mainFont.draw(sb, text, -width / 2 + 15, height / 2 - 15,
         //        width - 30, 1, true
         //);
-        sb.end();
-        sb.setColor(c.r, c.g, c.b, alpha);
+        //sb.end();
+        sb.setColor(c.r, c.g, c.b, 1);
     }
 }
