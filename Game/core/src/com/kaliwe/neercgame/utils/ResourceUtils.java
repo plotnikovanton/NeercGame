@@ -152,6 +152,7 @@ public class ResourceUtils {
         maps.put("level8", mapLoader.load(Gdx.files.internal("level8.tmx").path()));
         maps.put("level9", mapLoader.load(Gdx.files.internal("level9.tmx").path()));
         maps.put("level10", mapLoader.load(Gdx.files.internal("level10.tmx").path()));
+        maps.put("level11", mapLoader.load(Gdx.files.internal("level11.tmx").path()));
 
         maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 
