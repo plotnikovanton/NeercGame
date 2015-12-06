@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.actors.Bug;
 import com.kaliwe.neercgame.actors.Cat;
+import com.kaliwe.neercgame.actors.Egor;
 import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.utils.*;
@@ -79,6 +80,12 @@ public class Level1 extends GameStage {
         }
     }
 
+    protected void setupEgors() {
+        for (Body body : WorldUtils.createEgors(world, mapHolder.map)) {
+            addActor(new Egor(body));
+        }
+    }
+
     @Override
     public void beginContact(Contact contact) {
         super.beginContact(contact);
@@ -104,12 +111,13 @@ public class Level1 extends GameStage {
             player.kill();
         } else if (
             ContactUtils.checkBodyAndBody(ContactUtils.isBodyCat, ContactUtils.isBodyPlayer, contact)
-                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureCat, ContactUtils.isBodyPlayer, contact)) {
+                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixturePlayer, ContactUtils.isBodyEgor, contact)) {
             player.kill();
             Sound snd = ResourceUtils.getSound("meow");
             long sId = snd.play();
             //snd.setVolume(sId, 0.5f);
-
+        } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureFoot, ContactUtils.isBodyEgor, contact)) {
+            player.jumpOutOfEnemy();
         }
     }
 
