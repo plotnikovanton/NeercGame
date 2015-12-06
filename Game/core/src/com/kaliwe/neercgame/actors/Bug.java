@@ -29,6 +29,7 @@ public class Bug extends GameActor {
 
     public Bug(Body body) {
         super(body);
+        acc = rnd.nextFloat()*10;
         BugUserData userData = ((BugUserData)body.getUserData());
         if (userData!=null)userData.actor = this;
         Texture texture = new Texture("bug.png");

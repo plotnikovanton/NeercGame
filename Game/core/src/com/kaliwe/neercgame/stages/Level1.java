@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.actors.Bug;
 import com.kaliwe.neercgame.actors.Cat;
+import com.kaliwe.neercgame.actors.Egor;
 import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.BugUserData;
 import com.kaliwe.neercgame.utils.*;
@@ -26,6 +27,7 @@ public class Level1 extends GameStage {
     protected int[] renderOnBg = {0, 1, 2};
     protected List<RainCloud> clouds;
     protected Color tint = null;
+    protected Sound collectSmt;
 
 
 
@@ -44,6 +46,7 @@ public class Level1 extends GameStage {
         super(mapName, 12, text);
         cameraLowerY = 17f;
         super.renderOnBg = new int[]{};
+        collectSmt = ResourceUtils.getSound("getCoin");
     }
 
     @Override
@@ -61,6 +64,8 @@ public class Level1 extends GameStage {
         }
 
         setupCats();
+
+        setupEgors();
     }
 
     public void setupBugs() {
@@ -74,6 +79,15 @@ public class Level1 extends GameStage {
     protected void setupCats() {
         for (Body body : WorldUtils.createCats(world, mapHolder.map)) {
             addActor(new Cat(body));
+        }
+    }
+
+    protected void setupEgors() {
+        for (Body body : WorldUtils.createEgors(world, mapHolder.map)) {
+            Egor e = new Egor(body);
+            addActor(e);
+            addActor(e.bug);
+            maxScore++;
         }
     }
 
@@ -95,20 +109,20 @@ public class Level1 extends GameStage {
             }
             userData.isFlaggedForDelete = true;
 
-            Sound snd = ResourceUtils.getSound("getCoin");
-            long sId = snd.play();
-            snd.setVolume(sId, 0.5f);
+            long sId = collectSmt.play();
+            collectSmt.setVolume(sId, 0.5f);
 
         } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureRain, ContactUtils.isBodyPlayer, contact)) {
             player.kill();
         } else if (
             ContactUtils.checkBodyAndBody(ContactUtils.isBodyCat, ContactUtils.isBodyPlayer, contact)
-                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureCat, ContactUtils.isBodyPlayer, contact)) {
+                || ContactUtils.checkFixtureAndBody(ContactUtils.isFixturePlayer, ContactUtils.isBodyEgor, contact)) {
             player.kill();
             Sound snd = ResourceUtils.getSound("meow");
             long sId = snd.play();
             //snd.setVolume(sId, 0.5f);
-
+        } else if (ContactUtils.checkFixtureAndBody(ContactUtils.isFixtureFoot, ContactUtils.isBodyEgor, contact)) {
+            player.jumpOutOfEnemy();
         }
     }
 

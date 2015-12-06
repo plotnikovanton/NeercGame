@@ -47,7 +47,7 @@ public class SaveScore extends Stage {
         System.out.println("gotit");
         // generate data
         String score = HUDUtils.totalScoreFormatter.format(GameStateManager.totalScore);
-        String time = HUDUtils.simpleDateFormat.format((long)GameStateManager.totalTime * 1000);
+        String time = Integer.toString(Math.round(GameStateManager.totalTime));
         StringBuilder toEncode = new StringBuilder("kaliweproductioninaction");
         toEncode.append(score);
         toEncode.append(time);
@@ -69,7 +69,7 @@ public class SaveScore extends Stage {
 
         // Send post request
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost("http://localhost:1488");
+        HttpPost httpPost = new HttpPost("http://kaliwe.ru:1488");
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         nvps.add(new BasicNameValuePair("score", score));
         nvps.add(new BasicNameValuePair("time", time));
@@ -100,14 +100,14 @@ public class SaveScore extends Stage {
         textField.setTextFieldListener((textField1, c) -> {
             if (c == 13) {
                 try {
-                    sendToServer(textField1.getText());
+                    sendToServer(textField1.getText().toLowerCase());
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        addActor(textField.debug());
+        addActor(textField);
         setKeyboardFocus(textField);
     }
 

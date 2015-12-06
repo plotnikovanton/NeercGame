@@ -22,6 +22,7 @@ public class Level3 extends Level1 {
 
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, -1000, cameraLowerY*14));
         cameraLowerY = 7;
+        collectSmt = ResourceUtils.getSound("oink");
     }
 
     @Override

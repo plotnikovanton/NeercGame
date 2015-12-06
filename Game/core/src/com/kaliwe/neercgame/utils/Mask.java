@@ -5,4 +5,5 @@ package com.kaliwe.neercgame.utils;
  */
 public class Mask {
     public static final short PLAYER = 1;
+    public static final short EGOR = 1<<1;
 }

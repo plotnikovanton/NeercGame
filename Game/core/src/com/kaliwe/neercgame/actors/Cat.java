@@ -48,6 +48,7 @@ public class Cat extends GameActor {
     public Cat(Body body) {
         super(body);
         state = CatState.WALK;
+        totalTime = rnd.nextFloat()*10;
         getUserData().cat = this;
         goal = getUserData().b;
         right = getUserData().a < getUserData().b;
@@ -56,7 +57,6 @@ public class Cat extends GameActor {
 
     @Override
     public void act(float delta) {
-        System.out.println("test");
         totalTime += delta;
         animationTime += delta;
         if (Math.abs(goal - body.getPosition().x) < 0.05f) {

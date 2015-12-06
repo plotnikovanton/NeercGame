@@ -91,6 +91,7 @@ public class ContactUtils {
     public static Function<Fixture, Boolean> isFixtureBug = x -> fixtureIs(UserDataType.BUG, x);
     public static Function<Fixture, Boolean> isFixtureRain = x -> fixtureIs(UserDataType.RAIN, x);
     public static Function<Fixture, Boolean> isFixtureCat = x -> fixtureIs(UserDataType.CAT, x);
+    public static Function<Fixture, Boolean> isFixturePlayer = x -> fixtureIs(UserDataType.PLAYER, x);
 
     // Bodies
     public static Function<Body, Boolean> isBodyPlayer = x -> bodyIs(UserDataType.PLAYER, x);
@@ -98,4 +99,5 @@ public class ContactUtils {
     public static Function<Body, Boolean> isBodySimpleEnemy = x -> bodyIs(UserDataType.SIMPLE_ENEMY, x);
     public static Function<Body, Boolean> isBodyDissapearObject = x -> bodyIs(UserDataType.DISSAPEAR, x);
     public static Function<Body, Boolean> isBodyCat = x -> bodyIs(UserDataType.CAT, x);
+    public static Function<Body, Boolean> isBodyEgor = x -> bodyIs(UserDataType.EGOR, x);
 }

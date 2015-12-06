@@ -50,7 +50,7 @@ public class WorldUtils {
 
         Body body = world.createBody(bodyDef);
         body.setUserData(new PlayerUserData());
-        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData(body.getUserData());
         //body.resetMassData();
 
         // Foot
@@ -63,7 +63,7 @@ public class WorldUtils {
 
         // Foot Sensor
         fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.05f,
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.05f , 0.05f,
                 new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2 -0.05f), 0f);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
@@ -165,6 +165,39 @@ public class WorldUtils {
         return res;
     }
 
+    public static List<Body> createEgors(World world, TiledMap tiledMap) {
+        MapLayer layer = tiledMap.getLayers().get("egors");
+        List<Body> res = new ArrayList<>();
+        if (layer == null) return res;
+
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
+        bodyDef.gravityScale = 100f;
+
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(23f/25f/2f, 46f/25f/2f);
+        fixtureDef.shape = shape;
+        fixtureDef.friction = 0;
+        fixtureDef.filter.categoryBits = Mask.EGOR;
+        fixtureDef.filter.maskBits = Mask.PLAYER;
+
+        for (MapObject o : layer.getObjects()) {
+            System.out.println("test");
+            float[] pts = getXLine((PolylineMapObject) o);
+
+            EgorUserData userData = new EgorUserData(pts[0], pts[1]);
+
+            bodyDef.position.set(pts[0], pts[2]);
+            Body body = world.createBody(bodyDef);
+            body.setUserData(userData);
+            body.createFixture(fixtureDef).setUserData(userData);
+            res.add(body);
+        }
+
+        return res;
+    }
     public static List<Body> createCats(World world, TiledMap tiledMap) {
         MapLayer layer = tiledMap.getLayers().get("cats");
         List<Body> res = new ArrayList<>();
@@ -181,12 +214,6 @@ public class WorldUtils {
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
 
-        FixtureDef fixtureDef1 = new FixtureDef();
-        PolygonShape shape1 = new PolygonShape();
-        shape1.setAsBox(26f/58f, 24f/58f);
-        fixtureDef1.shape = shape1;
-        fixtureDef1.isSensor = true;
-
         for (MapObject o : layer.getObjects()) {
             float[] pts = getXLine((PolylineMapObject) o);
 
@@ -196,7 +223,6 @@ public class WorldUtils {
             Body body = world.createBody(bodyDef);
             body.setUserData(userData);
             body.createFixture(fixtureDef).setUserData(userData);
-            body.createFixture(fixtureDef1).setUserData(userData);
             res.add(body);
         }
 
