@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.kaliwe.neercgame.box2d.UserData;
+import com.kaliwe.neercgame.enums.Special;
 import com.kaliwe.neercgame.enums.UserDataType;
 
 import java.util.function.Function;
@@ -92,6 +93,7 @@ public class ContactUtils {
     public static Function<Fixture, Boolean> isFixtureRain = x -> fixtureIs(UserDataType.RAIN, x);
     public static Function<Fixture, Boolean> isFixtureCat = x -> fixtureIs(UserDataType.CAT, x);
     public static Function<Fixture, Boolean> isFixturePlayer = x -> fixtureIs(UserDataType.PLAYER, x);
+    public static Function<Fixture, Boolean> isFixtureLava = x -> compareFixtureByUserData(x, Special.LAVA);
 
     // Bodies
     public static Function<Body, Boolean> isBodyPlayer = x -> bodyIs(UserDataType.PLAYER, x);

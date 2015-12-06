@@ -6,5 +6,6 @@ package com.kaliwe.neercgame.enums;
 public enum Special {
     CUP,
     PIG,
-    BUG
+    BUG,
+    LAVA
 }

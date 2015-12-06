@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.kaliwe.neercgame.actors.RainCloud;
 import com.kaliwe.neercgame.box2d.*;
+import com.kaliwe.neercgame.enums.Special;
 import com.kaliwe.neercgame.stages.GameStage;
 
 import java.util.ArrayList;
@@ -86,6 +87,37 @@ public class WorldUtils {
         return body;
     }
 
+    public static List<Body> createLava(World world, TiledMap tiledMap) {
+        java.util.List<Body> bodies = new ArrayList<>();
+
+        MapLayer layer = tiledMap.getLayers().get("lava");
+        if (layer == null) return bodies;
+
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        Shape shape = null;
+        for (MapObject obj : layer.getObjects()) {
+            if (obj instanceof TextureMapObject) continue;
+            if (obj instanceof RectangleMapObject) {
+                shape = getRectangle((RectangleMapObject)obj);
+            } else if (obj instanceof PolygonMapObject) {
+                shape = getChain((PolygonMapObject)obj);
+            }
+
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+            fixtureDef.friction = Constants.WORLD_FRICTION;
+            fixtureDef.shape = shape;
+            fixtureDef.isSensor = false;
+            Body body = world.createBody(bodyDef);
+            body.setUserData(Special.LAVA);
+            body.createFixture(fixtureDef).setUserData(Special.LAVA);
+            bodies.add(body);
+
+            shape.dispose();
+        }
+
+        return bodies;
+    }
     public static MapHolder createMap(World world, String mapName) {
         java.util.List<Body> bodies = new ArrayList<>();
         TiledMap tiledMap = ResourceUtils.getMap(mapName);
