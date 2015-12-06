@@ -50,7 +50,7 @@ public class WorldUtils {
 
         Body body = world.createBody(bodyDef);
         body.setUserData(new PlayerUserData());
-        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData(body.getUserData());
         //body.resetMassData();
 
         // Foot
@@ -63,7 +63,7 @@ public class WorldUtils {
 
         // Foot Sensor
         fixtureDef = new FixtureDef();
-        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.1f , 0.05f,
+        shape.setAsBox(Constants.PLAYER_WIDTH / 2 - 0.05f , 0.05f,
                 new Vector2(0f, -Constants.PLAYER_HEIGHT / 2 - Constants.FOOT_HEIGHT * 2 -0.05f), 0f);
         fixtureDef.shape = shape;
         fixtureDef.isSensor = true;
@@ -177,11 +177,14 @@ public class WorldUtils {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1f, 1f);
+        shape.setAsBox(23f/25f/2f - 0.1f, 46f/25f/2f);
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
+        fixtureDef.filter.categoryBits = Mask.EGOR;
+        fixtureDef.filter.maskBits = Mask.PLAYER;
 
         for (MapObject o : layer.getObjects()) {
+            System.out.println("test");
             float[] pts = getXLine((PolylineMapObject) o);
 
             EgorUserData userData = new EgorUserData(pts[0], pts[1]);

@@ -64,6 +64,8 @@ public class Level1 extends GameStage {
         }
 
         setupCats();
+
+        setupEgors();
     }
 
     public void setupBugs() {

@@ -48,6 +48,7 @@ public class Cat extends GameActor {
     public Cat(Body body) {
         super(body);
         state = CatState.WALK;
+        totalTime = rnd.nextFloat()*10;
         getUserData().cat = this;
         goal = getUserData().b;
         right = getUserData().a < getUserData().b;

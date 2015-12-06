@@ -13,10 +13,10 @@ import java.util.Random;
  * Created by anton on 06.12.15.
  */
 public class Egor extends GameActor {
-    private static final float SPEED = 3f;
+    private static final float SPEED = 4f;
     protected static Random rnd = new Random();
     private float animationTime = 0;
-    private float totalTime = 1;
+    private float totalTime;
     private float standingTime = 0;
     private float goal;
     private boolean right;
@@ -30,6 +30,7 @@ public class Egor extends GameActor {
 
     public Egor(Body body) {
         super(body);
+        totalTime = rnd.nextFloat()*10;
         goal = getUserData().b;
         right = getUserData().a < getUserData().b;
         body.setLinearVelocity(Math.signum(goal - body.getPosition().x) * SPEED, body.getLinearVelocity().y);
@@ -43,7 +44,7 @@ public class Egor extends GameActor {
             right = !right;
         }
 
-        if ((long)totalTime % 10 == 0) {
+        if ((long)totalTime % 5 == 0) {
             if (rnd.nextDouble() < 0.1) {
                 standingTime = 1 + rnd.nextFloat();
                 animationTime = 0;
@@ -64,8 +65,8 @@ public class Egor extends GameActor {
     public void draw(Batch sb, float a) {
         Animation cur = right ? animationRight : animationLeft;
         TextureRegion curReg = cur.getKeyFrame(animationTime, true);
-        float width = 26f/25f;//26;
-        float height = 22f/25f;//22;
+        float width = 23f/25f;//26;
+        float height = 46f/25f;//22;
         sb.draw(curReg, body.getPosition().x - width / 2, body.getPosition().y - height / 2, width, height);
     }
 

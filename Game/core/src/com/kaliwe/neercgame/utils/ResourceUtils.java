@@ -78,8 +78,8 @@ public class ResourceUtils {
         split = TextureRegion.split(textureBuffer, 23, 46);
         mirror = flip(split);
 
-        animations.put("EgorLeft", new Animation(10f, mirror[0][0]));
-        animations.put("EgorRight", new Animation(10f, split[0][0]));
+        animations.put("egorLeft", new Animation(0.1f, Arrays.copyOfRange(mirror[0], 0, 4)));
+        animations.put("egorRight", new Animation(0.1f, Arrays.copyOfRange(split[0], 0, 4)));
 
 
         // Cat
