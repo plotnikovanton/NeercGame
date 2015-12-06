@@ -13,7 +13,7 @@ import com.kaliwe.neercgame.utils.WorldUtils;
  */
 public class Level3 extends Level1 {
     public Level3() {
-        super("level3", "Level with STANOK");
+        super("level3", "level3");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
 
         float skyOffset = 260;

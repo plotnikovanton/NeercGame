@@ -32,7 +32,7 @@ public class Level1 extends GameStage {
 
 
     public Level1() {
-        this("level1", "LEVEL 2");
+        this("level1", "level1");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
 
         float skyOffset = 260;

@@ -9,7 +9,7 @@ import com.kaliwe.neercgame.utils.ResourceUtils;
  */
 public class Level4 extends Level1 {
     public Level4() {
-        super("level4", "CATS WAS HERE");
+        super("level4", "level4");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
 
         float skyOffset = 260;

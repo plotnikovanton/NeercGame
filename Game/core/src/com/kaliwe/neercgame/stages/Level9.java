@@ -10,7 +10,7 @@ import com.kaliwe.neercgame.utils.ResourceUtils;
  */
 public class Level9 extends Level1 {
     public Level9() {
-        super("level9", "Reversed shit");
+        super("level9", "level9");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
         cameraLowerY = 15;
         float skyOffset = 230;

@@ -10,7 +10,7 @@ import com.kaliwe.neercgame.utils.ResourceUtils;
  */
 public class Level2 extends Level1 {
     public Level2() {
-        super("level2", "level 3");
+        super("level2", "level2");
         Gdx.gl.glClearColor(90/255f, 90/255f, 90/255f, 1);
         bgs.add(new Background(ResourceUtils.getTextureRegion("buildings"), 1.5f, 10f , 1f, hudCam, -1000, cameraLowerY*14));
         tint = new Color(Color.GRAY);

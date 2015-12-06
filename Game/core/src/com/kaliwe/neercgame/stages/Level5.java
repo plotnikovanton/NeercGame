@@ -9,7 +9,7 @@ import com.kaliwe.neercgame.utils.ResourceUtils;
  */
 public class Level5 extends Level1 {
     public Level5() {
-        super("level5", "LEVEL 6");
+        super("level5", "level5");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
         float skyOffset = 260;
 

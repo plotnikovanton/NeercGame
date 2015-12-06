@@ -130,6 +130,17 @@ public class ResourceUtils {
         // Photos
 
         textureRegions.put("level0", new TextureRegion(new Texture(Gdx.files.internal("photos/level0.png"))));
+        textureRegions.put("level1", new TextureRegion(new Texture(Gdx.files.internal("photos/level1.png"))));
+        textureRegions.put("level2", new TextureRegion(new Texture(Gdx.files.internal("photos/level2.png"))));
+        textureRegions.put("level3", new TextureRegion(new Texture(Gdx.files.internal("photos/level3.png"))));
+        textureRegions.put("level4", new TextureRegion(new Texture(Gdx.files.internal("photos/level4.png"))));
+        textureRegions.put("level5", new TextureRegion(new Texture(Gdx.files.internal("photos/level5.png"))));
+        textureRegions.put("level6", new TextureRegion(new Texture(Gdx.files.internal("photos/level6.png"))));
+        textureRegions.put("level7", new TextureRegion(new Texture(Gdx.files.internal("photos/level7.png"))));
+        textureRegions.put("level8", new TextureRegion(new Texture(Gdx.files.internal("photos/level8.png"))));
+        textureRegions.put("level9", new TextureRegion(new Texture(Gdx.files.internal("photos/level9.png"))));
+        textureRegions.put("level10", new TextureRegion(new Texture(Gdx.files.internal("photos/level10.png"))));
+        textureRegions.put("level11", new TextureRegion(new Texture(Gdx.files.internal("photos/level11.png"))));
 
         // Sound
         sounds.put("jump", Gdx.audio.newSound(Gdx.files.internal("music/jump.ogg")));

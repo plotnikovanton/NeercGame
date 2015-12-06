@@ -13,17 +13,17 @@ import java.util.Iterator;
 public class GameStateManager {
     private static Iterator<Class<? extends GameStage>> iter = new ArrayList<Class<? extends GameStage>>() {{
         add(Level0.class);
-        //add(Level1.class);
-        //add(Level2.class);
-        //add(Level3.class);
-        //add(Level4.class);
-        //add(Level5.class);
-        //add(Level6.class);
-        //add(Level7.class);
-        //add(Level8.class);
-        //add(Level9.class);
-        //add(Level10.class);
-        //add(Level11.class);
+        add(Level1.class);
+        add(Level2.class);
+        add(Level3.class);
+        add(Level4.class);
+        add(Level5.class);
+        add(Level6.class);
+        add(Level7.class);
+        add(Level8.class);
+        add(Level9.class);
+        add(Level10.class);
+        add(Level11.class);
     }}.iterator();
     private static Class<? extends GameStage> last;
     private static Stage lastInstance;

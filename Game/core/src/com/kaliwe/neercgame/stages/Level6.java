@@ -9,7 +9,7 @@ import com.kaliwe.neercgame.utils.ResourceUtils;
  */
 public class Level6 extends Level1 {
     public Level6() {
-        super("level6", "LEVEL 7");
+        super("level6", "level6");
         Gdx.gl.glClearColor(135/255f,206/255f,235/255f,1);
         float skyOffset = 260;
         bgs.add(new Background(ResourceUtils.getTextureRegion("cloudsBack"), 0.4f, 5f, 0.9f, hudCam, 0, skyOffset));
