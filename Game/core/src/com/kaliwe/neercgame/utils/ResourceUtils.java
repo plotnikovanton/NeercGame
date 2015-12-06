@@ -112,8 +112,10 @@ public class ResourceUtils {
 
         // Backgrounds
         textureRegions.put("buildings", new TextureRegion(new Texture(Gdx.files.internal("buildings.png"))));
+        textureRegions.put("special-edition", new TextureRegion(new Texture(Gdx.files.internal("special-edition.png"))));
         textureRegions.put("buildings-zinger", new TextureRegion(new Texture(Gdx.files.internal("buildings-zinger.png"))));
         textureRegions.put("clouds", new TextureRegion(new Texture(Gdx.files.internal("clouds.png"))));
+        textureRegions.put("x13", new TextureRegion(new Texture(Gdx.files.internal("x13.png"))));
         textureRegions.put("cloudsBack", new TextureRegion(new Texture(Gdx.files.internal("clouds_back.png"))));
 
         // Sound
@@ -139,7 +141,8 @@ public class ResourceUtils {
         maps.put("level7", mapLoader.load(Gdx.files.internal("level7.tmx").path()));
 
         maps.put("level8", mapLoader.load(Gdx.files.internal("level8.tmx").path()));
-        maps.put("level9", mapLoader.load(Gdx.files.internal("level1.tmx").path()));
+        maps.put("level9", mapLoader.load(Gdx.files.internal("level9.tmx").path()));
+        maps.put("level10", mapLoader.load(Gdx.files.internal("level10.tmx").path()));
 
         maps.put("test", mapLoader.load(Gdx.files.internal("test.tmx").path()));
 
