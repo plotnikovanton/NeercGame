@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="bg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7AhDf+mcEF2tEkTAAAAAAAAAAAAAAAAAAAAoM1YdVVVVZ8e6AzLhQ==
+  </data>
+ </layer>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAIADFW1810Mnm5AoG0yf0vAgAAAAAAAAAAAAAAAAAAZlnZrp7gO9mtngAAAABo4gGGKwKH
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 0,144 1600,140 1600,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawn">
+  <object name="spawn" x="84" y="576">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object x="1500" y="476" width="8" height="180"/>
+ </objectgroup>
+ <objectgroup name="platforms"/>
+ <objectgroup name="bugs">
+  <object x="1288" y="800" height="8">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="rain"/>
+ <objectgroup name="cats">
+  <object x="128" y="624">
+   <polyline points="0,0 96,0"/>
+  </object>
+  <object x="240" y="624">
+   <polyline points="0,0 128,0"/>
+  </object>
+  <object x="384" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="464" y="624">
+   <polyline points="0,0 160,0"/>
+  </object>
+  <object x="640" y="624">
+   <polyline points="0,0 92,0"/>
+  </object>
+  <object x="748" y="624">
+   <polyline points="0,0 148,0"/>
+  </object>
+  <object x="912" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="992" y="624">
+   <polyline points="0,0 48,0"/>
+  </object>
+  <object x="1056" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="1136" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="1216" y="624">
+   <polyline points="0,0 48,0"/>
+  </object>
+  <object x="1280" y="624">
+   <polyline points="0,0 64,0"/>
+  </object>
+  <object x="1360" y="624">
+   <polyline points="0,0 68,0"/>
+  </object>
+ </objectgroup>
+</map>

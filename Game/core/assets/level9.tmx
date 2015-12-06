@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="50" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Style" tilewidth="16" tileheight="16">
+  <image source="Style.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="bg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0NkJAkEURNHpENwCcwtIM3ALSDNwy8fyX1ARtWnOgftTMMOjuw4AAAAAAAAAAAAAAAAA/muV1mmTtmnX+Fa7Yzqlc7qka+Nb7Xql6/ppkIZpVNreajfOjZM0TbM0L21vtVvlxnXapG3albq2u1e2d/73yCItv/7azx1z4ymd0yVdS/3b3SffPrJPh5+8OAAAAK26AX1TwTk=
+  </data>
+ </layer>
+ <layer name="m1" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztxgEJACAQBEH7B1CTqXG8Fj44AwvbGgAAAAAAAAAAAAAAAAAAwBs9jTR9iV9pp+NLPAAAAH+6KSCO9w==
+  </data>
+ </layer>
+ <layer name="m2" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztz8FtwkAQBdC1nQgKIAWRBEEBUBMUEGqCApJ+MhK3lZFnIwVzeE/6t/2av6UAAAAAAAAAAAAAAAAAANxcItcZunPce/Tev1h0pSy76XdffSnnvr071suqu9mt9+629OeyjX27xMbv+NtP9b9Md6yXVXezW+/dbenP5Rj7TpEu0keGyEvktdq9Gkp5G9q7Y72supvdOrX3mV1i3zWyjrxHPiKfkU21ex9/Owzt3bFeVt3Nbp3aCwAAAP/lF12mJmU=
+  </data>
+ </layer>
+ <layer name="m3" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt00lOwzAYQGFvmjJ05lIMnbkUUGaORWcuxIvYlE3IitjN+6Qn/dlYiR2HIEmSJEmSJEmSJEmSJEmSJEmSJEmSJP34bISwpBWtaUNb2tGevhpVv2G9nGchtKhNHepSj/o0oIus6jeslxv2e0gjGtOEpjSjOd16Hv9qwX4/0hM90wu90hu908cRnMdJM4RTOmvGP+ct2fMVrWlDW9rRPvt7nVi+o2i+pCu6TmDOa1GbOtSlHvVpUGKdWL6jaL6je3pIYM4b0ojGNKEpzWheYp1YvqNorvp/cP79XHReKd6hFOfD51j+kTrPZe9HrHPq7+/9iHs+tv8r9fnw+Ru2mXWe
+  </data>
+ </layer>
+ <layer name="fg" width="100" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAAAAeDBOIAAB
+  </data>
+ </layer>
+ <objectgroup name="ground">
+  <object x="0" y="656">
+   <polygon points="0,0 704,0 708,-4 716,-12 720,0 724,4 732,16 744,28 748,32 748,36 756,40 772,40 776,36 780,32 784,24 792,20 792,16 800,4 800,0 804,-8 808,-8 816,0 1600,0 1600,144 0,144"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="spawn">
+  <object name="spawn" x="160" y="576">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="finish">
+  <object x="1307" y="512" width="8" height="144"/>
+ </objectgroup>
+ <objectgroup name="platforms">
+  <object x="228" y="600" width="24"/>
+  <object x="332" y="571" width="20"/>
+  <object x="360" y="564" width="20"/>
+  <object x="412" y="572" width="20"/>
+  <object x="440" y="564" width="20"/>
+  <object x="252" y="572" width="20"/>
+  <object x="280" y="564" width="20"/>
+  <object x="1154" y="564" width="28"/>
+  <object x="1131" y="572" width="24"/>
+  <object x="1050" y="572" width="24"/>
+  <object x="1073" y="562" width="32"/>
+  <object x="968" y="572" width="24"/>
+  <object x="992" y="562" width="36"/>
+  <object x="911" y="563" width="36"/>
+  <object x="890" y="572" width="24"/>
+  <object x="492" y="572" width="20"/>
+  <object x="512" y="564" width="32"/>
+  <object x="572" y="572" width="20"/>
+  <object x="592" y="564" width="32"/>
+  <object x="652" y="572" width="20"/>
+  <object x="672" y="564" width="32"/>
+  <object x="732" y="572" width="20"/>
+  <object x="752" y="564" width="32"/>
+  <object x="812" y="572" width="20"/>
+  <object x="832" y="564" width="32"/>
+  <object x="264" y="632" width="32"/>
+  <object x="316" y="636" width="12"/>
+  <object x="468" y="600" width="24"/>
+  <object x="504" y="632" width="32"/>
+  <object x="552" y="636" width="16"/>
+  <object x="916" y="600" width="24"/>
+  <object x="952" y="632" width="32"/>
+  <object x="1000" y="636" width="16"/>
+  <object x="1172" y="600" width="24"/>
+  <object x="1092" y="636" width="24"/>
+  <object x="1096" y="620" width="16"/>
+  <object x="1096" y="612" width="16"/>
+  <object x="852" y="636" width="24"/>
+  <object x="856" y="620" width="16"/>
+  <object x="860" y="612" width="8"/>
+  <object x="612" y="636" width="24"/>
+  <object x="616" y="620" width="16"/>
+  <object x="620" y="612" width="8"/>
+  <object x="388" y="636" width="24"/>
+  <object x="392" y="620" width="16"/>
+  <object x="396" y="612" width="8"/>
+  <object x="704" y="611" width="28"/>
+  <object x="708" y="648" width="12"/>
+ </objectgroup>
+ <objectgroup name="bugs">
+  <object x="240" y="588">
+   <ellipse/>
+  </object>
+  <object x="448" y="548">
+   <ellipse/>
+  </object>
+  <object x="368" y="552">
+   <ellipse/>
+  </object>
+  <object x="288" y="552">
+   <ellipse/>
+  </object>
+  <object x="1232" y="528">
+   <ellipse/>
+  </object>
+  <object x="1264" y="592">
+   <ellipse/>
+  </object>
+  <object x="400" y="600">
+   <ellipse/>
+  </object>
+  <object x="608" y="552">
+   <ellipse/>
+  </object>
+  <object x="624" y="600">
+   <ellipse/>
+  </object>
+  <object x="768" y="552">
+   <ellipse/>
+  </object>
+  <object x="848" y="552">
+   <ellipse/>
+  </object>
+  <object x="864" y="600">
+   <ellipse/>
+  </object>
+  <object x="928" y="588">
+   <ellipse/>
+  </object>
+  <object x="928" y="548">
+   <ellipse/>
+  </object>
+  <object x="1104" y="628">
+   <ellipse/>
+  </object>
+  <object x="1184" y="588">
+   <ellipse/>
+  </object>
+  <object x="1056" y="608">
+   <ellipse/>
+  </object>
+  <object x="520" y="600">
+   <ellipse/>
+  </object>
+  <object x="720" y="584">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="rain"/>
+</map>

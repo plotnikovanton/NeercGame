@@ -15,7 +15,7 @@
  </layer>
  <layer name="m2" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmklOw0AQRdtAkjXTgTKJNRkOlMHsMx0oAQ5AhvvwvXDExkqbcpfbpf+kt+lFm+qP5a8G52zy1qr7JyB/YR5xwTzignnEhZU8PozM0TYyh5XfK84RF5wjLjhHXHCOuLAyR0thjm7buR7swwEctqt/BvuVPzOc/xwu4BKmAfKw8n5ozLHH+R/gJ/yC38yjEI05ko5zd/AePsBWp/pnMA9/ujj/HuzDARwyj0JUvh84/zlcwCVMmUchWb/S6D+hsdSvNPpPaKy8H9kcGv0nNJby0Og/obGUh0b/CY2lPDT6T2is5CG5v5L0Mp+/S5bZ31K/+i+SXubz3DL7W3k/JHNIepnPc8vszzxkvcznuWX2Zx6yXubz3DL7Mw9ZL/P6fpTY30oeRf0q9J1WWvH5We9XTbvTsvJ+FM3RtDst63k07U7Leh5Nu9OynkfT7rTyOd7hCI7hBE6Fa9po/P+VD9I+l/erFVzDDdzCnXBNm1jec2mfy+f4gUd4gmd4Ea5pE0se0j6Xz/GYOPcEn+ELfE1ka9rEkoe0z12/HzjDERzDCZwmsrWMGZxXOu3tOepG2ufyOVY4wzXcwC3cJbK1jD08VDrt7TnqRtrnrt8PnOERnuAZXhLZGiGEEEIIIYQQEoJfVcaqRQ==
+   eJztmklOw0AQRduAkzXTgTKJNRkOFCdhn+lACXAAMtyH74UjNlbalLvSLv0nvU0v2lR/LH81OGeTt/TWPwH5C/OIC+YRF8wjLqzk8WFkjpaROaz8XnGOuOAcccE54oJzxIWVOVKFOTot57qwB/tw0Kr/GexX/kxx/hmcwTlcBMjDyvuhMccO57+Hn/ALfgfIwwoaeSRt5+7gPXyAaTv8M5uKRh4dnH8X9mAfDphHKSrfD5x/BmdwDhcB8rDy/cj7lUb/CY2lfqXRf0Jj5f3I57DQfyzlYaH/WMrDQv+xlIdG/wmNlTwk91eSXubzd8kq+1vqV/9F0st8nltlfyvvh2QOSS/zeW6V/ZmHrJf5PLfK/sxD1st8nltlf+Yh62Ve348K+1vJo6xfhb7TWtR8ftb7VdPutKy8H2VzNO1Oy3oeTbvTsp5H0+60rOfRtDutYo53OIQjOIYT4Zo2Gv9/5YO0zxX9aglXcA03cCtc0yaW91za54o5fuABHuEJnoVr2sSSh7TPFXM8Js49wWf4Al8T2Zo2seQh7XOX7wfOcAhHcAwniWwtZwqzWqe9Psetkfa5Yo4lznAF13ADt4lsLWcH97VOe32OWyPtc5fvB87wAI/wBM+JbI0QQgghhBBCCAnBL/pHqWE=
   </data>
  </layer>
  <layer name="m3" width="100" height="50">
@@ -127,7 +127,66 @@
   <object x="496" y="208" width="24"/>
   <object x="488" y="192" width="24"/>
   <object x="472" y="176" width="32"/>
+  <object x="904" y="576" width="24"/>
+  <object x="928" y="564" width="36"/>
+  <object x="988" y="572" width="20"/>
+  <object x="1008" y="564" width="36"/>
+  <object x="1068" y="572" width="20"/>
+  <object x="1088" y="564" width="32"/>
+  <object x="1148" y="572" width="20"/>
+  <object x="1168" y="564" width="32"/>
+  <object x="772" y="540" width="56"/>
+  <object x="796" y="628" width="8"/>
+  <object x="328" y="524" width="36"/>
+  <object x="504" y="524" width="32"/>
+  <object x="488" y="452" width="20"/>
+  <object x="792" y="356" width="20"/>
+  <object x="484" y="332" width="40"/>
+  <object x="220" y="340" width="8"/>
+  <object x="136" y="164" width="16"/>
+  <object x="216" y="148" width="44"/>
+  <object x="344" y="236" width="36"/>
+  <object x="616" y="252" width="48"/>
+  <object x="600" y="148" width="16"/>
+  <object x="808" y="164" width="20"/>
  </objectgroup>
- <objectgroup name="bugs"/>
+ <objectgroup name="bugs">
+  <object x="1024" y="552">
+   <ellipse/>
+  </object>
+  <object x="1104" y="552">
+   <ellipse/>
+  </object>
+  <object x="320" y="612">
+   <ellipse/>
+  </object>
+  <object x="796" y="600">
+   <ellipse/>
+  </object>
+  <object x="800" y="520">
+   <ellipse/>
+  </object>
+  <object x="344" y="512">
+   <ellipse/>
+  </object>
+  <object x="500" y="408">
+   <ellipse/>
+  </object>
+  <object x="236" y="128">
+   <ellipse/>
+  </object>
+  <object x="816" y="120">
+   <ellipse/>
+  </object>
+  <object x="892" y="240">
+   <ellipse/>
+  </object>
+  <object x="640" y="232">
+   <ellipse/>
+  </object>
+  <object x="472" y="516">
+   <ellipse/>
+  </object>
+ </objectgroup>
  <objectgroup name="rain"/>
 </map>
