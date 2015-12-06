@@ -53,6 +53,29 @@ public class ResourceUtils {
         animations.put("deadRight", new Animation(0.10f, Arrays.copyOfRange(mirror[3], 0, 2)));
         animations.put("deadLeft", new Animation(0.10f, Arrays.copyOfRange(split[3], 0, 2)));
 
+        // Player
+        textureBuffer = new Texture(Gdx.files.internal("player-emo.png"));
+        split = TextureRegion.split(textureBuffer, 19, 30);
+        mirror = flip(split);
+
+        animations.put("standRightEmo", new Animation(10f, mirror[0][0]));
+        animations.put("standLeftEmo", new Animation(10f, split[0][0]));
+
+        animations.put("walkRightEmo", new Animation(0.10f, Arrays.copyOfRange(mirror[0], 1, 5)));
+        animations.put("walkLeftEmo", new Animation(0.10f, Arrays.copyOfRange(split[0], 1, 5)));
+
+        animations.put("jumpUpLeftEmo", new Animation(10f, split[1][0]));
+        animations.put("jumpUpRightEmo", new Animation(10f, mirror[1][0]));
+
+        animations.put("jumpDownRightEmo", new Animation(10f, mirror[1][1]));
+        animations.put("jumpDownLeftEmo", new Animation(10f, split[1][1]));
+
+        animations.put("burningRightEmo", new Animation(0.10f, Arrays.copyOfRange(mirror[2], 0, 2)));
+        animations.put("burningLeftEmo", new Animation(0.10f, Arrays.copyOfRange(split[2], 0, 2)));
+
+        animations.put("deadRightEmo", new Animation(0.10f, Arrays.copyOfRange(mirror[3], 0, 2)));
+        animations.put("deadLeftEmo", new Animation(0.10f, Arrays.copyOfRange(split[3], 0, 2)));
+
         // Stanok
         textureBuffer = new Texture(Gdx.files.internal("stankevich.png"));
         split = TextureRegion.split(textureBuffer, 19, 30);

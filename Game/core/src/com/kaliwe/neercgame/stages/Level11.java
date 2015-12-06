@@ -1,7 +1,7 @@
 package com.kaliwe.neercgame.stages;
 
 import com.badlogic.gdx.Gdx;
-import com.kaliwe.neercgame.actors.Stanok;
+import com.kaliwe.neercgame.actors.Emo;
 import com.kaliwe.neercgame.utils.Background;
 import com.kaliwe.neercgame.utils.ResourceUtils;
 import com.kaliwe.neercgame.utils.WorldUtils;
@@ -23,7 +23,7 @@ public class Level11 extends Level1 {
 
     @Override
     public void setupPlayer() {
-        player = new Stanok(WorldUtils.createPlayer(world, mapHolder.map, mapHolder));
+        player = new Emo(WorldUtils.createPlayer(world, mapHolder.map, mapHolder));
         addActor(player);
     }
 }

@@ -139,7 +139,7 @@ public class BetweenStagesStage extends GameStage {
         getBatch().end();
 
         if (dst < 6) {
-            HUDUtils.drawTextBox(getBatch(), hudCam, Math.max(0, 0.8f-dst/6), bg);
+            HUDUtils.drawTextBox(getBatch(), hudCam, Math.max(0, Math.min(1, 1-dst/6)), bg);
         }
 
 
